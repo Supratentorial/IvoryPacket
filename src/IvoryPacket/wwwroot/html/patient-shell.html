@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<div layout="column">
+    <md-content layout="row">
+        <div layout="column">
+            <div layout="row">
+                <span>MUMFORD, Blake</span><span>(Mr)</span>
+                <span>Born</span><span>15 June 1990</span>
+            </div>
+        </div>
+        <div layout="column">
+            <div layout="row">
+                <span>Gender</span>
+                <span>Male</span>
+            </div>
+        </div>
+    </md-content>
+    <md-divider></md-divider>
+    <div layout="row">
+        <md-sidenav class="md-sidenav-left" md-is-locked-open="true">
+            <md-list>
+                <md-list-item class="side-nav" ui-sref="patient.detail.summary">
+                    Patient Summary
+                </md-list-item>
+                <md-divider></md-divider>
+                <md-list-item ui-sref="patient.detail.encounters.view">
+                    Encounters
+                </md-list-item>
+                <md-divider></md-divider>
+                <md-list-item ui-sref="patient.detail.documents.view">
+                    Documents
+                </md-list-item>
+                <md-divider></md-divider>
+                <md-list-item ui-sref="patient.detail.pathology.view">
+                    Pathology
+                </md-list-item>
+                <md-divider></md-divider>
+                <md-list-item ui-sref="patient.detail.demographics.edit">
+                    Demographics
+                </md-list-item>
+                <md-divider></md-divider>
+                <md-list-item ui-sref="patient.detail.medicalhistory.view">
+                    Medical History
+                </md-list-item>
+                <md-divider></md-divider>
+                <md-list-item ui-sref="patient.detail.socialhistory.view">
+                    Social & Family History
+                </md-list-item>
+                <md-divider></md-divider>
+                <md-list-item ui-sref="patient.detail.allergies.view">
+                    Allergies
+                </md-list-item>
+                <md-divider></md-divider>
+                <md-list-item ui-sref="patient.detail.immunisations.view">
+                    Immunisations
+                </md-list-item>
+            </md-list>
+        </md-sidenav>
+        <div ui-view flex></div>
+    </div>
+</div>

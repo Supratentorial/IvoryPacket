@@ -1,0 +1,19 @@
+{
+  "profiles": {
+    "IIS Express": {
+      "commandName": "IISExpress",
+      "launchBrowser": true,
+      "launchUrl": "http://localhost:53405/patients/detail/0",
+      "environmentVariables": {
+        "ASPNET_ENV": "Development"
+      },
+      "sdkVersion": "dnx-coreclr-win-x86.1.0.0-rc1-final"
+    },
+    "web": {
+      "commandName": "web",
+      "environmentVariables": {
+        "ASPNET_ENV": "Development"
+      }
+    }
+  }
+}

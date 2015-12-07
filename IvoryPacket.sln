@@ -1,0 +1,48 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio 14
+VisualStudioVersion = 14.0.23107.0
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "src", "src", "{701E3957-DBA4-4226-ADD7-8129DCD95348}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution Items", "{D0804CAE-8284-4085-9F3E-86E416C00232}"
+	ProjectSection(SolutionItems) = preProject
+		global.json = global.json
+		NuGet.Config = NuGet.Config
+	EndProjectSection
+EndProject
+Project("{8BB2217D-0F2D-49D1-97BC-3654ED321F3B}") = "IvoryPacket", "src\IvoryPacket\IvoryPacket.xproj", "{7F9C737B-8C68-492F-91FF-0D97B669E4F0}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "PublishScripts", "PublishScripts", "{F05CDE19-D8E0-43E9-88D7-05043390A12B}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Scripts", "Scripts", "{D00BC07A-B4EF-42C8-BF2F-A61AF6F65614}"
+	ProjectSection(SolutionItems) = preProject
+		PublishScripts\Scripts\Deploy-AzureResourceGroup.ps1 = PublishScripts\Scripts\Deploy-AzureResourceGroup.ps1
+	EndProjectSection
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Templates", "Templates", "{CC31BFA6-F3A0-4242-94A2-78358DAB43EE}"
+	ProjectSection(SolutionItems) = preProject
+		PublishScripts\Templates\IvoryPacket.json = PublishScripts\Templates\IvoryPacket.json
+		PublishScripts\Templates\IvoryPacket.param.dev.json = PublishScripts\Templates\IvoryPacket.param.dev.json
+	EndProjectSection
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{7F9C737B-8C68-492F-91FF-0D97B669E4F0}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{7F9C737B-8C68-492F-91FF-0D97B669E4F0}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{7F9C737B-8C68-492F-91FF-0D97B669E4F0}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{7F9C737B-8C68-492F-91FF-0D97B669E4F0}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(NestedProjects) = preSolution
+		{7F9C737B-8C68-492F-91FF-0D97B669E4F0} = {701E3957-DBA4-4226-ADD7-8129DCD95348}
+		{D00BC07A-B4EF-42C8-BF2F-A61AF6F65614} = {F05CDE19-D8E0-43E9-88D7-05043390A12B}
+		{CC31BFA6-F3A0-4242-94A2-78358DAB43EE} = {F05CDE19-D8E0-43E9-88D7-05043390A12B}
+	EndGlobalSection
+EndGlobal

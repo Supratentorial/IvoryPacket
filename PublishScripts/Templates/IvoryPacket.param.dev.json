@@ -1,0 +1,29 @@
+{
+  "siteName": {
+    "value": "IvoryPacket"
+  },
+  "hostingPlanName": {
+    "value": "IvoryPacket"
+  },
+  "siteLocation": {
+    "value": "Australia East"
+  },
+  "sku": {
+    "value": "Free"
+  },
+  "workerSize": {
+    "value": "0"
+  },
+  "siteMode": {
+    "value": "Limited"
+  },
+  "computeMode": {
+    "value": "0"
+  },
+  "subscriptionId": {
+    "value": "e6c27d69-9c32-40ec-9f08-a9bc5a70b3b8"
+  },
+  "resourceGroup": {
+    "value": "IvoryPacket"
+  }
+}

@@ -1,0 +1,73 @@
+<div layout="row">
+    <md-whiteframe class="md-whiteframe-2dp" flex="50" layout="column">
+        <div layout="row">
+            <md-input-container flex="50">
+                <label>First Name</label>
+                <input ng-model="vm.patientService.firstName" />
+            </md-input-container>
+            <md-input-container flex="50">
+                <label>Last Name</label>
+                <input ng-model="vm.patientService.lastName" />
+            </md-input-container>
+        </div>
+        <div layout="row">
+            <md-input-container flex="50">
+                <label>Middle Name(s)</label>
+                <input ng-model="vm.patientService.middleNames" />
+            </md-input-container>
+            <md-input-container flex="50">
+                <label>Nickname</label>
+                <input ng-model="vm.patientService.nickName" />
+            </md-input-container>
+        </div>
+        <div layout="row">
+            <md-input-container flex="25">
+                <label>Date of Birth</label>
+                <input ng-model="vm.patientService.dateOfBirth" />
+            </md-input-container>
+            <md-input-container flex="25">
+                <label>Title</label>
+                <md-select ng-model="vm.patientService.patient.title">
+                    <md-option ng-repeat="title in vm.titleOptions">
+                        {{title}}
+                    </md-option>
+                </md-select>
+            </md-input-container>
+            <md-input-container>
+                <label>Gender</label>
+                <md-select ng-model="vm.patientService.gender">
+                    <md-option ng-repeat="gender in vm.genderOptions">
+                        {{gender}}
+                    </md-option>
+                </md-select>
+            </md-input-container>
+        </div>
+    </md-whiteframe>
+    <md-whiteframe class="md-whiteframe-2dp" flex="50" style="" layout="column">
+        <div layout="row">
+            <md-input-container>
+                <label>Mobile Phone</label>
+                <input ng-model="vm.patientService.patient.mobilePhone" />
+            </md-input-container>
+            <md-input-container>
+                <label>Home Phone</label>
+                <input ng-model="vm.patientService.patient.homePhone" />
+            </md-input-container>
+            <md-input-container>
+                <label>Work Phone</label>
+                <input ng-model="vm.patientService.patient.workPhone" />
+            </md-input-container>
+        </div>
+        <md-input-container>
+            <label>Email Address</label>
+            <input ng-model="vm.patientService.patient.emailAddress" />
+        </md-input-container>
+    </md-whiteframe>
+</div>
+<div layout="row">
+    <md-whiteframe class="md-whiteframe-2dp" flex="50">
+        <md-input-container>
+            <label></label>
+        </md-input-container>
+    </md-whiteframe>
+</div>
