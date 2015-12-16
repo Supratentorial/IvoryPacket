@@ -7,6 +7,7 @@ namespace IvoryPacket.Models
 {
     public class Organisation
     {
+        public int OrganisationId { get; set; }
 
     }
 }

@@ -1,13 +1,8 @@
 {
   "commands": {
-    "web": "Microsoft.AspNet.Server.Kestrel",
-    "ef": "EntityFramework.Commands"
+    "web": "Microsoft.AspNet.Server.Kestrel"
   },
   "dependencies": {
-    "EntityFramework.Commands": "7.0.0-rc1-final",
-    "EntityFramework.Core": "7.0.0-rc1-final",
-    "EntityFramework.MicrosoftSqlServer": "7.0.0-rc1-final",
-    "Hl7.Fhir.DSTU2": "0.90.2",
     "Microsoft.AspNet.Authentication.Cookies": "1.0.0-rc1-final",
     "Microsoft.AspNet.Authentication.OpenIdConnect": "1.0.0-rc1-final",
     "Microsoft.AspNet.Diagnostics": "1.0.0-rc1-final",
@@ -30,7 +25,8 @@
     "node_modules"
   ],
   "frameworks": {
-    "dnxcore50": { }
+    "dnxcore50": { },
+    "dnx451": { }
   },
   "publishExclude": [
     "**.user",

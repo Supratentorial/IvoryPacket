@@ -8,9 +8,9 @@ namespace IvoryPacket.Models
     public class Patient
     {
         public int PatientId { get; set; }
-        public virtual ICollection<Identifier> Identifiers { get; set; }
         public bool IsActive { get; set; }
         public virtual ICollection<HumanName> HumanNames { get; set; }
         public virtual ICollection<ContactPoint> Telecom { get; set; }
+        public virtual ICollection<Allergy> Allergies { get; set; }
     }
 }

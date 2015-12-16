@@ -7,6 +7,7 @@ namespace IvoryPacket.Models
 {
     public class Observation
     {
+        public int ObservationId { get; set; }
 
     }
 }

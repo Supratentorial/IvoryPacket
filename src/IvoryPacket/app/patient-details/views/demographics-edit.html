@@ -1,73 +1,85 @@
-﻿<div layout="row">
-    <md-whiteframe class="md-whiteframe-2dp" flex="50" layout="column">
-        <div layout="row">
-            <md-input-container flex="50">
-                <label>First Name</label>
-                <input ng-model="vm.patientService.firstName" />
-            </md-input-container>
-            <md-input-container flex="50">
-                <label>Last Name</label>
-                <input ng-model="vm.patientService.lastName" />
-            </md-input-container>
-        </div>
-        <div layout="row">
-            <md-input-container flex="50">
-                <label>Middle Name(s)</label>
-                <input ng-model="vm.patientService.middleNames" />
-            </md-input-container>
-            <md-input-container flex="50">
-                <label>Nickname</label>
-                <input ng-model="vm.patientService.nickName" />
-            </md-input-container>
-        </div>
-        <div layout="row">
-            <md-input-container flex="25">
-                <label>Date of Birth</label>
-                <input ng-model="vm.patientService.dateOfBirth" />
-            </md-input-container>
-            <md-input-container flex="25">
-                <label>Title</label>
-                <md-select ng-model="vm.patientService.patient.title">
-                    <md-option ng-repeat="title in vm.titleOptions">
-                        {{title}}
-                    </md-option>
-                </md-select>
-            </md-input-container>
-            <md-input-container>
-                <label>Gender</label>
-                <md-select ng-model="vm.patientService.gender">
-                    <md-option ng-repeat="gender in vm.genderOptions">
-                        {{gender}}
-                    </md-option>
-                </md-select>
-            </md-input-container>
-        </div>
-    </md-whiteframe>
-    <md-whiteframe class="md-whiteframe-2dp" flex="50" style="" layout="column">
-        <div layout="row">
-            <md-input-container>
-                <label>Mobile Phone</label>
-                <input ng-model="vm.patientService.patient.mobilePhone" />
-            </md-input-container>
-            <md-input-container>
-                <label>Home Phone</label>
-                <input ng-model="vm.patientService.patient.homePhone" />
-            </md-input-container>
-            <md-input-container>
-                <label>Work Phone</label>
-                <input ng-model="vm.patientService.patient.workPhone" />
-            </md-input-container>
-        </div>
-        <md-input-container>
-            <label>Email Address</label>
-            <input ng-model="vm.patientService.patient.emailAddress" />
-        </md-input-container>
-    </md-whiteframe>
+﻿<div class="row">
+    <div class="col-lg-12">
+        <h4>Edit Demographics</h4>
+    </div>
 </div>
-<div layout="row">
-    <md-whiteframe class="md-whiteframe-2dp" flex="50">
-        <md-input-container>
-            <label></label>
-        </md-input-container>
-    </md-whiteframe>
+<div class="row">
+    <div class="col-lg-6">
+        <div class="panel panel-default">
+            <div class="panel-body">
+                <div class="row">
+                    <div class="form-group col-lg-6">
+                        <label>First Name</label>
+                        <input ng-model="vm.patientDetailService.currentPatient.firstName" class="form-control" />
+                    </div>
+                    <div class="form-group col-lg-6">
+                        <label>Last Name</label>
+                        <input ng-model="vm.patientDetailService.currentPatient.lastName" class="form-control" />
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="form-group col-lg-6">
+                        <label>Middle Name(s)</label>
+                        <input ng-model="vm.patient.middleNames" class="form-control" />
+                    </div>
+                    <div class="form-group col-lg-6">
+                        <label>Nickname</label>
+                        <input ng-model="vm.patient.nickName" class="form-control" />
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="form-group col-lg-4">
+                        <label>Title</label>
+                        <select class="form-control" ng-model="vm.patientService.patient.title">
+                            <option ng-repeat="title in vm.titleOptions">
+                                {{title}}
+                            </option>
+                        </select>
+                    </div>
+                    <div class="form-group col-lg-4">
+                        <label>Date of Birth</label>
+                        <input ng-model="vm.patient.dateOfBirth" class="form-control" />
+                    </div>
+                    <div class="form-group col-lg-4">
+                        <label>Gender</label>
+                        <select class="form-control" ng-model="vm.patient.gender">
+                            <option ng-repeat="gender in vm.genderOptions">
+                                {{gender}}
+                            </option>
+                        </select>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="col-lg-6">
+        <div class="panel panel-default">
+            <div class="panel-body">
+                <div class="row">
+                    <div class="form-group col-lg-4">
+                        <label>Mobile Phone</label>
+                        <input ng-model="vm.patientService.patient.mobilePhone" class="form-control" />
+                    </div>
+                    <div class="form-group col-lg-4">
+                        <label>Home Phone</label>
+                        <input ng-model="vm.patientService.patient.homePhone" class="form-control" />
+                    </div>
+                    <div class="form-group col-lg-4">
+                        <label>Work Phone</label>
+                        <input ng-model="vm.patientService.patient.workPhone" class="form-control" />
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label>Email Address</label>
+                    <input ng-model="vm.patientService.patient.emailAddress" class="form-control" />
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<div class="row">
+    <div class="col-lg-3">
+        <button class="btn btn-default" ui-sref="patient.detail.demographics.view" ng-click="vm.save()">Save</button>
+        <button class="btn btn-default" ui-sref="patient.detail.demographics.view">Cancel</button>
+    </div>
 </div>

@@ -4,11 +4,14 @@ var patient;
     (function (controllers) {
         "use strict";
         var DemographicsController = (function () {
-            function DemographicsController() {
+            function DemographicsController(patientDetailService) {
+                this.patientDetailService = patientDetailService;
                 this.genderOptions = ["Male", "Female"];
                 this.titleOptions = ["Mr", "Mrs", "Master", "Ms", "Doctor"];
             }
-            DemographicsController.$inject = [];
+            DemographicsController.prototype.save = function () {
+            };
+            DemographicsController.$inject = ["DemographicsService"];
             return DemographicsController;
         })();
         controllers.DemographicsController = DemographicsController;

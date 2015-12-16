@@ -1,10 +1,10 @@
-﻿/// <reference path="../typings/angular-material/angular-material.d.ts" />
-/// <reference path="../typings/angular-ui-router/angular-ui-router.d.ts" />
+﻿/// <reference path="../typings/angular-ui-router/angular-ui-router.d.ts" />
 /// <reference path="../typings/angularjs/angular.d.ts" />
 
 module app {
-    angular.module("app", ["ui.router", "patient", "ngMaterial"]).config(($stateProvider: angular.ui.IStateProvider, $urlRouterProvider: angular.ui.IUrlRouterProvider, $locationProvider: angular.ILocationProvider, $httpProvider: angular.IHttpProvider, $mdThemingProvider: angular.material.IThemingProvider) => {
+    angular.module("app", ["ui.router", "patient"]).config(($stateProvider: angular.ui.IStateProvider, $urlRouterProvider: angular.ui.IUrlRouterProvider, $locationProvider: angular.ILocationProvider, $httpProvider: angular.IHttpProvider) => {
         $urlRouterProvider.when("/", "/");
+        $urlRouterProvider.when("patients/detail/{patientId:int}/demographics", "patients/detail/{patientId:int}/demographics/view");
         $stateProvider
             .state("patient", <angular.ui.IState>{
                 url: "/patients",
@@ -18,7 +18,8 @@ module app {
             })
             .state("patient.detail", <angular.ui.IState>{
                 url: "/detail/{patientId:int}",
-                templateUrl: "html/patient-shell.html"
+                templateUrl: "html/patient-shell.html",
+                controller: "PatientShellController as vm"
             })
             .state("patient.detail.summary", <angular.ui.IState>{
                 url: "/summary",
@@ -45,7 +46,7 @@ module app {
                 controller: "DemographicsController as vm"
             })
             .state("patient.detail.demographics.view", <angular.ui.IState>{
-                url: "/view",
+                url:"",
                 templateUrl: "html/demographics-view.html"
             })
             .state("patient.detail.encounters", <angular.ui.IState>{
@@ -74,18 +75,18 @@ module app {
                 url: "/edit",
                 templateUrl: "html/documents-edit.html"
             })
-            .state("patient.detail.pathology", <angular.ui.IState>{
-                url: "/pathology",
+            .state("patient.detail.investigations", <angular.ui.IState>{
+                url: "/investigations",
                 abstract: true,
                 template: "<ui-view/>"
             })
-            .state("patient.detail.pathology.view", <angular.ui.IState>{
+            .state("patient.detail.investigations.view", <angular.ui.IState>{
                 url: "/view",
-                templateUrl: "html/pathology-view.html"
+                templateUrl: "html/investigations-view.html"
             })
-            .state("patient.detail.pathology.edit", <angular.ui.IState>{
+            .state("patient.detail.investigations.edit", <angular.ui.IState>{
                 url: "/edit",
-                templateUrl: "html/pathology-edit.html"
+                templateUrl: "html/investigations-edit.html"
             })
             .state("patient.detail.allergies", <angular.ui.IState>{
                 url: "/allergies",
@@ -95,11 +96,12 @@ module app {
             .state("patient.detail.allergies.view", <angular.ui.IState>{
                 url: "/view",
                 templateUrl: "html/allergies-view.html",
-                controller: "AllergyController as vm"
+                controller: "AllergiesController as vm"
             })
             .state("patient.detail.allergies.edit", <angular.ui.IState>{
                 url: "/edit",
-                templateUrl: "html/allergies-edit.html"
+                templateUrl: "html/allergies-edit.html",
+                controller: "AllergiesController as vm"
             })
             .state("patient.detail.immunisations", <angular.ui.IState>{
                 url: "/immunisations",
@@ -129,10 +131,6 @@ module app {
             })
 
         $locationProvider.html5Mode(true);
-
-        $mdThemingProvider.theme("default").primaryPalette("blue-grey", {
-            "default": "800"
-        });
     });
     angular.element(document).ready(() => { angular.bootstrap(document, ["app"]) });
 }

@@ -59,8 +59,8 @@ gulp.task("clean:index", function (cb) {
 //Transpiles app SCSS files into minifed CSS and writes them to webroot.
 gulp.task("transpile-scss", function () {
     return gulp.src(paths.srcSCSSFiles)
+        .pipe(plumber())
         .pipe(sass({ style: "expanded" }))
-        .pipe(minifycss())
         .pipe(gulp.dest(paths.distCSSDir));
 });
 
@@ -68,6 +68,7 @@ gulp.task("transpile-scss", function () {
 gulp.task('transpile-ts', function () {
     var clientResult = gulp.src(paths.srcTSFiles)
         .pipe(flatten())
+        .pipe(plumber())
         .pipe(ts({
             target: 'ES5'
         }));
@@ -104,7 +105,7 @@ gulp.task('copy-vendor-css', function () {
 });
 
 //Injects JS and CSS reference tags in index.html from Bower and app src files.
-gulp.task('wiredep', ["copy-vendor-js","copy-vendor-css", "transpile-ts", "transpile-scss"], function () {
+gulp.task('wiredep', ["copy-vendor-js", "transpile-ts", "transpile-scss"], function () {
     gulp.src(paths.srcIndexFile)
         .pipe(inject(gulp.src([paths.distJSFiles]).pipe(angularFileSort()), {
             addRootSlash: false,

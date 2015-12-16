@@ -1,10 +1,10 @@
-/// <reference path="../typings/angular-material/angular-material.d.ts" />
 /// <reference path="../typings/angular-ui-router/angular-ui-router.d.ts" />
 /// <reference path="../typings/angularjs/angular.d.ts" />
 var app;
 (function (app) {
-    angular.module("app", ["ui.router", "patient", "ngMaterial"]).config(function ($stateProvider, $urlRouterProvider, $locationProvider, $httpProvider, $mdThemingProvider) {
+    angular.module("app", ["ui.router", "patient"]).config(function ($stateProvider, $urlRouterProvider, $locationProvider, $httpProvider) {
         $urlRouterProvider.when("/", "/");
+        $urlRouterProvider.when("patients/detail/{patientId:int}/demographics", "patients/detail/{patientId:int}/demographics/view");
         $stateProvider
             .state("patient", {
             url: "/patients",
@@ -18,7 +18,8 @@ var app;
         })
             .state("patient.detail", {
             url: "/detail/{patientId:int}",
-            templateUrl: "html/patient-shell.html"
+            templateUrl: "html/patient-shell.html",
+            controller: "PatientShellController as vm"
         })
             .state("patient.detail.summary", {
             url: "/summary",
@@ -45,7 +46,7 @@ var app;
             controller: "DemographicsController as vm"
         })
             .state("patient.detail.demographics.view", {
-            url: "/view",
+            url: "",
             templateUrl: "html/demographics-view.html"
         })
             .state("patient.detail.encounters", {
@@ -74,18 +75,18 @@ var app;
             url: "/edit",
             templateUrl: "html/documents-edit.html"
         })
-            .state("patient.detail.pathology", {
-            url: "/pathology",
+            .state("patient.detail.investigations", {
+            url: "/investigations",
             abstract: true,
             template: "<ui-view/>"
         })
-            .state("patient.detail.pathology.view", {
+            .state("patient.detail.investigations.view", {
             url: "/view",
-            templateUrl: "html/pathology-view.html"
+            templateUrl: "html/investigations-view.html"
         })
-            .state("patient.detail.pathology.edit", {
+            .state("patient.detail.investigations.edit", {
             url: "/edit",
-            templateUrl: "html/pathology-edit.html"
+            templateUrl: "html/investigations-edit.html"
         })
             .state("patient.detail.allergies", {
             url: "/allergies",
@@ -95,11 +96,12 @@ var app;
             .state("patient.detail.allergies.view", {
             url: "/view",
             templateUrl: "html/allergies-view.html",
-            controller: "AllergyController as vm"
+            controller: "AllergiesController as vm"
         })
             .state("patient.detail.allergies.edit", {
             url: "/edit",
-            templateUrl: "html/allergies-edit.html"
+            templateUrl: "html/allergies-edit.html",
+            controller: "AllergiesController as vm"
         })
             .state("patient.detail.immunisations", {
             url: "/immunisations",
@@ -128,9 +130,6 @@ var app;
             templateUrl: "html/medical-history-edit.html"
         });
         $locationProvider.html5Mode(true);
-        $mdThemingProvider.theme("default").primaryPalette("blue-grey", {
-            "default": "800"
-        });
     });
     angular.element(document).ready(function () { angular.bootstrap(document, ["app"]); });
 })(app || (app = {}));
