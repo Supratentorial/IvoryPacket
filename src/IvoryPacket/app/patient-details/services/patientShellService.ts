@@ -1,8 +1,59 @@
-﻿module patient.services {
-    export class PatientShellService implements patient.interfaces.patientShellService {
+﻿//Manages currently open patients.
+module patient.services {
+    export interface patientShellService {
+        openPatients: interfaces.patient[];
+        currentPatient: interfaces.patient;
+        getPatientById(patientId: number): any;
+        activatePatient(): void;
+        savePatient(): any;
+    }
 
-        currentPatientId: number;
-        constructor() {
+    export class PatientShellService implements patientShellService {
+        openPatients: interfaces.patient[];
+        currentPatient: interfaces.patient;
+        static $inject = ["$http"];
+        constructor(private $http: angular.IHttpService) {
+            this.currentPatient = {
+                patientId: 0,
+                title: null,
+                givenName: null,
+                middleNames: null,
+                familyName: null,
+                preferredName: null,
+                gender: null,
+                dateOfBirth: null,
+                ethnicity: null,
+                isActive: true,
+                homePhone: null,
+                workPhone: null,
+                mobilePhone: null,
+                medicareCardNumber: null,
+                medicareCardExpiry: null,
+                medicareCardPosition: null,
+                allergies: [],
+                contactPoints: []
+            }
+        }
+
+        getPatientById(patientId: number) {
+            this.$http.get("api/patients" + patientId).then((result) => {
+                //Todo: check if patient isn't already open.
+                angular.copy(result.data, this.currentPatient);
+                this.activatePatient();
+            });
+        }
+
+        savePatient() {
+            return this.$http.post("api/patients/", this.currentPatient).then(
+                (result) => {
+                    angular.copy(this.currentPatient, result.data);
+                },
+                (error) => {
+
+                });
+        }
+
+        activatePatient(): void {
 
         }
     }

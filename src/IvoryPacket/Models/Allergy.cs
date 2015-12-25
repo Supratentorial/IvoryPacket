@@ -16,7 +16,7 @@ namespace IvoryPacket.Models
         public string ClinicalManifestation { get; set; }
         public string Note { get; set; }
 
-
+        public int PatientId { get; set; }
         public virtual Patient Patient { get; set; } 
     }
 }

@@ -6,6 +6,19 @@ var app;
         $urlRouterProvider.when("/", "/");
         $urlRouterProvider.when("patients/detail/{patientId:int}/demographics", "patients/detail/{patientId:int}/demographics/view");
         $stateProvider
+            .state("dashboard", {
+            url: "/dashboard",
+            temlateUrl: "html/dashboard.html"
+        })
+            .state("appointments", {
+            url: "/appointments",
+            abstract: true,
+            templateUrl: "<ui-view/>"
+        })
+            .state("appointments.list", {
+            url: "/list",
+            templateUrl: "html/appointments-list.html"
+        })
             .state("patient", {
             url: "/patients",
             template: "<ui-view/>",

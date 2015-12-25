@@ -211,12 +211,8 @@ GeneratedArtifacts/
 _Pvt_Extensions/
 ModelManifest.xml
 
-IvoryPacket/src/IvoryPacketbower_components/
-IvoryPacket/src/IvoryPacketnode_modules/
-IvoryPacket/src/IvoryPacketapp/*/*.js
-IvoryPacket/src/IvoryPacketapp/*/*.js.map
-IvoryPacket/src/IvoryPacketdist/lib
-IvoryPacket/src/IvoryPacketdist/css
-IvoryPacket/src/IvoryPacketdist/js
-IvoryPacket/src/IvoryPacketdist/html
-IvoryPacket/src/IvoryPacketdist/index.html
+src/IvoryPacket/node_modules/
+src/IvoryPacket/app/**/*.js
+src/IvoryPacket/app/**/*.js.map
+src/IvoryPacket/bower_components/
+src/IvoryPacket/wwwroot/

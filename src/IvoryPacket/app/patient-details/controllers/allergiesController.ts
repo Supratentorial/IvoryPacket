@@ -6,13 +6,12 @@
         allergyReactionTypes: string[];
         currentAllergy: patient.interfaces.allergy;
 
-        constructor(private allergiesService: patient.interfaces.allergiesService) {
+        constructor(private allergiesService: patient.services.allergiesService) {
             this.allergySeverityOptions = [];
             this.allergyReactionTypes = [];
             this.currentAllergy = {
                 allergyId: 0,
                 note: "",
-                onset: null,
                 type: "",
                 severity: "",
                 substance: "",
@@ -37,7 +36,7 @@
 
 
         saveAllergy() {
-            this.allergiesService.saveAllergy(this.currentAllergy);
+            this.allergiesService.addAllergy(this.currentAllergy);
         }
     }
     angular.module("patient").controller("AllergiesController", patient.controllers.AllergiesController);

@@ -6,7 +6,10 @@
     "angular-sanitize": "1.4.8",
     "adal-angular": "1.0.7",
     "ng-lodash": "0.3.0",
-    "angular-ui-router": "~0.2.15"
+    "angular-ui-router": "~0.2.15",
+    "international-phone-number": "~0.0.16",
+    "ngMask": "angular-mask#~3.0.16",
+    "bootstrap-sass": "~3.3.6"
   },
   "devDependencies": {}
 }

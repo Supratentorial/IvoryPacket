@@ -10,27 +10,27 @@
                 <div class="row">
                     <div class="form-group col-lg-6">
                         <label>First Name</label>
-                        <input ng-model="vm.patientDetailService.currentPatient.firstName" class="form-control" />
+                        <input placeholder="e.g. Harry" ng-model="vm.givenName" class="form-control" />
                     </div>
                     <div class="form-group col-lg-6">
                         <label>Last Name</label>
-                        <input ng-model="vm.patientDetailService.currentPatient.lastName" class="form-control" />
+                        <input placeholder="e.g. Potter" ng-model="vm.familyName" class="form-control" />
                     </div>
                 </div>
                 <div class="row">
                     <div class="form-group col-lg-6">
                         <label>Middle Name(s)</label>
-                        <input ng-model="vm.patient.middleNames" class="form-control" />
+                        <input placeholder="e.g. James" ng-model="vm.middleNames" class="form-control" />
                     </div>
                     <div class="form-group col-lg-6">
-                        <label>Nickname</label>
-                        <input ng-model="vm.patient.nickName" class="form-control" />
+                        <label>Preferred Name</label>
+                        <input placeholder="e.g. Hazza" ng-model="vm.preferredName" class="form-control" />
                     </div>
                 </div>
                 <div class="row">
                     <div class="form-group col-lg-4">
                         <label>Title</label>
-                        <select class="form-control" ng-model="vm.patientService.patient.title">
+                        <select class="form-control" ng-model="vm.title">
                             <option ng-repeat="title in vm.titleOptions">
                                 {{title}}
                             </option>
@@ -38,11 +38,11 @@
                     </div>
                     <div class="form-group col-lg-4">
                         <label>Date of Birth</label>
-                        <input ng-model="vm.patient.dateOfBirth" class="form-control" />
+                        <input type="date" placeholder="dd/mm/yyyy" ng-model="vm.dateOfBirth" class="form-control">
                     </div>
                     <div class="form-group col-lg-4">
                         <label>Gender</label>
-                        <select class="form-control" ng-model="vm.patient.gender">
+                        <select class="form-control" ng-model="vm.gender">
                             <option ng-repeat="gender in vm.genderOptions">
                                 {{gender}}
                             </option>
@@ -58,20 +58,54 @@
                 <div class="row">
                     <div class="form-group col-lg-4">
                         <label>Mobile Phone</label>
-                        <input ng-model="vm.patientService.patient.mobilePhone" class="form-control" />
+                        <input ng-model="vm.mobilePhone" class="form-control" />
                     </div>
                     <div class="form-group col-lg-4">
                         <label>Home Phone</label>
-                        <input ng-model="vm.patientService.patient.homePhone" class="form-control" />
+                        <input international-phone-number ng-model="vm.homePhone" class="form-control"/>
                     </div>
                     <div class="form-group col-lg-4">
                         <label>Work Phone</label>
-                        <input ng-model="vm.patientService.patient.workPhone" class="form-control" />
+                        <input ng-model="vm.workPhone" class="form-control" />
                     </div>
                 </div>
                 <div class="form-group">
                     <label>Email Address</label>
-                    <input ng-model="vm.patientService.patient.emailAddress" class="form-control" />
+                    <input ng-model="vm.emailAddress" class="form-control" />
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<div class="row">
+    <div class="col-lg-6">
+        <div class="panel panel-default">
+            <div class="panel-body">
+                <div class="row">
+                    <div class="col-lg-6">
+                        <div class="form-group">
+                            <label>Medicare Card No.</label>
+                            <input class="form-control" ng-model="vm.medicareCardNumber" />
+                        </div>
+                    </div>
+                    <div class="col-lg-2">
+                        <div class="form-group">
+                            <label>Position</label>
+                            <input placeholder="e.g. 2" class="form-control" ng-model="vm.medicarePosition" />
+                        </div>
+                    </div>
+                    <div class="col-lg-4">
+                        <div class="form-group">
+                            <label>Expiry</label>
+                            <input placeholder="e.g. 02/2017" class="form-control" ng-model="vm.medicareCardExpiry" />
+                        </div>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-lg-6">
+                        <label>DVA Card No.</label>
+                        <input class="form-control" ng-model="vm.dvaCardNumber"/>
+                    </div>
                 </div>
             </div>
         </div>
@@ -79,7 +113,7 @@
 </div>
 <div class="row">
     <div class="col-lg-3">
-        <button class="btn btn-default" ui-sref="patient.detail.demographics.view" ng-click="vm.save()">Save</button>
+        <button class="btn btn-default" ui-sref="patient.detail.demographics.view" ng-click="vm.updateDemographics()">Save</button>
         <button class="btn btn-default" ui-sref="patient.detail.demographics.view">Cancel</button>
     </div>
 </div>

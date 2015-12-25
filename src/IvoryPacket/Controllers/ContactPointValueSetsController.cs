@@ -1,19 +1,18 @@
 ﻿using System.Collections.Generic;
 using Microsoft.AspNet.Mvc;
-using IvoryPacket.Models;
 
 // For more information on enabling Web API for empty projects, visit http://go.microsoft.com/fwlink/?LinkID=397860
 
 namespace IvoryPacket.Controllers
 {
-    public class PatientsController : Controller
+    [Route("api/contactpoint/valuesets")]
+    public class ContactPointValueSetsController : Controller
     {
-        // GET: api/values
-        [Route ("api/patients")]
+        [Route("/systems")]
         [HttpGet]
-        public IEnumerable<string> Get()
+        public IEnumerable<string> GetContactPointSystemOptions()
         {
-            return new string[] { "value1", "value2" };
+            return new string[] { "Phone", "Fax", "Email", "Pager" };
         }
 
         // GET api/values/5
@@ -25,9 +24,8 @@ namespace IvoryPacket.Controllers
 
         // POST api/values
         [HttpPost]
-        public void Post(Patient patient)
+        public void Post([FromBody]string value)
         {
-
         }
 
         // PUT api/values/5

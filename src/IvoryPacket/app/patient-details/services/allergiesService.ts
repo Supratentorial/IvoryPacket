@@ -1,18 +1,21 @@
 ﻿module patient.services {
-    export class AllergiesService implements patient.interfaces.allergiesService {
+    export interface allergiesService {
+        getAllergySeverityOptions(): any;
+        getAllergyReactionTypes(): any;
+        addAllergy(allergy: interfaces.allergy): void;
+    }
+    export class AllergiesService implements allergiesService {
         static $inject = ["PatientShellService", "$http"];
-        constructor(private patientShellService: patient.interfaces.patientShellService, private $http: angular.IHttpService) {
+        constructor(private patientShellService: patient.services.patientShellService, private $http: angular.IHttpService) {
 
         }
 
-        saveAllergy(allergy: patient.interfaces.allergy) {
-            return this.$http.post("api/allergies", allergy).then(
-                //Success
-                () => {
-                    console.log("Allergy successfully saved to server.");
-                },
-                //Failure
-                () => { });
+        addAllergy(allergy: interfaces.allergy) {
+            this.patientShellService.currentPatient.allergies.push(allergy);
+        }
+
+        deleteAllergy(allergyId: number) {
+            //Todo: change allergy status.
         }
 
         getAllergySeverityOptions() {
@@ -40,21 +43,6 @@
                 });
 
         }
-
-
-        getCurrentPatientAllergies() {
-            this.$http.get("api/allergies").then(() => { });
-        }
-
-        getPatientAllergyById(patientId: number) {
-
-        }
-
-        addPatientAllergy(patientId: number, allergy: patient.interfaces.allergy) {
-
-        }
-
-
 
     }
     angular.module("patient").service("AllergiesService", patient.services.AllergiesService);

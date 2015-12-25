@@ -7,14 +7,11 @@ var patient;
                 this.patientShellService = patientShellService;
                 this.$http = $http;
             }
-            AllergiesService.prototype.saveAllergy = function (allergy) {
-                return this.$http.post("api/allergies", allergy).then(
-                //Success
-                function () {
-                    console.log("Allergy successfully saved to server.");
-                }, 
-                //Failure
-                function () { });
+            AllergiesService.prototype.addAllergy = function (allergy) {
+                this.patientShellService.currentPatient.allergies.push(allergy);
+            };
+            AllergiesService.prototype.deleteAllergy = function (allergyId) {
+                //Todo: change allergy status.
             };
             AllergiesService.prototype.getAllergySeverityOptions = function () {
                 return this.$http.get("api/allergies/valuesets/severity").then(
@@ -37,13 +34,6 @@ var patient;
                 //Failure
                 function (error) {
                 });
-            };
-            AllergiesService.prototype.getCurrentPatientAllergies = function () {
-                this.$http.get("api/allergies").then(function () { });
-            };
-            AllergiesService.prototype.getPatientAllergyById = function (patientId) {
-            };
-            AllergiesService.prototype.addPatientAllergy = function (patientId, allergy) {
             };
             AllergiesService.$inject = ["PatientShellService", "$http"];
             return AllergiesService;

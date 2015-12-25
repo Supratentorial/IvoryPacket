@@ -1,53 +1,53 @@
-﻿<div class="container-fluid">
-    <div id="patientBanner" class="row banner">
-        <div class="col-lg-3">
-            <div class="row">
-                <span class="banner-content">MUMFORD, Blake</span>
-                <span class="banner-content"> (Dr)</span>
-            </div>
+﻿
+<div id="patientBanner" class="row banner">
+    <div class="col-lg-3">
+        <div class="row">
+            <span class="banner-content banner-last-name">{{vm.patientShellService.currentPatient.familyName}}, </span>
+            <span class="banner-content">{{vm.patientShellService.currentPatient.givenName}}</span>
+            <span class="banner-content" ng-show="vm.patientShellService.currentPatient.title"> ({{vm.patientShellService.currentPatient.title}})</span>
         </div>
-        <div class="col-lg-3">
-            <div class="row">
-                <span class="banner-label">Gender</span>
-                <span class="banner-content"> Male</span>
-            </div>
-            <div class="row">
-                <span class="banner-label">Born</span>
-                <span class="banner-content"> 15/06/1990</span>
-                <span class="banner-content">(25y)</span>
-            </div>
+    </div>
+    <div class="col-lg-2">
+        <div class="row">
+            <span class="banner-label">Gender</span>
+            <span class="banner-content"> {{vm.patientShellService.currentPatient.gender || '-'}}</span>
         </div>
-        <div class="col-lg-3">
-            <div class="row">
-                <span class="banner-label">Phone</span>
-                <span class="banner-content">+61 400 939 291</span>
-            </div>
-            <div class="row">
-                <span class="banner-label">Address</span>
-                <span class="banner-content">4 Selbourne Road, Kew, Victoria</span>
-            </div>
+        <div class="row">
+            <span class="banner-label">Born</span>
+            <span class="banner-content"> {{(vm.patientShellService.currentPatient.dateOfBirth | date: 'dd/MM/yyyy') || '-'}}</span>
+            <span class="banner-content" ng-show="vm.age"> ({{vm.age}})</span>
         </div>
-        <div class="col-lg-3">
-            <div class="row">
-                <span class="banner-label">Alerts</span>
-            </div>
+    </div>
+    <div class="col-lg-4">
+        <div class="row">
+            <span class="banner-label">Phone</span>
+            <span class="banner-content"><span ng-show="vm.patientShellService.currentPatient.mobilePhone">(M) </span>{{vm.patientShellService.currentPatient.mobilePhone}}</span>
+            <span class="banner-content"><span ng-show="vm.patientShellService.currentPatient.homePhone">(H) </span>{{vm.patientShellService.currentPatient.homePhone}}</span>
+            <span class="banner-content"><span ng-show="vm.patientShellService.currentPatient.workPhone">(W) </span> {{vm.patientShellService.currentPatient.workPhone}}</span>
+        </div>
+        <div class="row">
+            <span class="banner-label">Address</span>
+            <span class="banner-content">4 Selbourne Road, Kew, Victoria</span>
+        </div>
+    </div>
+    <div class="col-lg-3">
+        <div class="row">
+            <span class="banner-label">Alerts</span>
         </div>
     </div>
 </div>
-<div class="container-fluid">
-    <div class="row">
-        <div class="col-lg-2">
-            <div class="list-group">
-                <a class="list-group-item" ui-sref-active="active" ui-sref="patient.detail.encounters.view">Encounters</a>
-                <a class="list-group-item" ui-sref-active="active" ui-sref="patient.detail.investigations.view">Investigations</a>
-                <a class="list-group-item" ui-sref-active="active" ui-sref="patient.detail.documents.view">Documents</a>
-                <a class="list-group-item" ui-sref-active="active" ui-sref="patient.detail.medicalhistory.view">Medical History</a>
-                <a class="list-group-item" ui-sref-active="active" ui-sref="patient.detail.socialhistory.view">Social & Family History</a>
-                <a class="list-group-item" ui-sref-active="active" ui-sref="patient.detail.demographics.view">Demographics</a>
-                <a class="list-group-item" ui-sref-active="active" ui-sref="patient.detail.allergies.view">Allergies & Intolerances</a>
-                <a class="list-group-item" ui-sref-active="active" ui-sref="patient.detail.immunisations.view">Immunisations</a>
-            </div>
+<div class="row">
+    <div class="col-lg-2">
+        <div class="list-group">
+            <a class="list-group-item" ui-sref-active="active" ui-sref="patient.detail.encounters.view">Encounters</a>
+            <a class="list-group-item" ui-sref-active="active" ui-sref="patient.detail.investigations.view">Investigations</a>
+            <a class="list-group-item" ui-sref-active="active" ui-sref="patient.detail.documents.view">Documents</a>
+            <a class="list-group-item" ui-sref-active="active" ui-sref="patient.detail.medicalhistory.view">Medical History</a>
+            <a class="list-group-item" ui-sref-active="active" ui-sref="patient.detail.socialhistory.view">Social & Family History</a>
+            <a class="list-group-item" ui-sref-active="active" ui-sref="patient.detail.demographics.view">Demographics</a>
+            <a class="list-group-item" ui-sref-active="active" ui-sref="patient.detail.allergies.view">Allergies & Intolerances</a>
+            <a class="list-group-item" ui-sref-active="active" ui-sref="patient.detail.immunisations.view">Immunisations</a>
         </div>
-        <div ui-view class="col-lg-10"></div>
     </div>
+    <div ui-view class="col-lg-10"></div>
 </div>

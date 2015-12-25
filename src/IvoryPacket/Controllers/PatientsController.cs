@@ -1,21 +1,23 @@
 ﻿using System.Collections.Generic;
 using Microsoft.AspNet.Mvc;
 using IvoryPacket.Models;
-using System;
+using IvoryPacket.Filters;
+
+// For more information on enabling Web API for empty projects, visit http://go.microsoft.com/fwlink/?LinkID=397860
 
 namespace IvoryPacket.Controllers
 {
-    public class AllergiesControllers : Controller
+    [Route("api/patients")]
+    public class PatientsController : Controller
     {
         [FromServices]
         public IvoryPacketDbContext DbContext { get; set; }
 
-        // GET api/allergies
-        [Route("api/allergies")]
+        // GET: api/values
         [HttpGet]
         public IEnumerable<string> Get()
         {
-            return new string[] { "Allergy1", "Allergy2" };
+            return new string[] { "value1", "value2" };
         }
 
         // GET api/values/5
@@ -25,21 +27,14 @@ namespace IvoryPacket.Controllers
             return "value";
         }
 
-        // POST api/allergies
-        [Route("api/allergies")]
+        // POST api/patients
         [HttpPost]
-        public IActionResult Post([FromBody]Allergy allergy)
+        [ValidateModel]
+        public IActionResult Post([FromBody]Patient patient)
         {
-            if (!ModelState.IsValid)
-            {
-                return HttpBadRequest();
-            }
-            if(allergy.AllergyId != 0)
-            {
-                return HttpBadRequest();
-            }
-            DbContext.Add(allergy);
-            return new ObjectResult(DbContext.Patients.;
+            DbContext.Add(patient);
+            DbContext.SaveChanges();
+            return new HttpOkObjectResult(patient);
         }
 
         // PUT api/values/5

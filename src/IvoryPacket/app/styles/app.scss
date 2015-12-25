@@ -4,6 +4,7 @@
 
 body {
     background: $md-blue-grey-50;
+    padding-top: 70px;
 }
 
 .active {
@@ -11,22 +12,28 @@ body {
 }
 
 .banner {
+    border-top: 1px solid $md-blue-grey-100;
     border-bottom: 1px solid $md-blue-grey-100;
     background: $white;
     margin-bottom: 1em;
 }
 
 .banner-section {
-
 }
 
 .banner-label {
-    font-size: $font-size-large;
+    font-size: $font-size-medium;
     color: $md-grey-500;
 }
 
-.banner-content{
-    font-size: $font-size-large;
+.banner-content {
+    font-size: $font-size-medium;
 }
 
+.banner-last-name {
+    text-transform: uppercase;
+}
 
+.banner-capitalize {
+    text-transform: capitalize;
+}

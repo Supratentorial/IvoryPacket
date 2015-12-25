@@ -4,16 +4,28 @@
 <head>
 
     <base href="/">
-    <title>Dermal</title>
+    <title>IvoryPacket</title>
     <!-- bower:css -->
+    <link rel="stylesheet" href="css/intlTelInput.css"/>
     <!-- endbower -->
     <!-- inject:css -->
     <link rel="stylesheet" href="css/app.css"/>
     <!-- endinject -->
 </head>
 <body>
-
-    <div ui-view></div>
+    <div class="navbar navbar-default navbar-fixed-top">
+        <div class="container-fluid">
+            <div class="navbar-header">
+                <a class="navbar-brand" ui-sref="dashboard">IvoryPacket</a>
+            </div>
+            <ul class="nav navbar-nav">
+                <li><a ui-sref-active="active" ui-sref="dashboard">Dashboard</a></li>
+                <li><a ui-sref-active="active" ui-sref="patient.list">Patients</a></li>
+                <li><a ui-sref-active="active" ui-sref="appointments.list">Appointments</a></li>
+            </ul>
+        </div>
+    </div>
+    <div class="container-fluid" ui-view></div>
     <!-- bower:js -->
     <script src="lib/angular.js"></script>
     <script src="lib/angular-sanitize.js"></script>
@@ -21,21 +33,26 @@
     <script src="lib/adal-angular.js"></script>
     <script src="lib/ng-lodash.js"></script>
     <script src="lib/angular-ui-router.js"></script>
+    <script src="lib/jquery.js"></script>
+    <script src="lib/intlTelInput.min.js"></script>
+    <script src="lib/utils.js"></script>
+    <script src="lib/international-phone-number.js"></script>
+    <script src="lib/ngMask.js"></script>
+    <script src="lib/bootstrap.js"></script>
     <!-- endbower -->
     <!-- inject:js -->
-    <script src="js/serviceInterfaces.js"></script>
     <script src="js/patientModule.js"></script>
     <script src="js/patientSummaryController.js"></script>
     <script src="js/patientShellService.js"></script>
     <script src="js/patientShellController.js"></script>
+    <script src="js/patientListService.js"></script>
     <script src="js/patientListController.js"></script>
     <script src="js/patientInterfaces.js"></script>
-    <script src="js/appModule.js"></script>
-    <script src="js/navLinkController.js"></script>
+    <script src="js/patientDetailService.js"></script>
     <script src="js/investigationsController.js"></script>
     <script src="js/encountersController.js"></script>
-    <script src="js/demographicsService.js"></script>
     <script src="js/demographicsController.js"></script>
+    <script src="js/appModule.js"></script>
     <script src="js/allergiesService.js"></script>
     <script src="js/allergiesController.js"></script>
     <!-- endinject -->

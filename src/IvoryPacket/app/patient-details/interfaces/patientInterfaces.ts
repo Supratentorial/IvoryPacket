@@ -1,18 +1,45 @@
 ﻿module patient.interfaces {
     export interface patient {
-        firstName: string;
-        lastName: string;
+        patientId: number;
+        title: string;
+        givenName: string;
+        middleNames: string;
+        familyName: string;
+        preferredName: string;
+        gender: string;
+        dateOfBirth: Date;
+        ethnicity?: string;
+        isActive: boolean;
+        mobilePhone: string;
+        workPhone: string;
+        homePhone: string;
 
+        medicareCardNumber?: number;
+        medicareCardExpiry?: Date;
+        medicareCardPosition?: number;
+
+        allergies: allergy[];
+        contactPoints: contactPoint[];
+    }
+
+    export interface humanName {
+        humanNameId: number;
     }
 
     export interface allergy {
         allergyId: number;
-        onset: Date;
         recordedDate: Date;
         substance: string;
         severity: string; //mild | moderate | severe
         type: string; //allergy | intolerance
         note: string;
         clinicalManifestation: string;
+    }
+
+    export interface contactPoint{
+        contactPointId: number;
+        system: string,
+        use: string,
+        value: string
     }
 }

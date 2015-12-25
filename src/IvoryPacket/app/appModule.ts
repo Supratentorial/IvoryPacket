@@ -6,6 +6,19 @@ module app {
         $urlRouterProvider.when("/", "/");
         $urlRouterProvider.when("patients/detail/{patientId:int}/demographics", "patients/detail/{patientId:int}/demographics/view");
         $stateProvider
+            .state("dashboard", <angular.ui.IState>{
+                url: "/dashboard",
+                temlateUrl: "html/dashboard.html"
+            })
+            .state("appointments", <angular.ui.IState>{
+                url: "/appointments",
+                abstract: true,
+                templateUrl: "<ui-view/>"
+            })
+            .state("appointments.list", <angular.ui.IState>{
+                url: "/list",
+                templateUrl: "html/appointments-list.html"
+            })
             .state("patient", <angular.ui.IState>{
                 url: "/patients",
                 template: "<ui-view/>",
@@ -46,7 +59,7 @@ module app {
                 controller: "DemographicsController as vm"
             })
             .state("patient.detail.demographics.view", <angular.ui.IState>{
-                url:"",
+                url: "",
                 templateUrl: "html/demographics-view.html"
             })
             .state("patient.detail.encounters", <angular.ui.IState>{

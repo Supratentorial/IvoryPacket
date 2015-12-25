@@ -3,10 +3,17 @@ var patient;
     var controllers;
     (function (controllers) {
         var PatientShellController = (function () {
-            function PatientShellController($state) {
+            function PatientShellController(patientShellService, $state) {
+                this.patientShellService = patientShellService;
                 this.$state = $state;
+                var patientId = this.$state.params["patientId"];
+                if (patientId != 0) {
+                    this.patientShellService.getPatientById(patientId);
+                }
+                else {
+                }
             }
-            PatientShellController.$inject = ["$state"];
+            PatientShellController.$inject = ["PatientShellService", "$state"];
             return PatientShellController;
         })();
         controllers.PatientShellController = PatientShellController;

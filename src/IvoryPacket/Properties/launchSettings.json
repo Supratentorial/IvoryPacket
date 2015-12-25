@@ -3,7 +3,7 @@
     "IIS Express": {
       "commandName": "IISExpress",
       "launchBrowser": true,
-      "launchUrl": "http://localhost:53405/patients/detail/0",
+      "launchUrl": "http://localhost:53405/patients/list",
       "environmentVariables": {
         "ASPNET_ENV": "Development"
       },

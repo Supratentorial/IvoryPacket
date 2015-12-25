@@ -36,13 +36,15 @@ namespace IvoryPacket
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
-            
-            var connectionString = @"Server=(localdb)\mssqllocaldb;Database=IvoryPacket;Trusted_Connection=True;";
-            services.AddEntityFramework().AddSqlServer().AddDbContext<IvoryPacketDbContext>(options => options.UseSqlServer(connectionString));
-
             // Add MVC services to the services container.
             services.AddMvc();
+
+            services.AddEntityFramework().AddSqlServer().AddDbContext<IvoryPacketDbContext>(
+                options => options.UseSqlServer(Configuration["Data:DefaultConnection:ConnectionString"])
+                );
         }
+
+        
 
         // Configure is called after ConfigureServices is called.
         public void Configure(IApplicationBuilder app, IHostingEnvironment env, ILoggerFactory loggerFactory)
@@ -84,6 +86,8 @@ namespace IvoryPacket
 
             // Add MVC to the request pipeline.
             app.UseMvc();
+
+            AutoMapperConfig.RegisterMappings();
         }
     }
 }

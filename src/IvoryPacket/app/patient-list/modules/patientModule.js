@@ -1,5 +1,5 @@
 var patient;
 (function (patient) {
     "use strict";
-    angular.module("patient", []);
+    angular.module("patient", ["ngMask"]);
 })(patient || (patient = {}));

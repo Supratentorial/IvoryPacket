@@ -5818,19 +5818,27 @@ button.close {
     display: none !important; } }
 
 body {
-  background: #ECEFF1; }
+  background: #ECEFF1;
+  padding-top: 70px; }
 
 .active {
   color: #ffffff !important; }
 
 .banner {
+  border-top: 1px solid #CFD8DC;
   border-bottom: 1px solid #CFD8DC;
   background: #ffffff;
   margin-bottom: 1em; }
 
 .banner-label {
-  font-size: 18px;
+  font-size: 1.1em;
   color: #9E9E9E; }
 
 .banner-content {
-  font-size: 18px; }
+  font-size: 1.1em; }
+
+.banner-last-name {
+  text-transform: uppercase; }
+
+.banner-capitalize {
+  text-transform: capitalize; }

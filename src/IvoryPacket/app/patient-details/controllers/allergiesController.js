@@ -10,7 +10,6 @@ var patient;
                 this.currentAllergy = {
                     allergyId: 0,
                     note: "",
-                    onset: null,
                     type: "",
                     severity: "",
                     substance: "",
@@ -33,7 +32,7 @@ var patient;
                 });
             };
             AllergiesController.prototype.saveAllergy = function () {
-                this.allergiesService.saveAllergy(this.currentAllergy);
+                this.allergiesService.addAllergy(this.currentAllergy);
             };
             AllergiesController.$inject = ["AllergiesService"];
             return AllergiesController;

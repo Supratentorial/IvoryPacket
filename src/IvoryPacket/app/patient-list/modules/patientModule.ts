@@ -1,4 +1,4 @@
 ﻿module patient {
     "use strict"
-    angular.module("patient", []);
+    angular.module("patient", ["ngMask"]);
 }
