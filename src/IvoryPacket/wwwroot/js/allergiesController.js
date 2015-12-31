@@ -38,6 +38,6 @@ var patient;
             return AllergiesController;
         })();
         controllers.AllergiesController = AllergiesController;
-        angular.module("patient").controller("AllergiesController", patient.controllers.AllergiesController);
+        angular.module("patient").controller("AllergiesController", AllergiesController);
     })(controllers = patient.controllers || (patient.controllers = {}));
 })(patient || (patient = {}));

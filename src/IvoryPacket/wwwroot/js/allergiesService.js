@@ -39,6 +39,6 @@ var patient;
             return AllergiesService;
         })();
         services.AllergiesService = AllergiesService;
-        angular.module("patient").service("AllergiesService", patient.services.AllergiesService);
+        angular.module("patient").service("AllergiesService", AllergiesService);
     })(services = patient.services || (patient.services = {}));
 })(patient || (patient = {}));

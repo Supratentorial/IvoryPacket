@@ -1,6 +1,6 @@
 //Manages currently open patients.
-var patient;
-(function (patient) {
+var interfaces;
+(function (interfaces) {
     var services;
     (function (services) {
         var PatientShellService = (function () {
@@ -29,7 +29,7 @@ var patient;
             }
             PatientShellService.prototype.getPatientById = function (patientId) {
                 var _this = this;
-                this.$http.get("api/patients" + patientId).then(function (result) {
+                this.$http.get("api/patients/" + patientId).then(function (result) {
                     //Todo: check if patient isn't already open.
                     angular.copy(result.data, _this.currentPatient);
                     _this.activatePatient();
@@ -48,6 +48,6 @@ var patient;
             return PatientShellService;
         })();
         services.PatientShellService = PatientShellService;
-        angular.module("patient").service("PatientShellService", patient.services.PatientShellService);
-    })(services = patient.services || (patient.services = {}));
-})(patient || (patient = {}));
+        angular.module("patient").service("PatientShellService", PatientShellService);
+    })(services = interfaces.services || (interfaces.services = {}));
+})(interfaces || (interfaces = {}));

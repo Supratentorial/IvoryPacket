@@ -8,6 +8,6 @@ var patient;
             return EncountersController;
         })();
         controllers.EncountersController = EncountersController;
-        angular.module("patient").controller("EncountersController", patient.controllers.EncountersController);
+        angular.module("patient").controller("EncountersController", EncountersController);
     })(controllers = patient.controllers || (patient.controllers = {}));
 })(patient || (patient = {}));

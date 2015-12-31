@@ -5821,24 +5821,33 @@ body {
   background: #ECEFF1;
   padding-top: 70px; }
 
-.active {
-  color: #ffffff !important; }
+.active-top-level {
+  color: #BF360C !important; }
 
-.banner {
+.static-label {
+  color: #9E9E9E;
+  display: inline;
+  font-weight: 100;
+  margin-right: 0.2em; }
+
+.static-form-group {
+  margin-bottom: 5px; }
+
+#patientBanner {
   border-top: 1px solid #CFD8DC;
   border-bottom: 1px solid #CFD8DC;
   background: #ffffff;
   margin-bottom: 1em; }
-
-.banner-label {
-  font-size: 1.1em;
-  color: #9E9E9E; }
-
-.banner-content {
-  font-size: 1.1em; }
-
-.banner-last-name {
-  text-transform: uppercase; }
+  #patientBanner label {
+    font-size: 1.1em;
+    color: #9E9E9E;
+    display: inline;
+    font-weight: 100;
+    margin-right: 0.2em; }
+  #patientBanner .content {
+    font-size: 1.1em; }
+  #patientBanner .last-name {
+    text-transform: uppercase; }
 
 .banner-capitalize {
   text-transform: capitalize; }

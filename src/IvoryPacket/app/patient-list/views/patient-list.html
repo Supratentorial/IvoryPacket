@@ -3,3 +3,19 @@
         <button class="btn btn-default" ui-sref="patient.detail({patientId : 0})">Add Patient</button>
     </div>
 </div>
+<div class="row">
+    <div class="col-lg-6">
+        <table class="table table-bordered">
+            <thead>
+                <tr>
+                    <th>Patient Name</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr ng-repeat="patient in vm.patientListService.patientsWithAppointmentToday" ui-sref="patient.detail({patientId: (patient.patientId)})">
+                    <td>{{patient.givenName}} {{patient.familyName}}</td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+</div>

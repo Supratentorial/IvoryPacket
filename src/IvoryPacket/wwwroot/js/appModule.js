@@ -60,7 +60,8 @@ var app;
         })
             .state("patient.detail.demographics.view", {
             url: "",
-            templateUrl: "html/demographics-view.html"
+            templateUrl: "html/demographics-view.html",
+            controller: "DemographicsController as vm"
         })
             .state("patient.detail.encounters", {
             url: "/encounters",

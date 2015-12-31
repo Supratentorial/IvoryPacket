@@ -7,6 +7,8 @@ using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.AspNet.Authentication.Cookies;
 using Microsoft.Extensions.Logging;
+using Microsoft.AspNet.Mvc.Formatters;
+using Newtonsoft.Json.Serialization;
 
 namespace IvoryPacket
 {
@@ -37,14 +39,13 @@ namespace IvoryPacket
         public void ConfigureServices(IServiceCollection services)
         {
             // Add MVC services to the services container.
-            services.AddMvc();
-
+            services.AddMvc().AddJsonOptions(options => {
+                options.SerializerSettings.ContractResolver = new CamelCasePropertyNamesContractResolver();
+            });
             services.AddEntityFramework().AddSqlServer().AddDbContext<IvoryPacketDbContext>(
                 options => options.UseSqlServer(Configuration["Data:DefaultConnection:ConnectionString"])
                 );
         }
-
-        
 
         // Configure is called after ConfigureServices is called.
         public void Configure(IApplicationBuilder app, IHostingEnvironment env, ILoggerFactory loggerFactory)

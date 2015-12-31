@@ -7,31 +7,42 @@ body {
     padding-top: 70px;
 }
 
-.active {
-    color: $white !important;
+.active-top-level {
+    color: $md-deep-orange-900 !important;
 }
 
-.banner {
+.static-label {
+    color: $md-grey-500;
+    display: inline;
+    font-weight: 100;
+    margin-right: 0.2em;
+}
+
+.static-form-group {
+    margin-bottom: 5px;
+}
+
+#patientBanner {
     border-top: 1px solid $md-blue-grey-100;
     border-bottom: 1px solid $md-blue-grey-100;
     background: $white;
     margin-bottom: 1em;
-}
 
-.banner-section {
-}
+    label {
+        font-size: $font-size-medium;
+        color: $md-grey-500;
+        display: inline;
+        font-weight: 100;
+        margin-right: 0.2em;
+    }
 
-.banner-label {
-    font-size: $font-size-medium;
-    color: $md-grey-500;
-}
+    .content {
+        font-size: $font-size-medium;
+    }
 
-.banner-content {
-    font-size: $font-size-medium;
-}
-
-.banner-last-name {
-    text-transform: uppercase;
+    .last-name {
+        text-transform: uppercase;
+    }
 }
 
 .banner-capitalize {

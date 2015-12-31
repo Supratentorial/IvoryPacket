@@ -1,4 +1,4 @@
-﻿module patient.interfaces {
+﻿module interfaces.patient.models {
     export interface patient {
         patientId: number;
         title: string;
@@ -7,7 +7,7 @@
         familyName: string;
         preferredName: string;
         gender: string;
-        dateOfBirth: Date;
+        dateOfBirth: string;
         ethnicity?: string;
         isActive: boolean;
         mobilePhone: string;
@@ -20,10 +20,6 @@
 
         allergies: allergy[];
         contactPoints: contactPoint[];
-    }
-
-    export interface humanName {
-        humanNameId: number;
     }
 
     export interface allergy {

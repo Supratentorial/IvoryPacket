@@ -1,16 +1,11 @@
 ﻿module patient.services {
-    export interface allergiesService {
-        getAllergySeverityOptions(): any;
-        getAllergyReactionTypes(): any;
-        addAllergy(allergy: interfaces.allergy): void;
-    }
-    export class AllergiesService implements allergiesService {
+    export class AllergiesService implements interfaces.patient.services.allergiesService {
         static $inject = ["PatientShellService", "$http"];
-        constructor(private patientShellService: patient.services.patientShellService, private $http: angular.IHttpService) {
+        constructor(private patientShellService: interfaces.patient.services.patientShellService, private $http: angular.IHttpService) {
 
         }
 
-        addAllergy(allergy: interfaces.allergy) {
+        addAllergy(allergy: interfaces.patient.models.allergy) {
             this.patientShellService.currentPatient.allergies.push(allergy);
         }
 
@@ -45,5 +40,5 @@
         }
 
     }
-    angular.module("patient").service("AllergiesService", patient.services.AllergiesService);
+    angular.module("patient").service("AllergiesService", AllergiesService);
 }

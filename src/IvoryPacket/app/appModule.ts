@@ -2,7 +2,7 @@
 /// <reference path="../typings/angularjs/angular.d.ts" />
 
 module app {
-    angular.module("app", ["ui.router", "patient"]).config(($stateProvider: angular.ui.IStateProvider, $urlRouterProvider: angular.ui.IUrlRouterProvider, $locationProvider: angular.ILocationProvider, $httpProvider: angular.IHttpProvider) => {
+    angular.module("app", ["ui.router", "patient", "utilities"]).config(($stateProvider: angular.ui.IStateProvider, $urlRouterProvider: angular.ui.IUrlRouterProvider, $locationProvider: angular.ILocationProvider, $httpProvider: angular.IHttpProvider) => {
         $urlRouterProvider.when("/", "/");
         $urlRouterProvider.when("patients/detail/{patientId:int}/demographics", "patients/detail/{patientId:int}/demographics/view");
         $stateProvider
@@ -60,7 +60,9 @@ module app {
             })
             .state("patient.detail.demographics.view", <angular.ui.IState>{
                 url: "",
-                templateUrl: "html/demographics-view.html"
+                templateUrl: "html/demographics-view.html",
+                controller: "DemographicsController as vm"
+
             })
             .state("patient.detail.encounters", <angular.ui.IState>{
                 url: "/encounters",

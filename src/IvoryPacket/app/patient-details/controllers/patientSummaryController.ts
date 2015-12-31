@@ -2,5 +2,5 @@
     export class PatientSummaryController {
         
     }
-    angular.module("patient").controller("PatientSummaryController", patient.controllers.PatientSummaryController);
+    angular.module("patient").controller("PatientSummaryController", PatientSummaryController);
 }

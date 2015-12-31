@@ -4,9 +4,11 @@ var patient;
     (function (controllers) {
         "use strict";
         var PatientListController = (function () {
-            function PatientListController() {
+            function PatientListController(patientListService) {
+                this.patientListService = patientListService;
+                this.patientListService.getAllPatients();
             }
-            PatientListController.$inject = [];
+            PatientListController.$inject = ["PatientListService"];
             return PatientListController;
         })();
         controllers.PatientListController = PatientListController;

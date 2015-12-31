@@ -1,4 +1,5 @@
 ﻿using System.Collections.Generic;
+using System.Linq;
 using Microsoft.AspNet.Mvc;
 using IvoryPacket.Models;
 using IvoryPacket.Filters;
@@ -13,18 +14,18 @@ namespace IvoryPacket.Controllers
         [FromServices]
         public IvoryPacketDbContext DbContext { get; set; }
 
-        // GET: api/values
+        // GET: api/patients
         [HttpGet]
-        public IEnumerable<string> Get()
+        public IEnumerable<Patient> Get()
         {
-            return new string[] { "value1", "value2" };
+            return DbContext.Patients;
         }
 
         // GET api/values/5
-        [HttpGet("{id}")]
-        public string Get(int id)
+        [HttpGet("{patientId}")]
+        public Patient Get(int patientId)
         {
-            return "value";
+            return DbContext.Patients.Single(p => p.PatientId == patientId);
         }
 
         // POST api/patients

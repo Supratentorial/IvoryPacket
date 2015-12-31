@@ -31,9 +31,7 @@
                     <div class="form-group col-lg-4">
                         <label>Title</label>
                         <select class="form-control" ng-model="vm.title">
-                            <option ng-repeat="title in vm.titleOptions">
-                                {{title}}
-                            </option>
+                            <option ng-repeat="title in vm.titleOptions" value="{{title}}">{{title}}</option>
                         </select>
                     </div>
                     <div class="form-group col-lg-4">
@@ -43,9 +41,7 @@
                     <div class="form-group col-lg-4">
                         <label>Gender</label>
                         <select class="form-control" ng-model="vm.gender">
-                            <option ng-repeat="gender in vm.genderOptions">
-                                {{gender}}
-                            </option>
+                            <option ng-repeat="gender in vm.genderOptions" value="{{gender}}">{{gender}}</option>
                         </select>
                     </div>
                 </div>
@@ -58,20 +54,39 @@
                 <div class="row">
                     <div class="form-group col-lg-4">
                         <label>Mobile Phone</label>
-                        <input ng-model="vm.mobilePhone" class="form-control" />
+                        <input type="text" ng-model="vm.mobilePhone" class="form-control" />
                     </div>
                     <div class="form-group col-lg-4">
                         <label>Home Phone</label>
-                        <input international-phone-number ng-model="vm.homePhone" class="form-control"/>
+                        <input type="text" ng-model="vm.homePhone" class="form-control" />
                     </div>
                     <div class="form-group col-lg-4">
                         <label>Work Phone</label>
-                        <input ng-model="vm.workPhone" class="form-control" />
+                        <input type="text" ng-model="vm.workPhone" class="form-control" />
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-lg-6">
+                        <div class="checkbox">
+                            <label>
+                                <input type="checkbox" />Receive SMS reminders
+                            </label>
+                        </div>
+                    </div>
+                    <div class="col-lg-6">
+                        <select ng-model="vm.preferredPhone">
+                            <option ng-repeat="phone in vm.phoneOptions" value="{{phone}}">{{phone}}</option>
+                        </select>
                     </div>
                 </div>
                 <div class="form-group">
                     <label>Email Address</label>
-                    <input ng-model="vm.emailAddress" class="form-control" />
+                    <input ng-model="vm.emailAddress" class="form-control" placeholder="e.g. harry@hogwarts.com.au" />
+                </div>
+
+                <div class="form-group">
+                    <label>Address Line 1</label>
+                    <input class="form-control" type="text" />
                 </div>
             </div>
         </div>
@@ -104,7 +119,7 @@
                 <div class="row">
                     <div class="col-lg-6">
                         <label>DVA Card No.</label>
-                        <input class="form-control" ng-model="vm.dvaCardNumber"/>
+                        <input class="form-control" ng-model="vm.dvaCardNumber" />
                     </div>
                 </div>
             </div>

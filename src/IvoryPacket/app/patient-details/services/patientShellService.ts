@@ -1,16 +1,8 @@
 ﻿//Manages currently open patients.
-module patient.services {
-    export interface patientShellService {
-        openPatients: interfaces.patient[];
-        currentPatient: interfaces.patient;
-        getPatientById(patientId: number): any;
-        activatePatient(): void;
-        savePatient(): any;
-    }
-
-    export class PatientShellService implements patientShellService {
-        openPatients: interfaces.patient[];
-        currentPatient: interfaces.patient;
+module interfaces.services {
+    export class PatientShellService implements interfaces.patient.services.patientShellService {
+        openPatients: interfaces.patient.models.patient[];
+        currentPatient: interfaces.patient.models.patient;
         static $inject = ["$http"];
         constructor(private $http: angular.IHttpService) {
             this.currentPatient = {
@@ -36,7 +28,7 @@ module patient.services {
         }
 
         getPatientById(patientId: number) {
-            this.$http.get("api/patients" + patientId).then((result) => {
+            this.$http.get("api/patients/" + patientId).then((result) => {
                 //Todo: check if patient isn't already open.
                 angular.copy(result.data, this.currentPatient);
                 this.activatePatient();
@@ -57,5 +49,5 @@ module patient.services {
 
         }
     }
-    angular.module("patient").service("PatientShellService", patient.services.PatientShellService);
+    angular.module("patient").service("PatientShellService", PatientShellService);
 }
