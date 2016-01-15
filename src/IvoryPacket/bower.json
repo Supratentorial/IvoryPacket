@@ -7,7 +7,10 @@
     "adal-angular": "1.0.7",
     "ng-lodash": "0.3.0",
     "angular-ui-router": "~0.2.15",
-    "bootstrap-sass": "~3.3.6"
+    "bootstrap-sass": "~3.3.6",
+    "angular-moment": "~0.10.3",
+    "angular-mocks": "~1.4.8",
+    "angular-loading-bar": "0.8.0"
   },
   "devDependencies": {}
 }

@@ -1,5 +1,5 @@
 ﻿module patient.services {
-    export class PatientListService implements interfaces.patient.services.PatientListService {
+    export class PatientListService implements interfaces.services.patientListService {
         static $inject = ["$http"];
         patientsWithAppointmentToday = [];
         constructor(private $http: angular.IHttpService) {

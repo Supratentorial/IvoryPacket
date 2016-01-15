@@ -1,4 +1,4 @@
-﻿module interfaces.patient.models {
+﻿module interfaces.models {
     export interface patient {
         patientId: number;
         title: string;
@@ -10,16 +10,15 @@
         dateOfBirth: string;
         ethnicity?: string;
         isActive: boolean;
-        mobilePhone: string;
-        workPhone: string;
-        homePhone: string;
 
         medicareCardNumber?: number;
-        medicareCardExpiry?: Date;
+        medicareCardExpiry?: string;
         medicareCardPosition?: number;
 
         allergies: allergy[];
-        contactPoints: contactPoint[];
+        addresses: address[];
+        emailAddress: emailAddress;
+        phoneNumbers: phoneNumber[];
     }
 
     export interface allergy {
@@ -32,10 +31,27 @@
         clinicalManifestation: string;
     }
 
-    export interface contactPoint{
-        contactPointId: number;
-        system: string,
-        use: string,
-        value: string
+    export interface phoneNumber {
+        phoneNumberId: number;
+        countryCode: string;
+        areaCode: string;
+        value: string;
+        type: string;
+        isPreferred: boolean;
+    }
+
+    export interface address {
+        addressId: number;
+        type: string;
+        city: string;
+        state: string;
+        postalCode: string;
+        country: string;
+    }
+
+    export interface emailAddress {
+        emailAddressId: number;
+        emailValue: string;
+        isPreferred: boolean;
     }
 }

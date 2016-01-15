@@ -1,12 +1,12 @@
 ﻿module patient.services {
-    export class AllergiesService implements interfaces.patient.services.allergiesService {
-        static $inject = ["PatientShellService", "$http"];
-        constructor(private patientShellService: interfaces.patient.services.patientShellService, private $http: angular.IHttpService) {
+    export class AllergiesService implements interfaces.services.allergiesService {
+        static $inject = ["PatientManagerService", "$http"];
+        constructor(private patientManagerService: interfaces.services.patientManagerService, private $http: angular.IHttpService) {
 
         }
 
-        addAllergy(allergy: interfaces.patient.models.allergy) {
-            this.patientShellService.currentPatient.allergies.push(allergy);
+        addAllergy(allergy: interfaces.models.allergy) {
+            this.patientManagerService.currentPatient.allergies.push(allergy);
         }
 
         deleteAllergy(allergyId: number) {

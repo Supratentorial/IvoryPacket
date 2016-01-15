@@ -2,7 +2,7 @@
 /// <reference path="../typings/angularjs/angular.d.ts" />
 var app;
 (function (app) {
-    angular.module("app", ["ui.router", "patient", "utilities"]).config(function ($stateProvider, $urlRouterProvider, $locationProvider, $httpProvider) {
+    angular.module("app", ["ui.router", "patient", "utilities", "angularMoment", "angular-loading-bar"]).config(function ($stateProvider, $urlRouterProvider, $locationProvider, $httpProvider) {
         $urlRouterProvider.when("/", "/");
         $urlRouterProvider.when("patients/detail/{patientId:int}/demographics", "patients/detail/{patientId:int}/demographics/view");
         $stateProvider

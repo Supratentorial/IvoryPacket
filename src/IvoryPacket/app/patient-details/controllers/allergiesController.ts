@@ -4,9 +4,9 @@
         static $inject = ["AllergiesService"];
         allergySeverityOptions: string[];
         allergyReactionTypes: string[];
-        currentAllergy: interfaces.patient.models.allergy;
+        currentAllergy: interfaces.models.allergy;
 
-        constructor(private allergiesService: interfaces.patient.services.allergiesService) {
+        constructor(private allergiesService: interfaces.services.allergiesService) {
             this.allergySeverityOptions = [];
             this.allergyReactionTypes = [];
             this.currentAllergy = {

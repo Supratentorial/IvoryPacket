@@ -16,6 +16,26 @@ namespace IvoryPacket.Migrations
                 .HasAnnotation("ProductVersion", "7.0.0-rc1-16348")
                 .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
+            modelBuilder.Entity("IvoryPacket.Models.Address", b =>
+                {
+                    b.Property<int>("AddressId")
+                        .ValueGeneratedOnAdd();
+
+                    b.Property<string>("City");
+
+                    b.Property<string>("Country");
+
+                    b.Property<int?>("PatientPatientId");
+
+                    b.Property<string>("PostalCode");
+
+                    b.Property<string>("State");
+
+                    b.Property<string>("Type");
+
+                    b.HasKey("AddressId");
+                });
+
             modelBuilder.Entity("IvoryPacket.Models.Allergy", b =>
                 {
                     b.Property<int>("AllergyId")
@@ -25,11 +45,9 @@ namespace IvoryPacket.Migrations
 
                     b.Property<string>("Note");
 
-                    b.Property<DateTime?>("Onset");
-
                     b.Property<int>("PatientId");
 
-                    b.Property<DateTime?>("RecordedDate");
+                    b.Property<DateTimeOffset?>("RecordedDate");
 
                     b.Property<string>("Severity");
 
@@ -40,22 +58,16 @@ namespace IvoryPacket.Migrations
                     b.HasKey("AllergyId");
                 });
 
-            modelBuilder.Entity("IvoryPacket.Models.ContactPoint", b =>
+            modelBuilder.Entity("IvoryPacket.Models.EmailAddress", b =>
                 {
-                    b.Property<int>("ContactPointId")
+                    b.Property<int>("EmailAddressId")
                         .ValueGeneratedOnAdd();
 
-                    b.Property<int>("PatientId");
+                    b.Property<string>("EmailValue");
 
-                    b.Property<int?>("Rank");
+                    b.Property<bool>("IsPreferred");
 
-                    b.Property<string>("System");
-
-                    b.Property<string>("Use");
-
-                    b.Property<string>("Value");
-
-                    b.HasKey("ContactPointId");
+                    b.HasKey("EmailAddressId");
                 });
 
             modelBuilder.Entity("IvoryPacket.Models.Patient", b =>
@@ -63,7 +75,10 @@ namespace IvoryPacket.Migrations
                     b.Property<int>("PatientId")
                         .ValueGeneratedOnAdd();
 
-                    b.Property<DateTime?>("DateOfBirth");
+                    b.Property<DateTime?>("DateOfBirth")
+                        .HasAnnotation("Relational:ColumnType", "Date");
+
+                    b.Property<int?>("EmailAddressEmailAddressId");
 
                     b.Property<string>("Ethnicity");
 
@@ -75,7 +90,7 @@ namespace IvoryPacket.Migrations
 
                     b.Property<bool>("IsActive");
 
-                    b.Property<DateTime?>("MedicareCardExpiry");
+                    b.Property<DateTimeOffset?>("MedicareCardExpiry");
 
                     b.Property<int?>("MedicareCardNumber");
 
@@ -90,6 +105,33 @@ namespace IvoryPacket.Migrations
                     b.HasKey("PatientId");
                 });
 
+            modelBuilder.Entity("IvoryPacket.Models.PhoneNumber", b =>
+                {
+                    b.Property<int>("PhoneNumberId")
+                        .ValueGeneratedOnAdd();
+
+                    b.Property<string>("AreaCode");
+
+                    b.Property<string>("CountryCode");
+
+                    b.Property<bool>("IsPreferred");
+
+                    b.Property<int?>("PatientPatientId");
+
+                    b.Property<string>("Type");
+
+                    b.Property<string>("Value");
+
+                    b.HasKey("PhoneNumberId");
+                });
+
+            modelBuilder.Entity("IvoryPacket.Models.Address", b =>
+                {
+                    b.HasOne("IvoryPacket.Models.Patient")
+                        .WithMany()
+                        .HasForeignKey("PatientPatientId");
+                });
+
             modelBuilder.Entity("IvoryPacket.Models.Allergy", b =>
                 {
                     b.HasOne("IvoryPacket.Models.Patient")
@@ -97,11 +139,18 @@ namespace IvoryPacket.Migrations
                         .HasForeignKey("PatientId");
                 });
 
-            modelBuilder.Entity("IvoryPacket.Models.ContactPoint", b =>
+            modelBuilder.Entity("IvoryPacket.Models.Patient", b =>
+                {
+                    b.HasOne("IvoryPacket.Models.EmailAddress")
+                        .WithMany()
+                        .HasForeignKey("EmailAddressEmailAddressId");
+                });
+
+            modelBuilder.Entity("IvoryPacket.Models.PhoneNumber", b =>
                 {
                     b.HasOne("IvoryPacket.Models.Patient")
                         .WithMany()
-                        .HasForeignKey("PatientId");
+                        .HasForeignKey("PatientPatientId");
                 });
         }
     }

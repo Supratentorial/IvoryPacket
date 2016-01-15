@@ -66,7 +66,7 @@ gulp.task("transpile-scss", function () {
 
 //Transpiles app TS files to JS and writes them to webroot.
 gulp.task('transpile-ts', function () {
-    var clientResult = gulp.src(paths.srcTSFiles)
+    var clientResult = gulp.src([paths.srcTSFiles, "!app/**/*Spec.ts"])
         .pipe(flatten())
         .pipe(plumber())
         .pipe(ts({
@@ -105,7 +105,7 @@ gulp.task('copy-vendor-css', function () {
 });
 
 //Injects JS and CSS reference tags in index.html from Bower and app src files.
-gulp.task('wiredep', ["copy-vendor-js", "transpile-ts", "transpile-scss"], function () {
+gulp.task('wiredep', ["copy-vendor-css", "copy-vendor-js", "transpile-ts", "transpile-scss"], function () {
     gulp.src(paths.srcIndexFile)
         .pipe(inject(gulp.src([paths.distJSFiles]).pipe(angularFileSort()), {
             addRootSlash: false,

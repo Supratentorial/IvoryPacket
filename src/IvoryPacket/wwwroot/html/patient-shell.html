@@ -1,33 +1,31 @@
 <div class="row">
     <nav>
-        <ul>
-            <li>{{vm.patientShellService.currentPatient.familyName}}</li>
+        <ul class="nav nav-tabs">
+            <li role="presentation" ng-repeat="patient in vm.patientManagerService.openPatients"><a ui-sref-active="active" ui-sref="patient.detail.demographics.view({patientId : {{patient.patientId}}})">{{patient.givenName}} {{patient.familyName}}</a></li>
         </ul>
     </nav>
 </div>
 <div id="patientBanner" class="row banner">
     <div class="col-lg-3">
         <div class="row">
-            <span class="content last-name">{{vm.patientShellService.currentPatient.familyName}}, </span>
-            <span class="content">{{vm.patientShellService.currentPatient.givenName}}</span>
-            <span class="content" ng-show="vm.patientShellService.currentPatient.title"> ({{vm.patientShellService.currentPatient.title}})</span>
+            {{vm.fullName}}
         </div>
     </div>
     <div class="col-lg-2">
         <div class="row">
             <label>Gender</label>
-            <span class="content"> {{vm.patientShellService.currentPatient.gender || '-'}}</span>
+            <span class="content"> {{vm.patientManagerService.currentPatient.gender || '-'}}</span>
         </div>
         <div class="row">
             <label>Born</label>
-            <span class="content"> {{(vm.patientShellService.currentPatient.dateOfBirth | date: 'dd/MM/yyyy') || '-'}}</span>
+            <span class="content"> {{(vm.patientManagerService.currentPatient.dateOfBirth | date: 'dd/MM/yyyy') || '-'}}</span>
             <span class="content" ng-show="vm.age"> ({{vm.age}})</span>
         </div>
     </div>
     <div class="col-lg-4">
         <div class="row">
             <label>Phone</label>
-            <span class="content">{{vm.patientShellService.currentPatient.mobilePhone || '-'}}</span>
+            <span class="content">{{vm.patientManagerService.currentPatient.mobilePhone || '-'}}</span>
         </div>
         <div class="row">
             <label>Address</label>

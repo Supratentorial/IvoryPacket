@@ -8,8 +8,7 @@ namespace IvoryPacket.Models
     public class Allergy
     {
         public int AllergyId { get; set; }
-        public DateTime? Onset { get; set; }
-        public DateTime? RecordedDate { get; set; }
+        public DateTimeOffset? RecordedDate { get; set; }
         public string Substance { get; set; }
         public string Type { get; set; } //Allergy vs medication side effect 
         public string Severity { get; set; }

@@ -1,48 +1,49 @@
 ﻿<div class="row">
     <div class="col-lg-3">
-        <button class="btn btn-default" ui-sref="patient.detail.demographics.edit">Edit</button>
+        <button class="btn btn-default" ui-sref="patient.detail.demographics.edit">Edit Details</button>
     </div>
 </div>
 <div class="row">
-    <div class="col-lg-12">
+    <div class="col-lg-4">
+        <h4>Basic</h4>
         <div class="panel panel-default">
             <div class="panel-body">
-                <div class="row">
-                    <div class="col-lg-4">
-                        <h4>Basic</h4>
-                        <div class="static-form-group">
-                            <div class="static-label">Name</div>
-                            <div>
-                            <span>{{vm.patientShellService.currentPatient.familyName}}</span>, 
-                            <span>{{vm.patientShellService.currentPatient.givenName}} {{vm.patientShellService.currentPatient.middleNames}}</span> 
-                            <span>({{vm.patientShellService.currentPatient.title}})</span></div>
-                        </div>
-                        <div class="static-form-group">
-                            <label class="static-label">Born</label>
-                            <div>{{vm.patientShellService.currentPatient.dateOfBirth | date:'dd/MM/yyyy'}} ({{vm.age}})</div>
-                        </div>
-                        <div class="static-form-group">
-                            <label class="static-label">Gender</label>
-                            <div>Male</div>
-                        </div>
+                <div class="static-form-group">
+                    <div class="static-label">Name</div>
+                    <div>
+                        {{vm.fullName}}
                     </div>
-                    <div class="col-lg-4">
-                        <h4>Contact</h4>
-                        <div class="static-form-group">
-                            <div class="static-label">Phone</div>
-                            <div>0400 939291</div>
-                        </div>
-                        <div class="static-form-group">
-                            <div class="static-label">Address</div>
-                            <div>21 Sutherland Street, Buderim, QLD 4556</div>
-                        </div>
-                        <div class="static-form-group">
-                            <div class="static-label">Email</div>
-                            <div>harry@hogwarts.com</div>
-                        </div>
-                    </div>
+                </div>
+                <div class="static-form-group">
+                    <label class="static-label">Born</label>
+                    <div>{{vm.patientManagerService.currentPatient.dateOfBirth | date:'dd/MM/yyyy'}} ({{vm.age}})</div>
+                </div>
+                <div class="static-form-group">
+                    <label class="static-label">Gender</label>
+                    <div>Male</div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="col-lg-4">
+        <h4>Contact</h4>
+        <div class="panel panel-default">
+            <div class="panel-body">
+                <div class="static-form-group">
+                    <div class="static-label">Phone</div>
+                    <div>0400 939291</div>
+                </div>
+                <div class="static-form-group">
+                    <div class="static-label">Address</div>
+                    <div><span class="label label-default">Residential</span> 21 Sutherland Street, Buderim, QLD 4556</div>
+                </div>
+                <div class="static-form-group">
+                    <div class="static-label">Email</div>
+                    <div>{{vm.emailAddress.emailValue}}</div>
                 </div>
             </div>
         </div>
     </div>
 </div>
+
+

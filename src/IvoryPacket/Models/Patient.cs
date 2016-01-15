@@ -1,7 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
+using System.ComponentModel.DataAnnotations.Schema;
 
 namespace IvoryPacket.Models
 {
@@ -14,16 +13,19 @@ namespace IvoryPacket.Models
         public string FamilyName { get; set; }
         public string PreferredName { get; set; }
         public string Gender { get; set; }
+        [Column(TypeName ="Date")]
         public DateTime? DateOfBirth { get; set; }
 
         public string Ethnicity { get; set; }
-        
+
         public int? MedicareCardNumber { get; set; }
-        public DateTime? MedicareCardExpiry { get; set; }
+        public DateTimeOffset? MedicareCardExpiry { get; set; }
         public int? MedicareCardPosition { get; set; }
 
         public bool IsActive { get; set; }
-        public virtual ICollection<ContactPoint> ContactPoints { get; set; }
+        public virtual ICollection<PhoneNumber> PhoneNumbers { get; set; }
+        public virtual EmailAddress EmailAddress { get; set; }
+        public virtual ICollection<Address> Addresses { get; set; }
         public virtual ICollection<Allergy> Allergies { get; set; }
     }
 }

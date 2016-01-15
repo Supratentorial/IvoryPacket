@@ -1,18 +1,33 @@
 ﻿<div class="row">
     <div class="col-lg-3">
-        <button class="btn btn-default" ui-sref="patient.detail({patientId : 0})">Add Patient</button>
+        <button class="btn btn-default" ui-sref="patient.detail.demographics.edit({patientId : 0})">New Patient</button>
     </div>
 </div>
 <div class="row">
-    <div class="col-lg-6">
-        <table class="table table-bordered">
+    <div class="col-lg-7">
+        <h4>Today's Patients</h4>
+        <table class="table table-bordered table-hover">
             <thead>
                 <tr>
                     <th>Patient Name</th>
                 </tr>
             </thead>
             <tbody>
-                <tr ng-repeat="patient in vm.patientListService.patientsWithAppointmentToday" ui-sref="patient.detail({patientId: (patient.patientId)})">
+                <tr style="cursor: pointer" ng-repeat="patient in vm.patientListService.patientsWithAppointmentToday" ui-sref="patient.detail.demographics.view({patientId: (patient.patientId)})">
+                    <td>{{patient.givenName}} {{patient.familyName}}</td>
+                    
+                </tr>
+            </tbody>
+        </table>
+    </div>
+    <div class="col-lg-5">
+        <h4>Open Patients</h4>
+        <table class="table table-bordered table-hover">
+            <thead>
+                
+            </thead>
+            <tbody>
+                <tr ng-repeat="patient in vm.patientManagerService.openPatients" ui-sref="patient.detail({patientId: (patient.patientId)})">
                     <td>{{patient.givenName}} {{patient.familyName}}</td>
                 </tr>
             </tbody>

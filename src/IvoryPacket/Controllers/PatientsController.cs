@@ -3,6 +3,8 @@ using System.Linq;
 using Microsoft.AspNet.Mvc;
 using IvoryPacket.Models;
 using IvoryPacket.Filters;
+using Microsoft.Data.Entity;
+using System;
 
 // For more information on enabling Web API for empty projects, visit http://go.microsoft.com/fwlink/?LinkID=397860
 
@@ -18,14 +20,14 @@ namespace IvoryPacket.Controllers
         [HttpGet]
         public IEnumerable<Patient> Get()
         {
-            return DbContext.Patients;
+            return DbContext.Patients.Take(40);
         }
 
         // GET api/values/5
         [HttpGet("{patientId}")]
         public Patient Get(int patientId)
         {
-            return DbContext.Patients.Single(p => p.PatientId == patientId);
+            return DbContext.Patients.Where(p => p.PatientId == patientId).Include(p => p.EmailAddress).Single();
         }
 
         // POST api/patients
@@ -39,9 +41,13 @@ namespace IvoryPacket.Controllers
         }
 
         // PUT api/values/5
-        [HttpPut("{id}")]
-        public void Put(int id, [FromBody]string value)
+        [HttpPut("{patientId}")]
+        public IActionResult Put(int patientId, [FromBody]Patient patient)
         {
+            DbContext.Entry(patient).State = patient.PatientId == 0 ? EntityState.Added : EntityState.Modified;
+            DbContext.Entry(patient.EmailAddress).State = patient.EmailAddress.EmailAddressId == 0 ? EntityState.Added : EntityState.Modified;
+            DbContext.SaveChanges();
+            return new HttpOkObjectResult(patient);
         }
 
         // DELETE api/values/5

@@ -2,7 +2,7 @@
 /// <reference path="../typings/angularjs/angular.d.ts" />
 
 module app {
-    angular.module("app", ["ui.router", "patient", "utilities"]).config(($stateProvider: angular.ui.IStateProvider, $urlRouterProvider: angular.ui.IUrlRouterProvider, $locationProvider: angular.ILocationProvider, $httpProvider: angular.IHttpProvider) => {
+    angular.module("app", ["ui.router", "patient", "utilities", "angularMoment", "angular-loading-bar"]).config(($stateProvider: angular.ui.IStateProvider, $urlRouterProvider: angular.ui.IUrlRouterProvider, $locationProvider: angular.ILocationProvider, $httpProvider: angular.IHttpProvider) => {
         $urlRouterProvider.when("/", "/");
         $urlRouterProvider.when("patients/detail/{patientId:int}/demographics", "patients/detail/{patientId:int}/demographics/view");
         $stateProvider

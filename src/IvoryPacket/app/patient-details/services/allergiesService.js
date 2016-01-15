@@ -3,12 +3,12 @@ var patient;
     var services;
     (function (services) {
         var AllergiesService = (function () {
-            function AllergiesService(patientShellService, $http) {
-                this.patientShellService = patientShellService;
+            function AllergiesService(patientManagerService, $http) {
+                this.patientManagerService = patientManagerService;
                 this.$http = $http;
             }
             AllergiesService.prototype.addAllergy = function (allergy) {
-                this.patientShellService.currentPatient.allergies.push(allergy);
+                this.patientManagerService.currentPatient.allergies.push(allergy);
             };
             AllergiesService.prototype.deleteAllergy = function (allergyId) {
                 //Todo: change allergy status.
@@ -35,7 +35,7 @@ var patient;
                 function (error) {
                 });
             };
-            AllergiesService.$inject = ["PatientShellService", "$http"];
+            AllergiesService.$inject = ["PatientManagerService", "$http"];
             return AllergiesService;
         })();
         services.AllergiesService = AllergiesService;

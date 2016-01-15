@@ -2,18 +2,12 @@
 {
     public class Address
     {
-        //Todo: Cross-reference to lookup table
-        public string Use { get; set; }
-        //Todo: Cross-reference to lookup table
+        public int AddressId { get; set; }
         public string Type { get; set; }
-
-        public string Text { get; set; }
-        public string Line { get; set; }
         public string City { get; set; }
-        public string District { get; set; }
         public string State { get; set; }
         public string PostalCode { get; set; }
         public string Country { get; set; }
-        public Period Period { get; set; }
+        //public Period Period { get; set; }
     }
 }
