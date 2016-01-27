@@ -10,10 +10,8 @@
         givenName: string;
         middleNames: string;
         familyName: string;
-        fullName: string;
         gender: string;
         dateOfBirth: Date;
-        age: string;
         preferredName: string;
         homePhone: interfaces.models.phoneNumber;
         mobilePhone: interfaces.models.phoneNumber;
@@ -30,40 +28,48 @@
             private $state: angular.ui.IStateService) {
 
             var patientId: number = this.$state.params["patientId"];
-            this.patientManagerService.openPatientById(patientId).then(
-                (response) => {
-                    this.givenName = this.patientManagerService.currentPatient.givenName;
-                    this.middleNames = this.demographicsService.getCurrentPatientMiddleNames();
-                    this.familyName = this.patientManagerService.currentPatient.familyName;
-                    this.title = this.patientManagerService.currentPatient.title;
-                    this.preferredName = this.patientManagerService.currentPatient.preferredName;
-                    this.gender = this.patientManagerService.currentPatient.gender;
-                    this.dateOfBirth = new Date(this.patientManagerService.currentPatient.dateOfBirth);
-                    this.age = this.demographicsService.getCurrentPatientAge();
-                    this.fullName = this.demographicsService.getCurrentPatientFullName();
-                    //this.mobilePhone = this.phoneNumberService.getPhoneNumberByType("mobile");
-                    //this.homePhone = this.phoneNumberService.getPhoneNumberByType("home");
-                    //this.workPhone = this.phoneNumberService.getPhoneNumberByType("work");
-                    this.emailAddress = this.emailService.getCurrentPatientEmail();
-                });
+            if (patientId) {
+                this.patientManagerService.openPatientById(patientId).then(
+                    (response) => {
+                        this.demographicsService.getCurrentPatient();
+                        this.givenName = this.demographicsService.currentPatient.givenName;
+                        this.middleNames = this.demographicsService.currentPatient.middleNames;
+                        this.familyName = this.demographicsService.currentPatient.familyName;
+                        this.title = this.demographicsService.currentPatient.title;
+                        this.preferredName = this.demographicsService.currentPatient.preferredName;
+                        this.gender = this.demographicsService.currentPatient.gender;
+                        this.dateOfBirth = new Date(this.demographicsService.currentPatient.dateOfBirth);
+                        this.emailAddress = this.emailService.getCurrentPatientEmail();
+                        if (this.phoneNumberService.currentPatientHasMobileNumber()) {
+                            this.mobilePhone = <interfaces.models.phoneNumber>{};
+                            angular.copy(this.phoneNumberService.getCurrentPatientMobileNumber(), this.mobilePhone);
+                            console.log(this.mobilePhone);
+                        }
+                        else {
+                            this.mobilePhone = this.phoneNumberService.createNewMobileNumber();
+                        }
+                    });
+            } else {
+                this.patientManagerService.createNewPatient();
+                this.patientManagerService.setCurrentPatientById(0);
+                this.demographicsService.getCurrentPatient();
+            }
         }
 
         savePatient(): void {
             this.isBusy = true;
-            this.patientManagerService.currentPatient.givenName = this.givenName;
-            this.patientManagerService.currentPatient.middleNames = this.middleNames;
-            this.patientManagerService.currentPatient.familyName = this.familyName;
-            this.patientManagerService.currentPatient.title = this.title;
-            this.patientManagerService.currentPatient.gender = this.gender;
-            this.patientManagerService.currentPatient.dateOfBirth = moment(this.dateOfBirth).format("YYYY/MM/DD");
-            this.patientManagerService.currentPatient.preferredName = this.preferredName;
+            this.demographicsService.currentPatient.givenName = this.givenName;
+            this.demographicsService.currentPatient.familyName = this.familyName;
+            this.demographicsService.currentPatient.title = this.title;
+            this.demographicsService.currentPatient.middleNames = this.middleNames
+            this.demographicsService.currentPatient.gender = this.gender;
+            this.demographicsService.currentPatient.dateOfBirth = moment(this.dateOfBirth).format("YYYY/MM/DD");
+            this.demographicsService.currentPatient.preferredName = this.preferredName;
             this.emailService.setCurrentPatientEmail(this.emailAddress);
-            //this.phoneNumberService.addNewPatientPhoneNumber(this.mobilePhone)
-            
-            this.patientManagerService.savePatient()
+            this.phoneNumberService.setCurrentPatientMobileNumber(this.mobilePhone);
+            this.patientManagerService.saveCurrentPatient()
                 .then(
                 () => {
-                    console.log(this.demographicsService.getCurrentPatientMiddleNames());
                     this.$state.go("patient.detail.demographics.view");
                 },
                 () => { console.log("patient failed to save") })

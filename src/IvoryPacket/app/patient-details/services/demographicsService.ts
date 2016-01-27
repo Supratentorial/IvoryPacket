@@ -1,45 +1,44 @@
 ﻿module patient.services {
     export class DemographicsService implements interfaces.services.demographicsService {
-
         static $inject = ["$http", "PatientManagerService"];
+        currentPatient: interfaces.models.patient;
+        fullName: string;
+        age: string;
         constructor(private $http: angular.IHttpService, private patientManagerService: interfaces.services.patientManagerService) {
-
+              
         }
 
-        getCurrentPatientDateOfBirth() {
-
+        getCurrentPatient() : void {
+            this.currentPatient = this.patientManagerService.getCurrentPatient();
+            this.getCurrentPatientFullName();
+            this.getCurrentPatientAge();
         }
 
-        getCurrentPatientMiddleNames(): string {
-            return this.patientManagerService.currentPatient.middleNames;
-        }
-
-        getCurrentPatientFullName(): string {
-            var fullName: string;
-            if (this.patientManagerService.currentPatient.familyName) {
-                fullName = this.patientManagerService.currentPatient.familyName.toUpperCase() + ", " + this.patientManagerService.currentPatient.givenName;
+        getCurrentPatientFullName() {
+            if (this.currentPatient.familyName) {
+                this.fullName = this.currentPatient.familyName.toUpperCase() + ", " + this.currentPatient.givenName;
             }
-            if (this.patientManagerService.currentPatient.middleNames) {
-                fullName += " " + this.patientManagerService.currentPatient.middleNames;
+            if (this.currentPatient.middleNames) {
+                this.fullName += " " + this.currentPatient.middleNames;
             }
-            if (this.patientManagerService.currentPatient.title) {
-                fullName += " (" + this.patientManagerService.currentPatient.title + ") "; 
+            if (this.currentPatient.title) {
+                this.fullName += " (" + this.currentPatient.title + ") "; 
             }
-            return fullName;
         }
 
-        getCurrentPatientAge(): string {
-            var dateOfBirth = this.patientManagerService.currentPatient.dateOfBirth;
+        getCurrentPatientAge() {
+            var dateOfBirth = this.currentPatient.dateOfBirth;
             if (!dateOfBirth) {
                 return;
             }
             var ageYears = moment().diff(moment(dateOfBirth, "YYYY/MM/dd"), "years");
             if (ageYears > 2) {
-                return ageYears.toString() + " years";
+                this.age = ageYears.toString() + " years";
             }
             if (ageYears < 2) {
-                return moment().diff(moment(dateOfBirth, "YYYY/MM/dd"), "months").toString() + " months";
+                this.age = moment().diff(moment(dateOfBirth, "YYYY/MM/dd"), "months").toString() + " months";
             }
+
         }
     }
 

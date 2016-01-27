@@ -9,8 +9,7 @@
             if (patientId != 0) {
                 this.patientManagerService.openPatientById(patientId).then((result) => {
                     this.patientManagerService.setCurrentPatientById(patientId)
-                    this.fullName = this.demographicsService.getCurrentPatientFullName();
-                    this.age = this.demographicsService.getCurrentPatientAge();
+                    this.demographicsService.getCurrentPatient();
                 });
             }
             else {

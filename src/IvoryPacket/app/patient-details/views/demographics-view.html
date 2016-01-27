@@ -11,16 +11,16 @@
                 <div class="static-form-group">
                     <div class="static-label">Name</div>
                     <div>
-                        {{vm.fullName}}
+                        {{vm.demographicsService.fullName}}
                     </div>
                 </div>
                 <div class="static-form-group">
                     <label class="static-label">Born</label>
-                    <div>{{vm.patientManagerService.currentPatient.dateOfBirth | date:'dd/MM/yyyy'}} ({{vm.age}})</div>
+                    <div>{{vm.demographicsService.currentPatient.dateOfBirth | date:'dd/MM/yyyy' || "Not recorded."}} ({{vm.demographicsService.age}})</div>
                 </div>
                 <div class="static-form-group">
                     <label class="static-label">Gender</label>
-                    <div>Male</div>
+                    <div>{{vm.demographicsService.currentPatient.gender}}</div>
                 </div>
             </div>
         </div>
@@ -31,7 +31,7 @@
             <div class="panel-body">
                 <div class="static-form-group">
                     <div class="static-label">Phone</div>
-                    <div>0400 939291</div>
+                    <div>{{vm.mobilePhone.value || "Not recorded."}}</div>
                 </div>
                 <div class="static-form-group">
                     <div class="static-label">Address</div>

@@ -3,25 +3,39 @@
         getAllPatients: any;
     }
 
-    export interface allergiesService {
+    export interface allergiesDetailService {
         getAllergySeverityOptions(): any;
         getAllergyReactionTypes(): any;
-        addAllergy(allergy: interfaces.models.allergy): void;
+
+        addNewAllergy(allergy: interfaces.models.allergy): angular.IHttpPromise<any>;
+        updateExistingAllergy(allergy: interfaces.models.allergy): angular.IHttpPromise<any>;
+        getAllergyById(allergyId: number): angular.IHttpPromise<any>;
+
+        allergySeverityOptions: string[];
+        allergyReactionTypes: string[];
+    }
+
+    export interface allergiesListService {
+        getCurrentPatientAllergies(): void;
     }
 
     export interface patientManagerService {
         openPatients: interfaces.models.patient[];
-        currentPatient: interfaces.models.patient;
+        currentPatientId: number;
         openPatientById(patientId: number): angular.IPromise<any>;
         createNewPatient();
+        getCurrentPatient(): interfaces.models.patient;
         setCurrentPatientById(patientId: number): void;
-        savePatient(): any;
-        isOpenPatient(patientId: number): boolean;
+        saveCurrentPatient(): any;
+        isPatientOpen(patientId: number): boolean;
         isCurrentPatient(patientId: number): boolean;
     }
 
     export interface phoneNumberService {
-        //getPhoneNumberByType(type: string): interfaces.models.phoneNumber;
+        getCurrentPatientMobileNumber(): interfaces.models.phoneNumber;
+        currentPatientHasMobileNumber(): boolean;
+        createNewMobileNumber(): interfaces.models.phoneNumber;
+        setCurrentPatientMobileNumber(mobileNumber: interfaces.models.phoneNumber): void;
         //addNewPatientPhoneNumber(phoneNumber: interfaces.models.phoneNumber): void;
     }
 
@@ -35,8 +49,9 @@
     }
 
     export interface demographicsService {
-        getCurrentPatientFullName(): string;
-        getCurrentPatientAge(): string;
-        getCurrentPatientMiddleNames(): string;
+        getCurrentPatientFullName();
+        getCurrentPatientAge();
+        getCurrentPatient(): void;
+        currentPatient: interfaces.models.patient;
     }
 }

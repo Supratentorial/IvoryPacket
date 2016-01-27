@@ -1,7 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
+﻿using System.ComponentModel.DataAnnotations.Schema;
 
 namespace IvoryPacket.Models
 {
@@ -10,5 +7,8 @@ namespace IvoryPacket.Models
         public int EmailAddressId { get; set; }
         public string EmailValue { get; set; }
         public bool IsPreferred { get; set; }
+        public virtual Patient Patient { get; set; }
+        [ForeignKey("PatientId")]
+        public int PatientId { get; set; }
     }
 }

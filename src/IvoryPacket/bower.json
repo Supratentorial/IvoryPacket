@@ -10,7 +10,8 @@
     "bootstrap-sass": "~3.3.6",
     "angular-moment": "~0.10.3",
     "angular-mocks": "~1.4.8",
-    "angular-loading-bar": "0.8.0"
+    "angular-loading-bar": "0.8.0",
+    "angular-smart-table": "~2.1.6"
   },
   "devDependencies": {}
 }

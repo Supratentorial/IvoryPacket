@@ -2,7 +2,8 @@
 /// <reference path="../typings/angularjs/angular.d.ts" />
 
 module app {
-    angular.module("app", ["ui.router", "patient", "utilities", "angularMoment", "angular-loading-bar"]).config(($stateProvider: angular.ui.IStateProvider, $urlRouterProvider: angular.ui.IUrlRouterProvider, $locationProvider: angular.ILocationProvider, $httpProvider: angular.IHttpProvider) => {
+    angular.module("app", ["ui.router", "patient", "utilities", "angularMoment", "angular-loading-bar", "smart-table"])
+        .config(($stateProvider: angular.ui.IStateProvider, $urlRouterProvider: angular.ui.IUrlRouterProvider, $locationProvider: angular.ILocationProvider, $httpProvider: angular.IHttpProvider) => {
         $urlRouterProvider.when("/", "/");
         $urlRouterProvider.when("patients/detail/{patientId:int}/demographics", "patients/detail/{patientId:int}/demographics/view");
         $stateProvider
@@ -42,11 +43,15 @@ module app {
             .state("patient.detail.socialhistory", <angular.ui.IState>{
                 url: "/social-history",
                 abstract: true,
-                templateUrl: "html/social-history-view.html"
+                template: "<ui-view/>"
             })
             .state("patient.detail.socialhistory.view", <angular.ui.IState>{
                 url: "/view",
                 templateUrl: "html/social-history-view.html"
+            })
+            .state("patient.detail.socialhistory.smoking", <angular.ui.IState>{
+                url: "/edit-smoking",
+                templateUrl: "html/smoking-history-edit.html"
             })
             .state("patient.detail.demographics", <angular.ui.IState>{
                 url: "/demographics",
@@ -111,12 +116,12 @@ module app {
             .state("patient.detail.allergies.view", <angular.ui.IState>{
                 url: "/view",
                 templateUrl: "html/allergies-view.html",
-                controller: "AllergiesController as vm"
+                controller: "AllergiesListController as vm"
             })
             .state("patient.detail.allergies.edit", <angular.ui.IState>{
-                url: "/edit",
+                url: "{allergyId:int}/edit",
                 templateUrl: "html/allergies-edit.html",
-                controller: "AllergiesController as vm"
+                controller: "AllergyDetailsController as vm"
             })
             .state("patient.detail.immunisations", <angular.ui.IState>{
                 url: "/immunisations",

@@ -18,7 +18,7 @@
                         <div class="form-group col-lg-6">
                             <label>Type</label>
                             <select class="form-control" ng-model="vm.currentAllergy.type">
-                                <option ng-repeat="type in vm.allergyReactionTypes">
+                                <option ng-repeat="type in vm.allergiesDetailService.allergyReactionTypes" value="{{type}}">
                                     {{type}}
                                 </option>
                             </select>
@@ -32,7 +32,7 @@
                         <div class="form-group col-lg-6">
                             <label>Severity</label>
                             <select class="form-control" ng-model="vm.currentAllergy.severity">
-                                <option ng-repeat="severity in vm.allergySeverityOptions">
+                                <option ng-repeat="severity in vm.allergiesDetailService.allergySeverityOptions" value="{{severity}}">
                                     {{severity}}
                                 </option>
                             </select>

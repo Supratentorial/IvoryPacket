@@ -36,7 +36,7 @@
     "**.vspscc"
   ],
   "scripts": {
-    "prepublish": [ "npm install", "bower install", "gulp clean", "gulp default" ]
+    "prepublish": [ "npm install", "bower install"]
   },
   "userSecretsId": "aspnet5-IvoryPacket-2b7ecf63-f7f5-4a4b-80bf-79644c1f627d",
   "version": "1.0.0-*",

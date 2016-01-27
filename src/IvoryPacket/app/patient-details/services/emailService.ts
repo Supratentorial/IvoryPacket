@@ -1,20 +1,19 @@
 ﻿module patient.services {
     export class EmailService implements interfaces.services.emailService {
         static $inject = ["PatientManagerService"];
-
+        currentPatient: interfaces.models.patient;
         constructor(private patientManagerService: interfaces.services.patientManagerService) {
-            this.getCurrentPatientEmail();
-        }
-
-        addEmailAddress() {
 
         }
 
         getCurrentPatientEmail(): interfaces.models.emailAddress {
-            if (this.patientManagerService.currentPatient.emailAddress) {
-                return this.patientManagerService.currentPatient.emailAddress;
-            }
-            return this.createNewEmail();
+            var emailAddress: interfaces.models.emailAddress = this.createNewEmail();
+            angular.copy(this.patientManagerService.getCurrentPatient().emailAddress, emailAddress);
+            return emailAddress;
+        }
+
+        setCurrentPatientEmail(email: interfaces.models.emailAddress) {
+            this.patientManagerService.getCurrentPatient().emailAddress = email;
         }
 
         createNewEmail(): interfaces.models.emailAddress {
@@ -24,10 +23,6 @@
                 emailValue: ""
             };
             return email;
-        }
-
-        setCurrentPatientEmail(email: interfaces.models.emailAddress) {
-            this.patientManagerService.currentPatient.emailAddress = email;
         }
     }
     angular.module("patient").service("EmailService", EmailService);

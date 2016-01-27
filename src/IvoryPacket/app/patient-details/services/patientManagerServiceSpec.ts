@@ -12,11 +12,11 @@ describe("patientManagerService", () => {
     }));
 
     it("should return false if there are no open patients", () => {
-        expect(patientManagerService.isOpenPatient(1)).toBe(false);
+        expect(patientManagerService.isPatientOpen(1)).toBe(false);
     });
 
     it("should return true if there is an new unsaved patient", () => {
         patientManagerService.createNewPatient();
-        expect(patientManagerService.isOpenPatient(0)).toBe(true);
+        expect(patientManagerService.isPatientOpen(0)).toBe(true);
     });
 });

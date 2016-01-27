@@ -2,7 +2,8 @@
 /// <reference path="../typings/angularjs/angular.d.ts" />
 var app;
 (function (app) {
-    angular.module("app", ["ui.router", "patient", "utilities", "angularMoment", "angular-loading-bar"]).config(function ($stateProvider, $urlRouterProvider, $locationProvider, $httpProvider) {
+    angular.module("app", ["ui.router", "patient", "utilities", "angularMoment", "angular-loading-bar", "smart-table"])
+        .config(function ($stateProvider, $urlRouterProvider, $locationProvider, $httpProvider) {
         $urlRouterProvider.when("/", "/");
         $urlRouterProvider.when("patients/detail/{patientId:int}/demographics", "patients/detail/{patientId:int}/demographics/view");
         $stateProvider
@@ -42,11 +43,15 @@ var app;
             .state("patient.detail.socialhistory", {
             url: "/social-history",
             abstract: true,
-            templateUrl: "html/social-history-view.html"
+            template: "<ui-view/>"
         })
             .state("patient.detail.socialhistory.view", {
             url: "/view",
             templateUrl: "html/social-history-view.html"
+        })
+            .state("patient.detail.socialhistory.smoking", {
+            url: "/edit-smoking",
+            templateUrl: "html/smoking-history-edit.html"
         })
             .state("patient.detail.demographics", {
             url: "/demographics",
@@ -110,12 +115,12 @@ var app;
             .state("patient.detail.allergies.view", {
             url: "/view",
             templateUrl: "html/allergies-view.html",
-            controller: "AllergiesController as vm"
+            controller: "AllergiesListController as vm"
         })
             .state("patient.detail.allergies.edit", {
-            url: "/edit",
+            url: "{allergyId:int}/edit",
             templateUrl: "html/allergies-edit.html",
-            controller: "AllergiesController as vm"
+            controller: "AllergyDetailsController as vm"
         })
             .state("patient.detail.immunisations", {
             url: "/immunisations",

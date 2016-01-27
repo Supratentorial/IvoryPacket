@@ -5,6 +5,7 @@ var patient;
         var EncountersController = (function () {
             function EncountersController() {
             }
+            EncountersController.$inject = ["EncountersService"];
             return EncountersController;
         })();
         controllers.EncountersController = EncountersController;

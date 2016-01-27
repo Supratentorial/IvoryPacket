@@ -27,7 +27,11 @@ namespace IvoryPacket.Controllers
         [HttpGet("{patientId}")]
         public Patient Get(int patientId)
         {
-            return DbContext.Patients.Where(p => p.PatientId == patientId).Include(p => p.EmailAddress).Single();
+            return DbContext.Patients
+                .Where(p => p.PatientId == patientId)
+                .Include(p => p.EmailAddress)
+                .Include(p => p.PhoneNumbers)
+                .FirstOrDefault();
         }
 
         // POST api/patients
@@ -46,6 +50,9 @@ namespace IvoryPacket.Controllers
         {
             DbContext.Entry(patient).State = patient.PatientId == 0 ? EntityState.Added : EntityState.Modified;
             DbContext.Entry(patient.EmailAddress).State = patient.EmailAddress.EmailAddressId == 0 ? EntityState.Added : EntityState.Modified;
+            foreach (PhoneNumber phone in patient.PhoneNumbers) {
+                DbContext.Entry(phone).State = phone.PhoneNumberId == 0 ? EntityState.Added : EntityState.Modified;
+            }
             DbContext.SaveChanges();
             return new HttpOkObjectResult(patient);
         }

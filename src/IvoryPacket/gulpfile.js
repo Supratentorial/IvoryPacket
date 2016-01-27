@@ -67,8 +67,8 @@ gulp.task("transpile-scss", function () {
 //Transpiles app TS files to JS and writes them to webroot.
 gulp.task('transpile-ts', function () {
     var clientResult = gulp.src([paths.srcTSFiles, "!app/**/*Spec.ts"])
-        .pipe(flatten())
         .pipe(plumber())
+        .pipe(flatten())
         .pipe(ts({
             target: 'ES5'
         }));

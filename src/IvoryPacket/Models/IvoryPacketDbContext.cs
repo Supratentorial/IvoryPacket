@@ -4,7 +4,7 @@ namespace IvoryPacket.Models
 {
     public class IvoryPacketDbContext : DbContext
     {
-        public IvoryPacketDbContext()
+        public IvoryPacketDbContext() : base()
         {
             Database.EnsureCreated();
         }
@@ -13,5 +13,12 @@ namespace IvoryPacket.Models
         public DbSet<PhoneNumber> PhoneNumbers { get; set; }
         public DbSet<Address> Addresses { get; set; }
         public DbSet<EmailAddress> EmailAddresses { get; set; }
+        public DbSet<Encounter> Encounters { get; set; }
+
+
+        protected override void OnModelCreating(ModelBuilder modelBuilder) {
+            modelBuilder.Entity<StaffMember>().HasKey(s => s.StaffId);
+            
+        }
     }
 }

@@ -13,8 +13,7 @@ var patient;
                 if (patientId != 0) {
                     this.patientManagerService.openPatientById(patientId).then(function (result) {
                         _this.patientManagerService.setCurrentPatientById(patientId);
-                        _this.fullName = _this.demographicsService.getCurrentPatientFullName();
-                        _this.age = _this.demographicsService.getCurrentPatientAge();
+                        _this.demographicsService.getCurrentPatient();
                     });
                 }
                 else {

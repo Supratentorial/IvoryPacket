@@ -23,12 +23,13 @@
 
     export interface allergy {
         allergyId: number;
-        recordedDate: Date;
+        recordedDate: moment.Moment;
         substance: string;
         severity: string; //mild | moderate | severe
-        type: string; //allergy | intolerance
+        type: string; //allergy | intolerance | overdose
         note: string;
         clinicalManifestation: string;
+        patientId: number;
     }
 
     export interface phoneNumber {
@@ -53,5 +54,11 @@
         emailAddressId: number;
         emailValue: string;
         isPreferred: boolean;
+    }
+
+    export interface encounter {
+        encounterId: number;
+        patientId: number;
+
     }
 }

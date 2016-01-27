@@ -4,11 +4,12 @@ using Microsoft.Data.Entity.Migrations;
 
 namespace IvoryPacket.Migrations
 {
-    public partial class _5 : Migration
+    public partial class _0 : Migration
     {
         protected override void Up(MigrationBuilder migrationBuilder)
         {
             migrationBuilder.DropForeignKey(name: "FK_Allergy_Patient_PatientId", table: "Allergy");
+            migrationBuilder.DropForeignKey(name: "FK_EmailAddress_Patient_PatientId", table: "EmailAddress");
             migrationBuilder.AddForeignKey(
                 name: "FK_Allergy_Patient_PatientId",
                 table: "Allergy",
@@ -16,15 +17,19 @@ namespace IvoryPacket.Migrations
                 principalTable: "Patient",
                 principalColumn: "PatientId",
                 onDelete: ReferentialAction.Cascade);
-            migrationBuilder.RenameColumn(
-                name: "DateOfBirth",
-                table: "Patient",
-                newName: "Date");
+            migrationBuilder.AddForeignKey(
+                name: "FK_EmailAddress_Patient_PatientId",
+                table: "EmailAddress",
+                column: "PatientId",
+                principalTable: "Patient",
+                principalColumn: "PatientId",
+                onDelete: ReferentialAction.Cascade);
         }
 
         protected override void Down(MigrationBuilder migrationBuilder)
         {
             migrationBuilder.DropForeignKey(name: "FK_Allergy_Patient_PatientId", table: "Allergy");
+            migrationBuilder.DropForeignKey(name: "FK_EmailAddress_Patient_PatientId", table: "EmailAddress");
             migrationBuilder.AddForeignKey(
                 name: "FK_Allergy_Patient_PatientId",
                 table: "Allergy",
@@ -32,10 +37,13 @@ namespace IvoryPacket.Migrations
                 principalTable: "Patient",
                 principalColumn: "PatientId",
                 onDelete: ReferentialAction.Restrict);
-            migrationBuilder.RenameColumn(
-                name: "Date",
-                table: "Patient",
-                newName: "DateOfBirth");
+            migrationBuilder.AddForeignKey(
+                name: "FK_EmailAddress_Patient_PatientId",
+                table: "EmailAddress",
+                column: "PatientId",
+                principalTable: "Patient",
+                principalColumn: "PatientId",
+                onDelete: ReferentialAction.Restrict);
         }
     }
 }

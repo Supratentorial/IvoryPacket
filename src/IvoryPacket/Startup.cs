@@ -9,6 +9,7 @@ using Microsoft.AspNet.Authentication.Cookies;
 using Microsoft.Extensions.Logging;
 using Microsoft.AspNet.Mvc.Formatters;
 using Newtonsoft.Json.Serialization;
+using Newtonsoft.Json;
 
 namespace IvoryPacket
 {
@@ -41,6 +42,7 @@ namespace IvoryPacket
             // Add MVC services to the services container.
             services.AddMvc().AddJsonOptions(options => {
                 options.SerializerSettings.ContractResolver = new CamelCasePropertyNamesContractResolver();
+                options.SerializerSettings.ReferenceLoopHandling = ReferenceLoopHandling.Ignore;
             });
             services.AddEntityFramework().AddSqlServer().AddDbContext<IvoryPacketDbContext>(
                 options => options.UseSqlServer(Configuration["Data:DefaultConnection:ConnectionString"])
@@ -71,10 +73,10 @@ namespace IvoryPacket
             // Add the platform handler to the request pipeline.
             app.UseIISPlatformHandler();
 
+            app.UseDefaultFiles();
+
             // Add static files to the request pipeline.
             app.UseStaticFiles();
-
-            app.UseDefaultFiles();
 
             // Add OpenIdConnect middleware so you can login using Azure AD.
             app.UseOpenIdConnectAuthentication(options =>

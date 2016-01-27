@@ -67,7 +67,23 @@ namespace IvoryPacket.Migrations
 
                     b.Property<bool>("IsPreferred");
 
+                    b.Property<int>("PatientId");
+
                     b.HasKey("EmailAddressId");
+                });
+
+            modelBuilder.Entity("IvoryPacket.Models.Encounter", b =>
+                {
+                    b.Property<int>("EncounterId")
+                        .ValueGeneratedOnAdd();
+
+                    b.Property<int>("ClinicianId");
+
+                    b.Property<int>("PatientId");
+
+                    b.Property<DateTimeOffset>("RecordedDate");
+
+                    b.HasKey("EncounterId");
                 });
 
             modelBuilder.Entity("IvoryPacket.Models.Patient", b =>
@@ -77,8 +93,6 @@ namespace IvoryPacket.Migrations
 
                     b.Property<DateTime?>("DateOfBirth")
                         .HasAnnotation("Relational:ColumnType", "Date");
-
-                    b.Property<int?>("EmailAddressEmailAddressId");
 
                     b.Property<string>("Ethnicity");
 
@@ -125,6 +139,18 @@ namespace IvoryPacket.Migrations
                     b.HasKey("PhoneNumberId");
                 });
 
+            modelBuilder.Entity("IvoryPacket.Models.StaffMember", b =>
+                {
+                    b.Property<int>("StaffId")
+                        .ValueGeneratedOnAdd();
+
+                    b.Property<string>("FamilyName");
+
+                    b.Property<string>("GivenName");
+
+                    b.HasKey("StaffId");
+                });
+
             modelBuilder.Entity("IvoryPacket.Models.Address", b =>
                 {
                     b.HasOne("IvoryPacket.Models.Patient")
@@ -139,11 +165,22 @@ namespace IvoryPacket.Migrations
                         .HasForeignKey("PatientId");
                 });
 
-            modelBuilder.Entity("IvoryPacket.Models.Patient", b =>
+            modelBuilder.Entity("IvoryPacket.Models.EmailAddress", b =>
                 {
-                    b.HasOne("IvoryPacket.Models.EmailAddress")
+                    b.HasOne("IvoryPacket.Models.Patient")
+                        .WithOne()
+                        .HasForeignKey("IvoryPacket.Models.EmailAddress", "PatientId");
+                });
+
+            modelBuilder.Entity("IvoryPacket.Models.Encounter", b =>
+                {
+                    b.HasOne("IvoryPacket.Models.StaffMember")
                         .WithMany()
-                        .HasForeignKey("EmailAddressEmailAddressId");
+                        .HasForeignKey("ClinicianId");
+
+                    b.HasOne("IvoryPacket.Models.Patient")
+                        .WithMany()
+                        .HasForeignKey("PatientId");
                 });
 
             modelBuilder.Entity("IvoryPacket.Models.PhoneNumber", b =>

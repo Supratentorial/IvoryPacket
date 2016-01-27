@@ -17,37 +17,47 @@ var patient;
                 this.contactOptions = ["Mobile", "Home", "Work", "Email"];
                 this.isBusy = false;
                 var patientId = this.$state.params["patientId"];
-                this.patientManagerService.openPatientById(patientId).then(function (response) {
-                    _this.givenName = _this.patientManagerService.currentPatient.givenName;
-                    _this.middleNames = _this.demographicsService.getCurrentPatientMiddleNames();
-                    _this.familyName = _this.patientManagerService.currentPatient.familyName;
-                    _this.title = _this.patientManagerService.currentPatient.title;
-                    _this.preferredName = _this.patientManagerService.currentPatient.preferredName;
-                    _this.gender = _this.patientManagerService.currentPatient.gender;
-                    _this.dateOfBirth = new Date(_this.patientManagerService.currentPatient.dateOfBirth);
-                    _this.age = _this.demographicsService.getCurrentPatientAge();
-                    _this.fullName = _this.demographicsService.getCurrentPatientFullName();
-                    //this.mobilePhone = this.phoneNumberService.getPhoneNumberByType("mobile");
-                    //this.homePhone = this.phoneNumberService.getPhoneNumberByType("home");
-                    //this.workPhone = this.phoneNumberService.getPhoneNumberByType("work");
-                    _this.emailAddress = _this.emailService.getCurrentPatientEmail();
-                });
+                if (patientId) {
+                    this.patientManagerService.openPatientById(patientId).then(function (response) {
+                        _this.demographicsService.getCurrentPatient();
+                        _this.givenName = _this.demographicsService.currentPatient.givenName;
+                        _this.middleNames = _this.demographicsService.currentPatient.middleNames;
+                        _this.familyName = _this.demographicsService.currentPatient.familyName;
+                        _this.title = _this.demographicsService.currentPatient.title;
+                        _this.preferredName = _this.demographicsService.currentPatient.preferredName;
+                        _this.gender = _this.demographicsService.currentPatient.gender;
+                        _this.dateOfBirth = new Date(_this.demographicsService.currentPatient.dateOfBirth);
+                        _this.emailAddress = _this.emailService.getCurrentPatientEmail();
+                        if (_this.phoneNumberService.currentPatientHasMobileNumber()) {
+                            _this.mobilePhone = {};
+                            angular.copy(_this.phoneNumberService.getCurrentPatientMobileNumber(), _this.mobilePhone);
+                            console.log(_this.mobilePhone);
+                        }
+                        else {
+                            _this.mobilePhone = _this.phoneNumberService.createNewMobileNumber();
+                        }
+                    });
+                }
+                else {
+                    this.patientManagerService.createNewPatient();
+                    this.patientManagerService.setCurrentPatientById(0);
+                    this.demographicsService.getCurrentPatient();
+                }
             }
             DemographicsController.prototype.savePatient = function () {
                 var _this = this;
                 this.isBusy = true;
-                this.patientManagerService.currentPatient.givenName = this.givenName;
-                this.patientManagerService.currentPatient.middleNames = this.middleNames;
-                this.patientManagerService.currentPatient.familyName = this.familyName;
-                this.patientManagerService.currentPatient.title = this.title;
-                this.patientManagerService.currentPatient.gender = this.gender;
-                this.patientManagerService.currentPatient.dateOfBirth = moment(this.dateOfBirth).format("YYYY/MM/DD");
-                this.patientManagerService.currentPatient.preferredName = this.preferredName;
+                this.demographicsService.currentPatient.givenName = this.givenName;
+                this.demographicsService.currentPatient.familyName = this.familyName;
+                this.demographicsService.currentPatient.title = this.title;
+                this.demographicsService.currentPatient.middleNames = this.middleNames;
+                this.demographicsService.currentPatient.gender = this.gender;
+                this.demographicsService.currentPatient.dateOfBirth = moment(this.dateOfBirth).format("YYYY/MM/DD");
+                this.demographicsService.currentPatient.preferredName = this.preferredName;
                 this.emailService.setCurrentPatientEmail(this.emailAddress);
-                //this.phoneNumberService.addNewPatientPhoneNumber(this.mobilePhone)
-                this.patientManagerService.savePatient()
+                this.phoneNumberService.setCurrentPatientMobileNumber(this.mobilePhone);
+                this.patientManagerService.saveCurrentPatient()
                     .then(function () {
-                    console.log(_this.demographicsService.getCurrentPatientMiddleNames());
                     _this.$state.go("patient.detail.demographics.view");
                 }, function () { console.log("patient failed to save"); })
                     .finally(function () { _this.isBusy = false; });
