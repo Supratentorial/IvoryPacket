@@ -11,7 +11,9 @@
     "angular-moment": "~0.10.3",
     "angular-mocks": "~1.4.8",
     "angular-loading-bar": "0.8.0",
-    "angular-smart-table": "~2.1.6"
+    "angular-smart-table": "~2.1.6",
+    "angular-bootstrap": "1.1.1",
+    "font-awesome": "4.5.0"
   },
   "devDependencies": {}
 }

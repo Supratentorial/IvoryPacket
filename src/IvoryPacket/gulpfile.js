@@ -26,15 +26,16 @@ paths.distCSSFiles = paths.webroot + "css/**/*.css";
 paths.distJSDir = paths.webroot + "js/";
 paths.distHTMLDir = paths.webroot + "html";
 paths.distJSFiles = paths.webroot + "js/**/*.js";
+paths.distFontDir = paths.webroot + "fonts/";
 paths.distIndexFile = paths.webroot + "index.html";
 paths.srcSCSSFiles = "app/styles/**/*.{scss, css}";
 paths.srcTSFiles = "app/**/*.ts";
 paths.srcIndexFile = "app/index.html";
 paths.srcHTMLFiles = "app/**/*.html";
 paths.typings = "./typings/**/*.d.ts";
-paths.bower = "bower_components/**/*.min.js";
+paths.bower = "bower_components/";
 
-gulp.task("clean", ["clean:app-js", "clean:vendor-js", "clean:css", "clean:html", "clean:index"]);
+gulp.task("clean", ["clean:app-js", "clean:vendor-js", "clean:css", "clean:html", "clean:index", "clean:vendor-fonts"]);
 
 gulp.task("clean:css", function (cb) {
     rimraf(paths.distCSSDir, cb);
@@ -46,6 +47,10 @@ gulp.task("clean:app-js", function (cb) {
 
 gulp.task("clean:vendor-js", function (cb) {
     rimraf(paths.distVendorDir, cb);
+})
+
+gulp.task("clean:vendor-fonts", function (cb) {
+    rimraf(paths.distFontDir, cb);
 })
 
 gulp.task("clean:html", function (cb) {
@@ -104,6 +109,11 @@ gulp.task('copy-vendor-css', function () {
      .pipe(gulp.dest(paths.distCSSDir));
 });
 
+//Copies vendor font files to webroot.
+gulp.task('copy-vendor-fonts', function () {
+    return gulp.src("bower_components/font-awesome/fonts/*.woff").pipe(gulp.dest(paths.distFontDir));
+});
+
 //Injects JS and CSS reference tags in index.html from Bower and app src files.
 gulp.task('wiredep', ["copy-vendor-css", "copy-vendor-js", "transpile-ts", "transpile-scss"], function () {
     gulp.src(paths.srcIndexFile)
@@ -143,4 +153,4 @@ gulp.task("watch", function () {
     gulp.watch(paths.srcHTMLFiles, ["default"]);
 });
 
-gulp.task("default", ["copy-html", "wiredep"], function () { });
+gulp.task("default", ["copy-html","copy-vendor-fonts", "wiredep"], function () { });

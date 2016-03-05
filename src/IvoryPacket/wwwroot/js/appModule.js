@@ -2,23 +2,44 @@
 /// <reference path="../typings/angularjs/angular.d.ts" />
 var app;
 (function (app) {
-    angular.module("app", ["ui.router", "patient", "utilities", "angularMoment", "angular-loading-bar", "smart-table"])
+    angular.module("app", ["ui.router", "ui.bootstrap", "patient", "appointment", "utilities", "angularMoment", "angular-loading-bar", "smart-table"])
         .config(function ($stateProvider, $urlRouterProvider, $locationProvider, $httpProvider) {
-        $urlRouterProvider.when("/", "/");
+        $urlRouterProvider.when("/", "/dashboard");
         $urlRouterProvider.when("patients/detail/{patientId:int}/demographics", "patients/detail/{patientId:int}/demographics/view");
         $stateProvider
             .state("dashboard", {
             url: "/dashboard",
-            temlateUrl: "html/dashboard.html"
+            templateUrl: "html/dashboard.html"
         })
             .state("appointments", {
             url: "/appointments",
-            abstract: true,
-            templateUrl: "<ui-view/>"
+            controller: "AppointmentShellController",
+            controllerAs: "shell",
+            templateUrl: "html/appointment-shell.html"
         })
-            .state("appointments.list", {
-            url: "/list",
-            templateUrl: "html/appointments-list.html"
+            .state("appointments.month", {
+            url: "/month",
+            templateUrl: "html/appointment-month-view.html"
+        })
+            .state("appointments.week", {
+            url: "/week",
+            templateUrl: "html/appointment-week-view.html"
+        })
+            .state("appointments.day", {
+            url: "/day",
+            templateUrl: "html/appointment-day-view.html"
+        })
+            .state("appointments.details", {
+            url: "/detail/{appointmentId:int}",
+            templateUrl: "html/appointment-detail-view.html"
+        })
+            .state("appointments.details.edit", {
+            url: "/edit",
+            templateUrl: "html/appointment-detail-edit.html"
+        })
+            .state("appointments.details.view", {
+            url: "/view",
+            templateUrl: "html/appointment-detail-view"
         })
             .state("patient", {
             url: "/patients",
@@ -28,12 +49,14 @@ var app;
             .state("patient.list", {
             url: "/list",
             templateUrl: "html/patient-list.html",
-            controller: "PatientListController as vm"
+            controller: "PatientListController",
+            controllerAs: "vm"
         })
             .state("patient.detail", {
             url: "/detail/{patientId:int}",
             templateUrl: "html/patient-shell.html",
-            controller: "PatientShellController as vm"
+            controller: "PatientShellController",
+            controllerAs: "vm"
         })
             .state("patient.detail.summary", {
             url: "/summary",

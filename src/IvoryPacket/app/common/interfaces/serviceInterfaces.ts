@@ -54,4 +54,15 @@
         getCurrentPatient(): void;
         currentPatient: interfaces.models.patient;
     }
+
+    export interface sessionService {
+        getSessionTimeSlots(): interfaces.models.timeSlot[];
+        
+    }
+
+    export interface timeSlotService {
+        getTimeSlotHeight(): number;
+        zoomIn(): number;
+        zoomOut(): number;
+    }
 }

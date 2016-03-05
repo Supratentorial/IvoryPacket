@@ -11,7 +11,7 @@
     "IIS Express": {
       "commandName": "IISExpress",
       "launchBrowser": true,
-      "launchUrl": "http://localhost:53405/patients/list",
+      "launchUrl": "http://localhost:64454/patients/list",
       "environmentVariables": {
         "ASPNET_ENV": "Development"
       },

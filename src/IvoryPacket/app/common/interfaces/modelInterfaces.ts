@@ -61,4 +61,9 @@
         patientId: number;
 
     }
+
+    export interface timeSlot {
+        
+    }
+
 }

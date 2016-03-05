@@ -22,7 +22,7 @@
             <ul class="nav navbar-nav">
                 <li><a ui-sref-active="active-top-level" ui-sref="dashboard">Dashboard</a></li>
                 <li><a ui-sref-active="active-top-level" ui-sref="patient.list">Patients</a></li>
-                <li><a ui-sref-active="active-top-level" ui-sref="appointments.list">Appointments</a></li>
+                <li><a ui-sref-active="active-top-level" ui-sref="appointments">Appointments</a></li>
             </ul>
         </div>
     </div>
@@ -41,11 +41,19 @@
     <script src="lib/angular-mocks.js"></script>
     <script src="lib/loading-bar.js"></script>
     <script src="lib/smart-table.js"></script>
+    <script src="lib/ui-bootstrap-tpls.js"></script>
     <!-- endbower -->
     <!-- inject:js -->
+    <script src="js/appointmentsModule.js"></script>
+    <script src="js/weekService.js"></script>
+    <script src="js/weekController.js"></script>
     <script src="js/utilitiesModule.js"></script>
     <script src="js/utilitiesService.js"></script>
     <script src="js/utilitiesInterfaces.js"></script>
+    <script src="js/timeSlotService.js"></script>
+    <script src="js/timeSlot.js"></script>
+    <script src="js/settingsModule.js"></script>
+    <script src="js/sessionService.js"></script>
     <script src="js/serviceInterfaces.js"></script>
     <script src="js/patientModule.js"></script>
     <script src="js/phoneNumberService.js"></script>
@@ -61,7 +69,13 @@
     <script src="js/emailService.js"></script>
     <script src="js/demographicsService.js"></script>
     <script src="js/demographicsController.js"></script>
+    <script src="js/controllerInterfaces.js"></script>
     <script src="js/commonModule.js"></script>
+    <script src="js/calendarZoomService.js"></script>
+    <script src="js/calendarSettingsService.js"></script>
+    <script src="js/appointmentShellController.js"></script>
+    <script src="js/appointmentListService.js"></script>
+    <script src="js/appointmentListController.js"></script>
     <script src="js/appModule.js"></script>
     <script src="js/allergiesListService.js"></script>
     <script src="js/allergiesListController.js"></script>
