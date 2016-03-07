@@ -52,6 +52,7 @@
             } else {
                 this.patientManagerService.createNewPatient();
                 this.patientManagerService.setCurrentPatientById(0);
+                this.mobilePhone = this.phoneNumberService.createNewMobileNumber();
                 this.demographicsService.getCurrentPatient();
             }
         }
@@ -66,7 +67,9 @@
             this.demographicsService.currentPatient.dateOfBirth = moment(this.dateOfBirth).format("YYYY/MM/DD");
             this.demographicsService.currentPatient.preferredName = this.preferredName;
             this.emailService.setCurrentPatientEmail(this.emailAddress);
-            this.phoneNumberService.setCurrentPatientMobileNumber(this.mobilePhone);
+            if (this.mobilePhone.value) {
+                this.phoneNumberService.setCurrentPatientMobileNumber(this.mobilePhone);
+            }
             this.patientManagerService.saveCurrentPatient()
                 .then(
                 () => {

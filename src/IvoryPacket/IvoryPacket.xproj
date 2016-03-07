@@ -14,7 +14,7 @@
   <PropertyGroup>
     <SchemaVersion>2.0</SchemaVersion>
     <WebProject_DirectoryAccessLevelKey>0</WebProject_DirectoryAccessLevelKey>
-    <DevelopmentServerPort>53405</DevelopmentServerPort>
+    <DevelopmentServerPort>64454</DevelopmentServerPort>
     <SSLPort>0</SSLPort>
   </PropertyGroup>
   <ItemGroup>

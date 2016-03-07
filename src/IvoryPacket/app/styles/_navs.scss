@@ -1,0 +1,32 @@
+﻿.nav-tabs {
+
+    > li {
+        background: $white;
+        border: none;
+        border-radius: 0px;
+    }
+
+    > li.active {
+        border: none;
+        background: $primary-accent;
+        a {
+            background: $primary-accent;
+            color: $white;
+            border: none;
+            font-weight: bold;
+            &:hover {
+                background: $primary-accent;
+                color: $white;
+                cursor: pointer;
+                border: none;
+            }
+
+            &:focus {
+                background: $primary-accent;
+                color: $white;
+                cursor: pointer;
+                border: none;
+            }
+        }
+    }
+}

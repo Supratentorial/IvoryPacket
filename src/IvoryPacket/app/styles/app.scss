@@ -2,6 +2,8 @@
 @import "_variables.scss";
 @import "../../bower_components/bootstrap-sass/assets/stylesheets/_bootstrap.scss";
 @import "../../bower_components/font-awesome/scss/font-awesome.scss";
+@import "_button-groups.scss";
+@import "_navs.scss";
 
 body {
     background: $md-blue-grey-700;
@@ -10,10 +12,6 @@ body {
 
 .active-top-level {
     color: $md-deep-orange-900 !important;
-}
-
-.panel-heading {
-    background: $md-blue-grey-50 !important;
 }
 
 .static-label {
@@ -97,25 +95,7 @@ body {
 
     &:hover {
         background: $md-blue-grey-50;
-        border-left: solid 0.25em $md-deep-orange-900;
+        border-left: solid 0.25em $md-deep-orange-800;
     }
 }
 
-.nav-tabs {
-    border-bottom: none;
-
-    > li {
-    }
-}
-
-.nav-tabs > li > a:hover {
-    background-color: $md-blue-grey-50 !important;
-    border-radius: 0;
-    color: #fff;
-}
-
-.nav-tabs > li.active > a,
-.nav-tabs > li.active > a:focus,
-.nav-tabs > li.active > a:hover {
-    background-color: #303136 !important;
-}

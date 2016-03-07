@@ -1,7 +1,7 @@
 <div class="row">
     <nav>
         <ul class="nav nav-tabs">
-            <li role="presentation" ng-repeat="patient in vm.patientManagerService.openPatients"><a ui-sref-active="active" ui-sref="patient.detail.demographics.view({patientId : {{patient.patientId}}})">{{patient.givenName}} {{patient.familyName}}</a></li>
+            <li ui-sref-active="active" role="presentation" ng-repeat="patient in vm.patientManagerService.openPatients"><a  ui-sref="patient.detail.demographics.view({patientId : {{patient.patientId}}})">{{patient.givenName}} {{patient.familyName}}</a></li>
         </ul>
     </nav>
 </div>
