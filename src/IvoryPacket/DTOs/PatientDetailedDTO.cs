@@ -1,21 +1,21 @@
-﻿using IvoryPacket.Utilities;
+﻿using IvoryPacket.Models;
 using System;
 using System.Collections.Generic;
-using System.ComponentModel.DataAnnotations.Schema;
 
-namespace IvoryPacket.Models
+namespace IvoryPacket.DTOs
 {
-    public class Patient
+    public class PatientDetailedDTO
     {
         public int PatientId { get; set; }
-        public string Title { get; set; }
+        public string FullName { get; set; }
         public string GivenName { get; set; }
-        public string MiddleNames { get; set; }
         public string FamilyName { get; set; }
+        public string Title { get; set; }
         public string PreferredName { get; set; }
         public string Gender { get; set; }
-        [Column(TypeName ="Date")]
         public DateTime DateOfBirth { get; set; }
+        public string Age { get; set; }
+        public bool IsActive { get; set; }
 
         public string Ethnicity { get; set; }
 
@@ -23,23 +23,10 @@ namespace IvoryPacket.Models
         public DateTimeOffset? MedicareCardExpiry { get; set; }
         public int? MedicareCardPosition { get; set; }
 
-        public bool IsActive { get; set; }
         public virtual ICollection<PhoneNumber> PhoneNumbers { get; set; }
         public virtual EmailAddress EmailAddress { get; set; }
         public virtual ICollection<Address> Addresses { get; set; }
         public virtual ICollection<Allergy> Allergies { get; set; }
-
-        public string GetFullName() {
-            return GivenName + " " + FamilyName;
-        }
-
-        public string GetFullNameWithTitle() {
-            return Title + " " + GivenName + " " + FamilyName;
-        }
-
-        public string GetAgeString() {
-            return DateTimeExtensions.ToAgeString(DateOfBirth);
-        }
 
     }
 }

@@ -4,6 +4,9 @@
 @import "../../bower_components/font-awesome/scss/font-awesome.scss";
 @import "_button-groups.scss";
 @import "_navs.scss";
+@import "_panels.scss";
+@import "_banner.scss";
+@import "_calendar.scss";
 
 body {
     background: $md-blue-grey-700;
@@ -25,60 +28,13 @@ body {
     margin-bottom: 5px;
 }
 
-#patientBanner {
-    border-top: 1px solid $md-blue-grey-100;
-    border-bottom: 1px solid $md-blue-grey-100;
-    background: $white;
-    margin-bottom: 1em;
-
-    label {
-        font-size: $font-size-medium;
-        color: $md-grey-500;
-        display: inline;
-        font-weight: 100;
-        margin-right: 0.2em;
-    }
-
-    .content {
-        font-size: $font-size-medium;
-    }
-
-    .last-name {
-        text-transform: uppercase;
-    }
-}
-
-.week-container {
-    display: flex;
-}
-
-.time-slot {
-    background: white;
-    border-right: thin solid $md-grey-300;
-    border-top: thin solid $md-grey-300;
-    padding-left: 0.5em;
-    padding-right: 0.5em;
-
-    &:hover {
-        background: $md-blue-grey-50;
-    }
-}
-
-.calendar-day {
-    flex: 1;
-}
-
-#calendar-canvas {
-    height: 80vh;
-    overflow-y: auto;
-    margin-left: -15px;
-    margin-bottom: -15px;
-    margin-right: -15px;
-    margin-top: -15px;
-}
-
-.banner-capitalize {
-    text-transform: capitalize;
+.footer {
+    position: fixed;
+    left: 0px;
+    bottom: 0px;
+    height: 50px;
+    width: 100%;
+    background: $md-blue-grey-900;
 }
 
 .list-item-name {
@@ -98,4 +54,3 @@ body {
         border-left: solid 0.25em $md-deep-orange-800;
     }
 }
-

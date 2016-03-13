@@ -1,42 +1,28 @@
 ﻿<div class="row">
     <nav>
         <ul class="nav nav-tabs">
-            <li ui-sref-active="active" role="presentation" ng-repeat="patient in vm.patientManagerService.openPatients"><a  ui-sref="patient.detail.demographics.view({patientId : {{patient.patientId}}})">{{patient.givenName}} {{patient.familyName}}</a></li>
+            <li ui-sref-active="active" role="presentation" ng-repeat="patient in vm.patientManagerService.openPatients"><a ui-sref="patient.detail.demographics.view({patientId : {{patient.patientId}}})">{{patient.fullName}}</a></li>
         </ul>
     </nav>
 </div>
 <div id="patientBanner" class="row banner">
-    <div class="col-lg-3">
-        <div class="row">
-            {{vm.demographicsService.fullName}}
-        </div>
-    </div>
-    <div class="col-lg-2">
-        <div class="row">
-            <label>Gender</label>
-            <span class="content"> {{vm.demographicsService.currentPatient.gender || '-'}}</span>
-        </div>
-        <div class="row">
-            <label>Born</label>
-            <span class="content"> {{(vm.demographicsService.currentPatient.dateOfBirth | date: 'dd/MM/yyyy') || '-'}}</span>
-            <span class="content" ng-show="vm.demographicsService.age"> ({{vm.demographicsService.age}})</span>
-        </div>
-    </div>
-    <div class="col-lg-4">
-        <div class="row">
-            <label>Phone</label>
-            <span class="content">{{vm.mobilePhone.value || '-'}}</span>
-        </div>
-        <div class="row">
-            <label>Address</label>
-            <span class="content">{{vm.addressService.currentPatient.address || '-'}}</span>
-        </div>
-    </div>
-    <div class="col-lg-3">
-        <div class="row">
-            <label>Alerts</label>
-        </div>
-    </div>
+    <span>{{vm.demographicsService.currentPatient.fullName}}</span>
+
+    <label>Gender</label>
+    <span class="content"> {{vm.demographicsService.currentPatient.gender || '-'}}</span>
+
+    <label>Born</label>
+    <span class="content"> {{(vm.demographicsService.currentPatient.dateOfBirth | date: 'dd/MM/yyyy') || '-'}} ({{vm.demographicsService.currentPatient.age}})</span>
+    <span class="content" ng-show="vm.demographicsService.age"> ({{vm.demographicsService.age}})</span>
+
+    <label>Phone</label>
+    <span class="content">{{vm.mobilePhone.value || 'Not recorded.'}}</span>
+
+    <label>Address</label>
+    <span class="content">{{vm.addressService.currentPatient.address || 'Not recorded.'}}</span>
+
+    <label>Alerts</label>
+
 </div>
 <div class="row">
     <div class="col-lg-2">

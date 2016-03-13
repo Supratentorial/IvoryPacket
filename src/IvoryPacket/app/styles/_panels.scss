@@ -1,3 +1,13 @@
 ﻿.panel-heading {
-    background: $md-blue-grey-100 !important;
+    background: $md-blue-grey-50 !important;
+    display: flex;
+    flex-flow: row;
+    align-items: center;
+    padding-top: 4px;
+    min-height: 42px;
+    padding-bottom: 4px;
+    h4{
+        flex-grow: 1;
+        font-size: 1.3em;
+    }
 }

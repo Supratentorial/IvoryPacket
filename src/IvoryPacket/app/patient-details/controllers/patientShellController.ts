@@ -12,10 +12,6 @@
                     this.demographicsService.getCurrentPatient();
                 });
             }
-            else {
-                this.patientManagerService.createNewPatient();
-                this.patientManagerService.setCurrentPatientById(0);
-            }
         }
     }
     angular.module("patient").controller("PatientShellController", PatientShellController);

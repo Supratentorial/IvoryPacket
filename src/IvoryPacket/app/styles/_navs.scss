@@ -1,5 +1,5 @@
 ﻿.nav-tabs {
-
+    background: $md-blue-grey-900;
     > li {
         background: $white;
         border: none;
@@ -9,6 +9,7 @@
     > li.active {
         border: none;
         background: $primary-accent;
+        margin: 0px;
         a {
             background: $primary-accent;
             color: $white;

@@ -1,7 +1,7 @@
 ﻿module patient.services {
     export class EmailService implements interfaces.services.emailService {
         static $inject = ["PatientManagerService"];
-        currentPatient: interfaces.models.patient;
+        currentPatient: interfaces.models.patientDetailed;
         constructor(private patientManagerService: interfaces.services.patientManagerService) {
 
         }

@@ -1,7 +1,7 @@
 ﻿<div class="row">
     <div class="col-lg-12">
         <div class="toolbar">
-            <button class="btn btn-default" ui-sref="patient.detail.demographics.edit({patientId : 0})">New Patient</button>
+            <button class="btn btn-default" ng-click="vm.createPatient()">New Patient</button>
         </div>
     </div>
 </div>
@@ -14,11 +14,10 @@
             <div class="panel-body">
                 <div class="patient-list-item" ng-repeat="patient in vm.patientListService.patientsWithAppointmentToday" ui-sref="patient.detail.demographics.view({patientId: (patient.patientId)})">
                     <div>
-                        <span class="list-item-name">{{patient.givenName}}</span>
-                        <span class="list-item-name">{{patient.familyName}}</span>
+                        <span class="list-item-name">{{patient.fullName}}</span>
                     </div>
                     <div>
-                        <span class="list-item-subtext">{{patient.dateOfBirth | date: 'dd/MM/yyyy'}} ()</span>
+                        <span class="list-item-subtext">{{patient.dateOfBirth | date: 'dd/MM/yyyy'}} ({{patient.age}})</span>
                     </div>
                 </div>
             </div>
@@ -32,11 +31,10 @@
             <div class="panel-body">
                 <div class="patient-list-item" ng-repeat="patient in vm.patientManagerService.openPatients" ui-sref="patient.detail({patientId: (patient.patientId)})">
                     <div>
-                        <span class="list-item-name">{{patient.givenName}}</span>
-                        <span class="list-item-name">{{patient.familyName}}</span>
+                        <span class="list-item-name">{{patient.fullName}}</span>
                     </div>
                     <div>
-                        <span class="list-item-subtext">{{patient.dateOfBirth | date: 'dd/MM/yyyy'}} ()</span>
+                        <span class="list-item-subtext">{{patient.dateOfBirth | date: 'dd/MM/yyyy'}} ({{patient.age}})</span>
                     </div>
                 </div>
             </div>

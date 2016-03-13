@@ -6,7 +6,7 @@
         }
 
         getCurrentPatientMobileNumber(): interfaces.models.phoneNumber {
-            var currentPatient: interfaces.models.patient = this.patientManagerService.getCurrentPatient();
+            var currentPatient: interfaces.models.patientDetailed = this.patientManagerService.getCurrentPatient();
             for (var i = 0; i < currentPatient.phoneNumbers.length; i++) {
                 if (currentPatient.phoneNumbers[i].type === "mobile") {
                     return this.patientManagerService.getCurrentPatient().phoneNumbers[i];
@@ -15,7 +15,7 @@
         }
 
         currentPatientHasMobileNumber(): boolean {
-            var currentPatient: interfaces.models.patient = this.patientManagerService.getCurrentPatient();
+            var currentPatient: interfaces.models.patientDetailed = this.patientManagerService.getCurrentPatient();
             for (var i = 0; i < currentPatient.phoneNumbers.length; i++) {
                 if (currentPatient.phoneNumbers[i].type === "mobile" && currentPatient.phoneNumbers[i].phoneNumberId != 0) {
                     return true;
@@ -36,7 +36,7 @@
         }
 
         setCurrentPatientMobileNumber(newMobileNumber: interfaces.models.phoneNumber): void {
-            var currentPatient: interfaces.models.patient = this.patientManagerService.getCurrentPatient();
+            var currentPatient: interfaces.models.patientDetailed = this.patientManagerService.getCurrentPatient();
             var currentMobileNumber: interfaces.models.phoneNumber = this.getCurrentPatientMobileNumber();
             if (newMobileNumber.phoneNumberId != 0 && newMobileNumber.value) {
                 angular.copy(newMobileNumber, currentMobileNumber);

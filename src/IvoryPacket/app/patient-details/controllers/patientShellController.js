@@ -16,10 +16,6 @@ var patient;
                         _this.demographicsService.getCurrentPatient();
                     });
                 }
-                else {
-                    this.patientManagerService.createNewPatient();
-                    this.patientManagerService.setCurrentPatientById(0);
-                }
             }
             PatientShellController.$inject = ["PatientManagerService", "$state", "DemographicsService"];
             return PatientShellController;

@@ -1,4 +1,5 @@
-﻿using System.ComponentModel.DataAnnotations.Schema;
+﻿using Newtonsoft.Json;
+using System.ComponentModel.DataAnnotations.Schema;
 
 namespace IvoryPacket.Models
 {
@@ -7,6 +8,7 @@ namespace IvoryPacket.Models
         public int EmailAddressId { get; set; }
         public string EmailValue { get; set; }
         public bool IsPreferred { get; set; }
+        [JsonIgnore]
         public virtual Patient Patient { get; set; }
         [ForeignKey("PatientId")]
         public int PatientId { get; set; }

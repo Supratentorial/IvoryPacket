@@ -1,5 +1,5 @@
 ﻿module interfaces.models {
-    export interface patient {
+    export interface patientDetailed {
         patientId: number;
         title: string;
         givenName: string;
@@ -19,6 +19,19 @@
         addresses: address[];
         emailAddress: emailAddress;
         phoneNumbers: phoneNumber[];
+    }
+
+    export interface patientSimple {
+        patientId: number;
+        title: string;
+        fullName: string;
+        givenName: string;
+        familyName: string;
+        preferredName: string;
+        gender: string;
+        dateOfBirth: string;
+        isActive: boolean;
+        age: string;
     }
 
     export interface allergy {

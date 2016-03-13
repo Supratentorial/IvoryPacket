@@ -38,12 +38,6 @@ var patient;
                         }
                     });
                 }
-                else {
-                    this.patientManagerService.createNewPatient();
-                    this.patientManagerService.setCurrentPatientById(0);
-                    this.mobilePhone = this.phoneNumberService.createNewMobileNumber();
-                    this.demographicsService.getCurrentPatient();
-                }
             }
             DemographicsController.prototype.savePatient = function () {
                 var _this = this;
@@ -59,7 +53,7 @@ var patient;
                 if (this.mobilePhone.value) {
                     this.phoneNumberService.setCurrentPatientMobileNumber(this.mobilePhone);
                 }
-                this.patientManagerService.saveCurrentPatient()
+                this.patientManagerService.updateCurrentPatient()
                     .then(function () {
                     _this.$state.go("patient.detail.demographics.view");
                 }, function () { console.log("patient failed to save"); })

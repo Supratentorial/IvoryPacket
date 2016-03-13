@@ -20,13 +20,14 @@
     }
 
     export interface patientManagerService {
-        openPatients: interfaces.models.patient[];
+        openPatients: interfaces.models.patientDetailed[];
         currentPatientId: number;
         openPatientById(patientId: number): angular.IPromise<any>;
-        createNewPatient();
-        getCurrentPatient(): interfaces.models.patient;
+        createNewPatient(): interfaces.models.patientDetailed;
+        saveNewPatient(newPatient: interfaces.models.patientDetailed);
+        getCurrentPatient(): interfaces.models.patientDetailed;
         setCurrentPatientById(patientId: number): void;
-        saveCurrentPatient(): any;
+        updateCurrentPatient(): any;
         isPatientOpen(patientId: number): boolean;
         isCurrentPatient(patientId: number): boolean;
     }
@@ -49,10 +50,8 @@
     }
 
     export interface demographicsService {
-        getCurrentPatientFullName();
-        getCurrentPatientAge();
         getCurrentPatient(): void;
-        currentPatient: interfaces.models.patient;
+        currentPatient: interfaces.models.patientDetailed;
     }
 
     export interface sessionService {

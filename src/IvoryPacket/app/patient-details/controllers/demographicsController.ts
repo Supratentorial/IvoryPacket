@@ -49,11 +49,6 @@
                             this.mobilePhone = this.phoneNumberService.createNewMobileNumber();
                         }
                     });
-            } else {
-                this.patientManagerService.createNewPatient();
-                this.patientManagerService.setCurrentPatientById(0);
-                this.mobilePhone = this.phoneNumberService.createNewMobileNumber();
-                this.demographicsService.getCurrentPatient();
             }
         }
 
@@ -70,7 +65,7 @@
             if (this.mobilePhone.value) {
                 this.phoneNumberService.setCurrentPatientMobileNumber(this.mobilePhone);
             }
-            this.patientManagerService.saveCurrentPatient()
+            this.patientManagerService.updateCurrentPatient()
                 .then(
                 () => {
                     this.$state.go("patient.detail.demographics.view");

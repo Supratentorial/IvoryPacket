@@ -1,24 +1,20 @@
 ﻿<div class="row">
-    <div class="col-lg-3">
-        <button class="btn btn-default" ui-sref="patient.detail.demographics.edit">Edit Details</button>
-    </div>
-</div>
-<div class="row">
     <div class="col-lg-4">
         <div class="panel panel-default">
             <div class="panel-heading">
                 <h4 class="panel-title">Basic</h4>
+                <button class="btn btn-default" ui-sref="patient.detail.demographics.edit"><i class="fa fa-pencil"></i> Edit</button>
             </div>
             <div class="panel-body">
                 <div class="static-form-group">
                     <div class="static-label">Name</div>
                     <div>
-                        {{vm.demographicsService.fullName}}
+                        {{vm.demographicsService.currentPatient.fullName}}
                     </div>
                 </div>
                 <div class="static-form-group">
                     <label class="static-label">Born</label>
-                    <div>{{vm.demographicsService.currentPatient.dateOfBirth | date:'dd/MM/yyyy' || "Not recorded."}} ({{vm.demographicsService.age}})</div>
+                    <div>{{vm.demographicsService.currentPatient.dateOfBirth | date:'dd/MM/yyyy' || "Not recorded."}} ({{vm.demographicsService.currentPatient.age}})</div>
                 </div>
                 <div class="static-form-group">
                     <label class="static-label">Gender</label>
@@ -29,8 +25,9 @@
     </div>
     <div class="col-lg-4">
         <div class="panel panel-default">
-            <div class="panel-heading">
+            <div class="panel-heading"> 
                 <h4 class="panel-title">Contact</h4>
+                <button class="btn btn-default"><i class="fa fa-pencil"></i> Edit</button>
             </div>
             <div class="panel-body">
                 <div class="static-form-group">
@@ -39,11 +36,11 @@
                 </div>
                 <div class="static-form-group">
                     <div class="static-label">Address</div>
-                    <div><span class="label label-default">Residential</span> 21 Sutherland Street, Buderim, QLD 4556</div>
+                    <div><span class="label label-default">Residential</span> {{vm.address.value || "Not recorded."}}</div>
                 </div>
                 <div class="static-form-group">
                     <div class="static-label">Email</div>
-                    <div>{{vm.emailAddress.emailValue}}</div>
+                    <div>{{vm.emailAddress.emailValue || "Not recorded."}}</div>
                 </div>
             </div>
         </div>

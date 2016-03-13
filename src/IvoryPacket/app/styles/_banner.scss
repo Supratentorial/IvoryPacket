@@ -1,0 +1,21 @@
+﻿#patientBanner {
+    background: $white;
+    margin-bottom: 1em;
+    display: flex;
+
+    label {
+        font-size: $font-size-medium;
+        color: $md-grey-500;
+        display: inline;
+        font-weight: 100;
+        margin-right: 0.2em;
+    }
+
+    .content {
+        font-size: $font-size-medium;
+    }
+}
+
+.banner-capitalize {
+    text-transform: capitalize;
+}

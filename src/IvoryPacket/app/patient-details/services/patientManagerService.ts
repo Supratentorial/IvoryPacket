@@ -1,7 +1,7 @@
 ﻿//Manages currently open patients.
 module patient.services {
     export class PatientManagerService implements interfaces.services.patientManagerService {
-        openPatients: interfaces.models.patient[];
+        openPatients: interfaces.models.patientDetailed[];
         currentPatientId: number;
         static $inject = ["$http", "$q"];
         constructor(private $http: angular.IHttpService, private $q: angular.IQService) {
@@ -18,7 +18,7 @@ module patient.services {
             return false;
         }
 
-        replaceOpenPatient(patient: interfaces.models.patient): void {
+        replaceOpenPatient(patient: interfaces.models.patientDetailed): void {
             for (var i = 0; i < this.openPatients.length; i++) {
                 if (patient.patientId === this.openPatients[i].patientId) {
                     this.openPatients[i] = patient;
@@ -33,12 +33,8 @@ module patient.services {
             return false;
         }
 
-        createNewPatient(): void {
-            if (this.isPatientOpen(0)) {
-                //TODO: Use message service to alert user.
-                return;
-            }
-            var newPatient = <interfaces.models.patient>{
+        createNewPatient(): interfaces.models.patientDetailed {
+            return <interfaces.models.patientDetailed>{
                 patientId: 0,
                 title: null,
                 givenName: "",
@@ -57,19 +53,18 @@ module patient.services {
                 addresses: [],
                 emailAddress: null
             }
-            this.openPatients.push(newPatient);
         }
 
-        getCurrentPatient(): interfaces.models.patient {
+        getCurrentPatient(): interfaces.models.patientDetailed {
             if (this.openPatients.length) {
                 for (var i = 0; i < this.openPatients.length; i++) {
-                    var patient: interfaces.models.patient = this.openPatients[i];
+                    var patient: interfaces.models.patientDetailed = this.openPatients[i];
                     if (patient.patientId === this.currentPatientId) {
                         return patient;
                     }
                 }
             }
-        };
+        }
 
         setCurrentPatientById(patientId: number): void {
             if (patientId != null) {
@@ -83,9 +78,9 @@ module patient.services {
         }
 
         openPatientById(patientId: number) {
-            return this.$http.get("api/patients/" + patientId).then(
+            return this.$http.get("api/patients/" + patientId + "/detailed").then(
                 (result) => {
-                    var patient = <interfaces.models.patient>{};
+                    var patient = <interfaces.models.patientDetailed>{};
                     angular.copy(result.data, patient);
                     if (!this.isPatientOpen(patient.patientId)) {
                         this.openPatients.push(patient);
@@ -108,27 +103,25 @@ module patient.services {
             }
         }
 
-        saveCurrentPatient() {
-            var currentPatient: interfaces.models.patient = this.getCurrentPatient();
-            if (currentPatient.patientId === 0) {
-                return this.$http.post("api/patients/", currentPatient).then(
+        saveNewPatient(newPatient: interfaces.models.patientDetailed): angular.IPromise<void> {
+            if (newPatient.patientId === 0) {
+                return this.$http.post("api/patients/", newPatient).then(
                     (result) => {
-                        var savedPatient: interfaces.models.patient = <interfaces.models.patient>{};
+                        var savedPatient: interfaces.models.patientDetailed = <interfaces.models.patientDetailed>{};
                         angular.copy(result.data, savedPatient);
-                        for (var i = 0; i < this.openPatients.length; i++) {
-                            if (this.openPatients[i].patientId === 0) {
-                                this.openPatients[i] = savedPatient;
-                            }
-                        }
                         this.setCurrentPatientById(savedPatient.patientId);
                     },
                     (error) => {
 
                     });
             }
+        }
+
+        updateCurrentPatient() {
+            var currentPatient: interfaces.models.patientDetailed = this.getCurrentPatient();
             return this.$http.put("api/patients/" + currentPatient.patientId, currentPatient).then(
                 (result) => {
-                    var savedPatient: interfaces.models.patient = <interfaces.models.patient>{};
+                    var savedPatient: interfaces.models.patientDetailed = <interfaces.models.patientDetailed>{};
                     angular.copy(result.data, savedPatient);
                     this.replaceOpenPatient(savedPatient);
                 },

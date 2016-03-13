@@ -4,12 +4,21 @@ var patient;
     (function (controllers) {
         "use strict";
         var PatientListController = (function () {
-            function PatientListController(patientListService, patientManagerService) {
+            function PatientListController(patientListService, patientManagerService, $uibModal) {
                 this.patientListService = patientListService;
                 this.patientManagerService = patientManagerService;
+                this.$uibModal = $uibModal;
                 this.patientListService.getAllPatients();
             }
-            PatientListController.$inject = ["PatientListService", "PatientManagerService"];
+            PatientListController.prototype.createPatient = function () {
+                this.$uibModal.open({
+                    templateUrl: "html/create-patient-modal.html",
+                    backdrop: "static",
+                    controllerAs: "vm",
+                    controller: "CreatePatientModalController"
+                });
+            };
+            PatientListController.$inject = ["PatientListService", "PatientManagerService", "$uibModal"];
             return PatientListController;
         })();
         controllers.PatientListController = PatientListController;
