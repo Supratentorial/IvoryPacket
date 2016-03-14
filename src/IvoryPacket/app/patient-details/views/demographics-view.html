@@ -5,21 +5,21 @@
                 <h4 class="panel-title">Basic</h4>
                 <button class="btn btn-default" ui-sref="patient.detail.demographics.edit"><i class="fa fa-pencil"></i> Edit</button>
             </div>
-            <div class="panel-body">
-                <div class="static-form-group">
-                    <div class="static-label">Name</div>
-                    <div>
-                        {{vm.demographicsService.currentPatient.fullName}}
-                    </div>
-                </div>
-                <div class="static-form-group">
-                    <label class="static-label">Born</label>
-                    <div>{{vm.demographicsService.currentPatient.dateOfBirth | date:'dd/MM/yyyy' || "Not recorded."}} ({{vm.demographicsService.currentPatient.age}})</div>
-                </div>
-                <div class="static-form-group">
-                    <label class="static-label">Gender</label>
-                    <div>{{vm.demographicsService.currentPatient.gender}}</div>
-                </div>
+            <div class="panel-body no-padding">
+                <table class="table panel-table">
+                    <tr>
+                        <td class="table-label top">Full name</td>
+                        <td class="top">{{vm.demographicsService.currentPatient.fullName}}</td>
+                    </tr>
+                    <tr>
+                        <td class="table-label">Born</td>
+                        <td>{{vm.demographicsService.currentPatient.dateOfBirth | date:'dd/MM/yyyy' || "Not recorded."}} ({{vm.demographicsService.currentPatient.age}})</td>
+                    </tr>
+                    <tr>
+                        <td class="table-label">Gender</td>
+                        <td>{{vm.demographicsService.currentPatient.gender || "Not recorded."}}</td>
+                    </tr>
+                </table>
             </div>
         </div>
     </div>
@@ -29,19 +29,25 @@
                 <h4 class="panel-title">Contact</h4>
                 <button class="btn btn-default"><i class="fa fa-pencil"></i> Edit</button>
             </div>
-            <div class="panel-body">
-                <div class="static-form-group">
-                    <div class="static-label">Phone</div>
-                    <div>{{vm.mobilePhone.value || "Not recorded."}}</div>
-                </div>
-                <div class="static-form-group">
-                    <div class="static-label">Address</div>
-                    <div><span class="label label-default">Residential</span> {{vm.address.value || "Not recorded."}}</div>
-                </div>
-                <div class="static-form-group">
-                    <div class="static-label">Email</div>
-                    <div>{{vm.emailAddress.emailValue || "Not recorded."}}</div>
-                </div>
+            <div class="panel-body no-padding">
+                <table class="table panel-table">
+                    <tr>
+                        <td class="col-lg-4 table-label top">Mobile</td>
+                        <td class="top">{{vm.mobilePhone.value || "Not recorded."}}</td>
+                    </tr>
+                    <tr>
+                        <td class="col-lg-4 table-label">Home</td>
+                        <td>{{vm.homePhone.value || "Not recorded."}}</td>
+                    </tr>
+                    <tr>
+                        <td class="col-lg-4 table-label">Residential Address</td>
+                        <td>{{vm.address.value || "Not recorded."}}</td>
+                    </tr>
+                    <tr>
+                        <td class="col-lg-4 table-label">Email</td>
+                        <td>{{vm.emailAddress.emailValue || "Not recorded."}}</td>
+                    </tr>
+                </table>
             </div>
         </div>
     </div>

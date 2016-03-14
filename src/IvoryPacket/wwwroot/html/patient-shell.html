@@ -6,13 +6,17 @@
     </nav>
 </div>
 <div id="patientBanner" class="row banner">
-    <span>{{vm.demographicsService.currentPatient.fullName}}</span>
+    <div style="margin-right: 1em;">
+        <div class="name">{{vm.demographicsService.currentPatient.fullName}}</div>
+        <div>
+            <label>Born</label>
+            <span class="content"> {{(vm.demographicsService.currentPatient.dateOfBirth | date: 'dd/MM/yyyy') || '-'}} ({{vm.demographicsService.currentPatient.age}})</span>
+        </div>
+    </div>
 
     <label>Gender</label>
     <span class="content"> {{vm.demographicsService.currentPatient.gender || '-'}}</span>
 
-    <label>Born</label>
-    <span class="content"> {{(vm.demographicsService.currentPatient.dateOfBirth | date: 'dd/MM/yyyy') || '-'}} ({{vm.demographicsService.currentPatient.age}})</span>
     <span class="content" ng-show="vm.demographicsService.age"> ({{vm.demographicsService.age}})</span>
 
     <label>Phone</label>

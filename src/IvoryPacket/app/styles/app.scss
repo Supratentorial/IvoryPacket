@@ -7,6 +7,7 @@
 @import "_panels.scss";
 @import "_banner.scss";
 @import "_calendar.scss";
+@import "_table.scss";
 
 body {
     background: $md-blue-grey-700;
@@ -17,12 +18,7 @@ body {
     color: $md-deep-orange-900 !important;
 }
 
-.static-label {
-    color: $md-grey-500;
-    display: inline;
-    font-weight: 100;
-    margin-right: 0.2em;
-}
+
 
 .static-form-group {
     margin-bottom: 5px;
@@ -30,9 +26,12 @@ body {
 
 .footer {
     position: fixed;
+    display: flex;
+    align-items: center;
+    justify-content: center;
     left: 0px;
     bottom: 0px;
-    height: 50px;
+    height: 60px;
     width: 100%;
     background: $md-blue-grey-900;
 }

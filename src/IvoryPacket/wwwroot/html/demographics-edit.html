@@ -7,45 +7,47 @@
                         <h4 class="panel-title">Basic</h4>
                     </div>
                     <div class="panel-body">
-                        <div class="row">
-                            <div class="form-group col-lg-6">
-                                <label>First Name</label>
-                                <input placeholder="e.g. Harry" ng-model="vm.givenName" class="form-control" />
+                        <form ng-hide="vm.isLoading">
+                            <div class="row">
+                                <div class="form-group col-lg-6">
+                                    <label>First Name</label>
+                                    <input placeholder="e.g. Harry" ng-model="vm.givenName" class="form-control" />
+                                </div>
+                                <div class="form-group col-lg-6">
+                                    <label>Last Name</label>
+                                    <input placeholder="e.g. Potter" ng-model="vm.familyName" class="form-control" />
+                                </div>
                             </div>
-                            <div class="form-group col-lg-6">
-                                <label>Last Name</label>
-                                <input placeholder="e.g. Potter" ng-model="vm.familyName" class="form-control" />
+                            <div class="row">
+                                <div class="form-group col-lg-6">
+                                    <label>Middle Name(s)</label>
+                                    <input placeholder="e.g. James" ng-model="vm.middleNames" class="form-control" />
+                                </div>
+                                <div class="form-group col-lg-6">
+                                    <label>Preferred Name</label>
+                                    <input placeholder="e.g. Hazza" ng-model="vm.preferredName" class="form-control" />
+                                </div>
                             </div>
-                        </div>
-                        <div class="row">
-                            <div class="form-group col-lg-6">
-                                <label>Middle Name(s)</label>
-                                <input placeholder="e.g. James" ng-model="vm.middleNames" class="form-control" />
+                            <div class="row">
+                                <div class="form-group col-lg-4">
+                                    <label>Title</label>
+                                    <select class="form-control" ng-model="vm.title">
+                                        <option ng-repeat="title in vm.titleOptions" value="{{title}}">{{title}}</option>
+                                    </select>
+                                </div>
+                                <div class="form-group col-lg-4">
+                                    <label>Date of Birth</label>
+                                    <input type="date" placeholder="dd/mm/yyyy" ng-model="vm.dateOfBirth" class="form-control">
+                                </div>
+                                <div class="form-group col-lg-4">
+                                    <label>Gender</label>
+                                    <select class="form-control" ng-model="vm.gender">
+                                        <option ng-repeat="gender in vm.genderOptions" value="{{gender}}">{{gender}}</option>
+                                    </select>
+                                </div>
                             </div>
-                            <div class="form-group col-lg-6">
-                                <label>Preferred Name</label>
-                                <input placeholder="e.g. Hazza" ng-model="vm.preferredName" class="form-control" />
-                            </div>
-                        </div>
-                        <div class="row">
-                            <div class="form-group col-lg-4">
-                                <label>Title</label>
-                                <select class="form-control" ng-model="vm.title">
-                                    <option ng-repeat="title in vm.titleOptions" value="{{title}}">{{title}}</option>
-                                </select>
-                            </div>
-                            <div class="form-group col-lg-4">
-                                <label>Date of Birth</label>
-                                <input type="date" placeholder="dd/mm/yyyy" ng-model="vm.dateOfBirth" class="form-control">
-                            </div>
-                            <div class="form-group col-lg-4">
-                                <label>Gender</label>
-                                <select class="form-control" ng-model="vm.gender">
-                                    <option ng-repeat="gender in vm.genderOptions" value="{{gender}}">{{gender}}</option>
-                                </select>
-                            </div>
-
-                        </div>
+                        </form>
+                        <div ng-show="vm.isLoading" style="display: flex; align-content: center; justify-content: center"><i style="color:grey" class="fa fa-2x fa-spinner fa-pulse"></i></div>
                     </div>
                 </div>
             </div>
@@ -97,7 +99,7 @@
                 <div class="row">
                     <div class="form-group col-xs-12 col-lg-4">
                         <label>Mobile phone</label>
-                        <input type="text" class="form-control" placeholder="e.g. 0400 123 123" ng-model="vm.mobilePhone.value"/>
+                        <input type="text" class="form-control" placeholder="e.g. 0400 123 123" ng-model="vm.mobilePhone.value" />
                     </div>
                     <div class="col-lg-6">
                         <div class="form-group">
@@ -163,5 +165,9 @@
     </div>
 </div>
 <div class="footer">
-
+    <button ng-disabled="vm.isLoading" ng-click="vm.savePatient()" class="btn btn-success btn-lg" style="margin-right: 10px">
+        <i ng-hide="vm.isLoading" class="fa fa-save"></i>
+        <i ng-show="vm.isLoading" class="fa fa-pulse fa-spinner"></i> Save
+    </button>
+    <button class="btn btn-default btn-lg"><i class="fa fa-ban"></i> Cancel</button>
 </div>

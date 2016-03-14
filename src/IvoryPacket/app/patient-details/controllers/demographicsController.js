@@ -15,9 +15,10 @@ var patient;
                 this.genderOptions = ["Male", "Female"];
                 this.titleOptions = ["Mr", "Mrs", "Master", "Ms", "Doctor"];
                 this.contactOptions = ["Mobile", "Home", "Work", "Email"];
-                this.isBusy = false;
+                this.isLoading = false;
                 var patientId = this.$state.params["patientId"];
                 if (patientId) {
+                    this.isLoading = true;
                     this.patientManagerService.openPatientById(patientId).then(function (response) {
                         _this.demographicsService.getCurrentPatient();
                         _this.givenName = _this.demographicsService.currentPatient.givenName;
@@ -36,12 +37,14 @@ var patient;
                         else {
                             _this.mobilePhone = _this.phoneNumberService.createNewMobileNumber();
                         }
+                    }).finally(function () {
+                        _this.isLoading = false;
                     });
                 }
             }
             DemographicsController.prototype.savePatient = function () {
                 var _this = this;
-                this.isBusy = true;
+                this.isLoading = true;
                 this.demographicsService.currentPatient.givenName = this.givenName;
                 this.demographicsService.currentPatient.familyName = this.familyName;
                 this.demographicsService.currentPatient.title = this.title;
@@ -55,9 +58,12 @@ var patient;
                 }
                 this.patientManagerService.updateCurrentPatient()
                     .then(function () {
-                    _this.$state.go("patient.detail.demographics.view");
+                    console.log("patient saved successfully");
                 }, function () { console.log("patient failed to save"); })
-                    .finally(function () { _this.isBusy = false; });
+                    .finally(function () {
+                    _this.isLoading = false;
+                    _this.$state.go("patient.detail.demographics.view");
+                });
             };
             DemographicsController.prototype.updatePhoneNumber = function () {
             };

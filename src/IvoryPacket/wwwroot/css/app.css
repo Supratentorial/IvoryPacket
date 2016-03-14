@@ -7944,9 +7944,15 @@ button.close {
     flex-grow: 1;
     font-size: 1.3em; }
 
+.panel .no-padding {
+  padding: 0; }
+
 #patientBanner {
   background: #ffffff;
   margin-bottom: 1em;
+  padding-top: 0.5em;
+  padding-bottom: 0.5em;
+  padding-left: 1em;
   display: flex; }
   #patientBanner label {
     font-size: 1.1em;
@@ -7956,9 +7962,8 @@ button.close {
     margin-right: 0.2em; }
   #patientBanner .content {
     font-size: 1.1em; }
-
-.banner-capitalize {
-  text-transform: capitalize; }
+  #patientBanner .name {
+    font-size: 1.5em; }
 
 .week-container {
   display: flex; }
@@ -7983,6 +7988,15 @@ button.close {
   .time-slot:hover {
     background: #ECEFF1; }
 
+.panel-table {
+  margin-bottom: 0px; }
+  .panel-table .top {
+    border-top: none; }
+
+.table-label {
+  text-align: left;
+  color: #78909C; }
+
 body {
   background: #455A64;
   padding-top: 50px; }
@@ -7990,20 +8004,17 @@ body {
 .active-top-level {
   color: #BF360C !important; }
 
-.static-label {
-  color: #9E9E9E;
-  display: inline;
-  font-weight: 100;
-  margin-right: 0.2em; }
-
 .static-form-group {
   margin-bottom: 5px; }
 
 .footer {
   position: fixed;
+  display: flex;
+  align-items: center;
+  justify-content: center;
   left: 0px;
   bottom: 0px;
-  height: 50px;
+  height: 60px;
   width: 100%;
   background: #263238; }
 

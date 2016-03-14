@@ -1,6 +1,9 @@
 ﻿#patientBanner {
     background: $white;
     margin-bottom: 1em;
+    padding-top: 0.5em;
+    padding-bottom: 0.5em;
+    padding-left: 1em;
     display: flex;
 
     label {
@@ -14,8 +17,8 @@
     .content {
         font-size: $font-size-medium;
     }
-}
 
-.banner-capitalize {
-    text-transform: capitalize;
+    .name {
+        font-size: 1.5em;
+    }
 }

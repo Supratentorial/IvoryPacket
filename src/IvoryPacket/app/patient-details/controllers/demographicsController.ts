@@ -5,7 +5,7 @@
         genderOptions: string[] = ["Male", "Female"];
         titleOptions: string[] = ["Mr", "Mrs", "Master", "Ms", "Doctor"];
         contactOptions: string[] = ["Mobile", "Home", "Work", "Email"];
-        isBusy: boolean = false;
+        isLoading: boolean = false;
         title: string;
         givenName: string;
         middleNames: string;
@@ -29,6 +29,7 @@
 
             var patientId: number = this.$state.params["patientId"];
             if (patientId) {
+                this.isLoading = true;
                 this.patientManagerService.openPatientById(patientId).then(
                     (response) => {
                         this.demographicsService.getCurrentPatient();
@@ -48,12 +49,14 @@
                         else {
                             this.mobilePhone = this.phoneNumberService.createNewMobileNumber();
                         }
+                    }).finally(() => {
+                        this.isLoading = false;
                     });
             }
         }
 
         savePatient(): void {
-            this.isBusy = true;
+            this.isLoading = true;
             this.demographicsService.currentPatient.givenName = this.givenName;
             this.demographicsService.currentPatient.familyName = this.familyName;
             this.demographicsService.currentPatient.title = this.title;
@@ -68,11 +71,14 @@
             this.patientManagerService.updateCurrentPatient()
                 .then(
                 () => {
-                    this.$state.go("patient.detail.demographics.view");
+                    console.log("patient saved successfully");
                 },
                 () => { console.log("patient failed to save") })
                 .finally(
-                () => { this.isBusy = false; })
+                () => {
+                    this.isLoading = false;
+                    this.$state.go("patient.detail.demographics.view");
+                })
         }
 
         updatePhoneNumber() {
