@@ -8,12 +8,15 @@ var patient;
                 this.patientManagerService = patientManagerService;
                 this.$state = $state;
                 this.demographicsService = demographicsService;
-                this.isBusy = false;
+                this.isLoading = false;
                 var patientId = this.$state.params["patientId"];
                 if (patientId != 0) {
+                    this.isLoading = true;
                     this.patientManagerService.openPatientById(patientId).then(function (result) {
                         _this.patientManagerService.setCurrentPatientById(patientId);
                         _this.demographicsService.getCurrentPatient();
+                    }).finally(function () {
+                        _this.isLoading = false;
                     });
                 }
             }

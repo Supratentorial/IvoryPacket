@@ -8,6 +8,7 @@
 @import "_banner.scss";
 @import "_calendar.scss";
 @import "_table.scss";
+@import "_loaders.scss";
 
 body {
     background: $md-blue-grey-700;
@@ -16,12 +17,6 @@ body {
 
 .active-top-level {
     color: $md-deep-orange-900 !important;
-}
-
-
-
-.static-form-group {
-    margin-bottom: 5px;
 }
 
 .footer {

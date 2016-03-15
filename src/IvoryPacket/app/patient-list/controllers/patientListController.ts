@@ -1,9 +1,13 @@
 ﻿module patient.controllers {
     "use strict"
     export class PatientListController {
+        isLoading: boolean = false;
         static $inject = ["PatientListService", "PatientManagerService", "$uibModal"];
         constructor(private patientListService: interfaces.services.patientListService, private patientManagerService: interfaces.services.patientManagerService, private $uibModal: angular.ui.bootstrap.IModalService) {
-            this.patientListService.getAllPatients();
+            this.isLoading = true;
+            this.patientListService.getAllPatients().then().finally(() => {
+                this.isLoading = false;
+            });
         }
 
         createPatient() {

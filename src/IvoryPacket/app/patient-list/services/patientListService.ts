@@ -10,9 +10,9 @@
 
         }
 
-        getAllPatients() : any {
-            this.$http.get("api/patients").then((result) => {
-                return angular.copy(result.data, this.patientsWithAppointmentToday);
+        getAllPatients(): angular.IPromise<any> {
+            return this.$http.get("api/patients").then((result) => {
+                angular.copy(result.data, this.patientsWithAppointmentToday);
             });
         }
 

@@ -5,10 +5,15 @@ var patient;
         "use strict";
         var PatientListController = (function () {
             function PatientListController(patientListService, patientManagerService, $uibModal) {
+                var _this = this;
                 this.patientListService = patientListService;
                 this.patientManagerService = patientManagerService;
                 this.$uibModal = $uibModal;
-                this.patientListService.getAllPatients();
+                this.isLoading = false;
+                this.isLoading = true;
+                this.patientListService.getAllPatients().then().finally(function () {
+                    _this.isLoading = false;
+                });
             }
             PatientListController.prototype.createPatient = function () {
                 this.$uibModal.open({

@@ -5832,7 +5832,7 @@ button.close {
 
 .fa {
   display: inline-block;
-  font: normal normal normal 14px/1 FontAwesome;
+  font: normal normal normal 14px / 1 FontAwesome;
   font-size: inherit;
   text-rendering: auto;
   -webkit-font-smoothing: antialiased;
@@ -7997,15 +7997,21 @@ button.close {
   text-align: left;
   color: #78909C; }
 
+.loader-container {
+  display: flex;
+  align-content: center;
+  justify-content: center;
+  margin: 1em; }
+
+.loader {
+  color: #B0BEC5; }
+
 body {
   background: #455A64;
   padding-top: 50px; }
 
 .active-top-level {
   color: #BF360C !important; }
-
-.static-form-group {
-  margin-bottom: 5px; }
 
 .footer {
   position: fixed;

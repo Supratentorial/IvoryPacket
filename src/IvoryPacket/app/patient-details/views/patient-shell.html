@@ -11,17 +11,17 @@
         <div>
             <label>Born</label>
             <span class="content"> {{(vm.demographicsService.currentPatient.dateOfBirth | date: 'dd/MM/yyyy') || '-'}} ({{vm.demographicsService.currentPatient.age}})</span>
+            <label>Gender</label>
+            <span class="content"> {{vm.demographicsService.currentPatient.gender || 'Not recorded.'}}</span>
         </div>
     </div>
+    <div>
 
-    <label>Gender</label>
-    <span class="content"> {{vm.demographicsService.currentPatient.gender || '-'}}</span>
-
-    <span class="content" ng-show="vm.demographicsService.age"> ({{vm.demographicsService.age}})</span>
-
-    <label>Phone</label>
-    <span class="content">{{vm.mobilePhone.value || 'Not recorded.'}}</span>
-
+    </div>
+    <div>
+        <label>Phone</label>
+        <span class="content">{{vm.mobilePhone.value || 'Not recorded.'}}</span>
+    </div>
     <label>Address</label>
     <span class="content">{{vm.addressService.currentPatient.address || 'Not recorded.'}}</span>
 
@@ -33,12 +33,13 @@
         <div class="list-group">
             <a class="list-group-item" ui-sref-active="active" ui-sref="patient.detail.encounters.view">Encounters</a>
             <a class="list-group-item" ui-sref-active="active" ui-sref="patient.detail.investigations.view">Investigations</a>
+            <a class="list-group-item" ui-sref-active="active" ui-sref="patient.detail.scripts.view">Scripts</a>
             <a class="list-group-item" ui-sref-active="active" ui-sref="patient.detail.documents.view">Documents</a>
             <a class="list-group-item" ui-sref-active="active" ui-sref="patient.detail.medicalhistory.view">Medical History</a>
             <a class="list-group-item" ui-sref-active="active" ui-sref="patient.detail.socialhistory.view">Social & Family History</a>
             <a class="list-group-item" ui-sref-active="active" ui-sref="patient.detail.demographics.view">Demographics</a>
             <a class="list-group-item" ui-sref-active="active" ui-sref="patient.detail.allergies.view">Allergies & Intolerances</a>
-            <a class="list-group-item" ui-sref-active="active" ui-sref="patient.detail.immunisations.view">Immunisations</a>
+            <a class="list-group-item" ui-sref-active="active" ui-sref="patient.detail.immunisations.view"><i></i>Immunisations</a>
         </div>
     </div>
     <div ui-view class="col-lg-10"></div>

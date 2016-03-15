@@ -6,7 +6,10 @@
                 <button class="btn btn-default" ui-sref="patient.detail.demographics.edit"><i class="fa fa-pencil"></i> Edit</button>
             </div>
             <div class="panel-body no-padding">
-                <table class="table panel-table">
+                <div ng-show="vm.isLoading" class="loader-container">
+                    <i class="fa fa-spinner fa-pulse loader fa-2x"></i>
+                </div>
+                <table ng-hide="vm.isLoading" class="table panel-table">
                     <tr>
                         <td class="table-label top">Full name</td>
                         <td class="top">{{vm.demographicsService.currentPatient.fullName}}</td>
@@ -27,10 +30,13 @@
         <div class="panel panel-default">
             <div class="panel-heading"> 
                 <h4 class="panel-title">Contact</h4>
-                <button class="btn btn-default"><i class="fa fa-pencil"></i> Edit</button>
+                <button class="btn btn-default" ui-sref="patient.detail.demographics.edit"><i class="fa fa-pencil"></i> Edit</button>
             </div>
             <div class="panel-body no-padding">
-                <table class="table panel-table">
+                <div ng-show="vm.isLoading" class="loader-container">
+                    <i class="fa fa-spinner fa-pulse loader fa-2x"></i>
+                </div>
+                <table ng-hide="vm.isLoading" class="table panel-table">
                     <tr>
                         <td class="col-lg-4 table-label top">Mobile</td>
                         <td class="top">{{vm.mobilePhone.value || "Not recorded."}}</td>
