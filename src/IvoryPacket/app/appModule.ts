@@ -105,6 +105,10 @@ module app {
                     url: "/edit",
                     templateUrl: "html/encounters-edit.html"
                 })
+                .state("patient.detail.vitals.view", <angular.ui.IState>{
+                    url: "/vitals",
+                    templateUrl: ""
+                })
                 .state("patient.detail.documents", <angular.ui.IState>{
                     url: "/documents",
                     abstract: true,

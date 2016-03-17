@@ -5,9 +5,9 @@ using System.Threading.Tasks;
 
 namespace IvoryPacket.Models
 {
-    public class Observation
+    public class SmokingObservation
     {
-        public int ObservationId { get; set; }
-
+        public int SmokingObservationId { get; set; }
+        public string SmokingStatus { get; set; }
     }
 }

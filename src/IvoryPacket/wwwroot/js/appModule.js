@@ -104,6 +104,10 @@ var app;
             url: "/edit",
             templateUrl: "html/encounters-edit.html"
         })
+            .state("patient.detail.vitals.view", {
+            url: "/vitals",
+            templateUrl: ""
+        })
             .state("patient.detail.documents", {
             url: "/documents",
             abstract: true,

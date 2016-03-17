@@ -8006,6 +8006,9 @@ button.close {
 .loader {
   color: #B0BEC5; }
 
+.save-btn {
+  margin-right: 10px; }
+
 body {
   background: #455A64;
   padding-top: 50px; }

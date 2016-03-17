@@ -10,7 +10,7 @@
         <div class="name">{{vm.demographicsService.currentPatient.fullName}}</div>
         <div>
             <label>Born</label>
-            <span class="content"> {{(vm.demographicsService.currentPatient.dateOfBirth | date: 'dd/MM/yyyy') || '-'}} ({{vm.demographicsService.currentPatient.age}})</span>
+            <a class="content" ui-sref="patient.detail.demographics.edit"> {{(vm.demographicsService.currentPatient.dateOfBirth | date: 'dd/MM/yyyy') || '-'}} ({{vm.demographicsService.currentPatient.age}})</a>
             <label>Gender</label>
             <span class="content"> {{vm.demographicsService.currentPatient.gender || 'Not recorded.'}}</span>
         </div>
