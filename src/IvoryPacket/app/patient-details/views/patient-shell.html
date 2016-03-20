@@ -1,7 +1,7 @@
 ﻿<div class="row">
     <nav>
         <ul class="nav nav-tabs">
-            <li ui-sref-active="active" role="presentation" ng-repeat="patient in vm.patientManagerService.openPatients"><a ui-sref="patient.detail.demographics.view({patientId : {{patient.patientId}}})">{{patient.fullName}}</a></li>
+            <li ui-sref-active="active" role="presentation" ng-repeat="patient in vm.patientManagerService.openPatients"><a ui-sref="patient.detail({patientId : {{patient.patientId}}})">{{patient.fullName}}</a></li>
         </ul>
     </nav>
 </div>
@@ -10,7 +10,7 @@
         <div class="name">{{vm.demographicsService.currentPatient.fullName}}</div>
         <div>
             <label>Born</label>
-            <a class="content" ui-sref="patient.detail.demographics.edit"> {{(vm.demographicsService.currentPatient.dateOfBirth | date: 'dd/MM/yyyy') || '-'}} ({{vm.demographicsService.currentPatient.age}})</a>
+            <a class="content" ui-sref="patient.detail.demographics-edit"> {{(vm.demographicsService.currentPatient.dateOfBirth | date: 'dd/MM/yyyy') || '-'}} ({{vm.demographicsService.currentPatient.age}})</a>
             <label>Gender</label>
             <span class="content"> {{vm.demographicsService.currentPatient.gender || 'Not recorded.'}}</span>
         </div>
@@ -31,15 +31,17 @@
 <div class="row">
     <div class="col-lg-2">
         <div class="list-group">
-            <a class="list-group-item" ui-sref-active="active" ui-sref="patient.detail.encounters.view">Encounters</a>
-            <a class="list-group-item" ui-sref-active="active" ui-sref="patient.detail.investigations.view">Investigations</a>
-            <a class="list-group-item" ui-sref-active="active" ui-sref="patient.detail.scripts.view">Scripts</a>
-            <a class="list-group-item" ui-sref-active="active" ui-sref="patient.detail.documents.view">Documents</a>
-            <a class="list-group-item" ui-sref-active="active" ui-sref="patient.detail.medicalhistory.view">Medical History</a>
-            <a class="list-group-item" ui-sref-active="active" ui-sref="patient.detail.socialhistory.view">Social & Family History</a>
-            <a class="list-group-item" ui-sref-active="active" ui-sref="patient.detail.demographics.view">Demographics</a>
-            <a class="list-group-item" ui-sref-active="active" ui-sref="patient.detail.allergies.view">Allergies & Intolerances</a>
-            <a class="list-group-item" ui-sref-active="active" ui-sref="patient.detail.immunisations.view"><i></i>Immunisations</a>
+            <a class="list-group-item" ui-sref-active="active" ui-sref="patient.detail.summary">Summary</a>
+            <a class="list-group-item" ui-sref-active="active" ui-sref="patient.detail.encounters-view">Encounters</a>
+            <a class="list-group-item" ui-sref-active="active" ui-sref="patient.detail.investigations-view">Investigations</a>
+            <a class="list-group-item" ui-sref-active="active" ui-sref="patient.detail.scripts-view">Scripts</a>
+            <a class="list-group-item" ui-sref-active="active" ui-sref="patient.detail.vitals-view">Vitals</a>
+            <a class="list-group-item" ui-sref-active="active" ui-sref="patient.detail.documents-view">Documents</a>
+            <a class="list-group-item" ui-sref-active="active" ui-sref="patient.detail.medicalhistory-view">Medical History</a>
+            <a class="list-group-item" ui-sref-active="active" ui-sref="patient.detail.socialhistory-view">Social & Family History</a>
+            <a class="list-group-item" ui-sref-active="active" ui-sref="patient.detail.demographics-view">Demographics</a>
+            <a class="list-group-item" ui-sref-active="active" ui-sref="patient.detail.allergies-view">Allergies & Intolerances</a>
+            <a class="list-group-item" ui-sref-active="active" ui-sref="patient.detail.immunisations-view"><i></i>Immunisations</a>
         </div>
     </div>
     <div ui-view class="col-lg-10"></div>

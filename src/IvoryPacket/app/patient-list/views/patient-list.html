@@ -15,7 +15,7 @@
                 <div ng-show="vm.isLoading" class="loader-container">
                     <i class="fa fa-spinner fa-pulse loader fa-2x"></i>
                 </div>
-                <div ng-hide="vm.isLoading" class="patient-list-item" ng-repeat="patient in vm.patientListService.patientsWithAppointmentToday" ui-sref="patient.detail.demographics.view({patientId: (patient.patientId)})">
+                <div ng-hide="vm.isLoading" class="patient-list-item" ng-repeat="patient in vm.patientListService.patientsWithAppointmentToday" ui-sref="patient.detail.demographics-view({patientId: (patient.patientId)})">
                     <div>
                         <span class="list-item-name">{{patient.fullName}}</span>
                     </div>

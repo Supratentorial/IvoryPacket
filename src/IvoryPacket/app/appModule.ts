@@ -5,7 +5,9 @@ module app {
     angular.module("app", ["ui.router", "ui.bootstrap", "patient", "appointment", "utilities", "angularMoment", "smart-table"])
         .config(($stateProvider: angular.ui.IStateProvider, $urlRouterProvider: angular.ui.IUrlRouterProvider, $locationProvider: angular.ILocationProvider, $httpProvider: angular.IHttpProvider) => {
             $urlRouterProvider.when("/", "/dashboard");
-            $urlRouterProvider.when("patients/detail/{patientId:int}/demographics", "patients/detail/{patientId:int}/demographics/view");
+            $urlRouterProvider.when("/patients", "/patients/list");
+            $urlRouterProvider.when("/patients/detail/{patientId:int}", "/patients/detail/{patientId:int}/summary");
+            $urlRouterProvider.when("/patients/detail/{patientId:int}/demographics", "patients/detail/{patientId:int}/demographics/view");
             $stateProvider
                 .state("dashboard", <angular.ui.IState>{
                     url: "/dashboard",
@@ -43,8 +45,7 @@ module app {
                 })
                 .state("patient", <angular.ui.IState>{
                     url: "/patients",
-                    template: "<ui-view/>",
-                    abstract: true
+                    template: "<ui-view/>"
                 })
                 .state("patient.list", <angular.ui.IState>{
                     url: "/list",
@@ -63,117 +64,88 @@ module app {
                     templateUrl: "html/patient-summary.html",
                     controller: "PatientSummaryController as vm"
                 })
-                .state("patient.detail.socialhistory", <angular.ui.IState>{
-                    url: "/social-history",
-                    abstract: true,
-                    template: "<ui-view/>"
-                })
-                .state("patient.detail.socialhistory.view", <angular.ui.IState>{
+                .state("patient.detail.socialhistory-view", <angular.ui.IState>{
                     url: "/view",
-                    templateUrl: "html/social-history-view.html"
+                    templateUrl: "html/social-history-view.html",
                 })
-                .state("patient.detail.socialhistory.smoking", <angular.ui.IState>{
+                .state("patient.detail.socialhistory-substances-edit", <angular.ui.IState>{
                     url: "/edit-smoking",
                     templateUrl: "html/smoking-history-edit.html"
                 })
-                .state("patient.detail.demographics", <angular.ui.IState>{
-                    url: "/demographics",
-                    abstract: true,
-                    template: "<ui-view/>"
-                })
-                .state("patient.detail.demographics.edit", <angular.ui.IState>{
-                    url: "/edit",
+                .state("patient.detail.demographics-edit", <angular.ui.IState>{
+                    url: "/demographics/edit",
                     templateUrl: "html/demographics-edit.html",
                     controller: "DemographicsController as vm"
                 })
-                .state("patient.detail.demographics.view", <angular.ui.IState>{
-                    url: "",
+                .state("patient.detail.demographics-view", <angular.ui.IState>{
+                    url: "/demographics/view",
                     templateUrl: "html/demographics-view.html",
                     controller: "DemographicsController as vm"
-
                 })
-                .state("patient.detail.encounters", <angular.ui.IState>{
-                    url: "/encounters",
-                    abstract: true,
-                    template: "<ui-view/>"
-                })
-                .state("patient.detail.encounters.view", <angular.ui.IState>{
-                    url: "/view",
+                .state("patient.detail.encounters-view", <angular.ui.IState>{
+                    url: "/encounters/view",
                     templateUrl: "html/encounters-view.html"
                 })
-                .state("patient.detail.encounters.edit", <angular.ui.IState>{
-                    url: "/edit",
+                .state("patient.detail.encounters-edit", <angular.ui.IState>{
+                    url: "/encounters/edit",
                     templateUrl: "html/encounters-edit.html"
                 })
-                .state("patient.detail.vitals.view", <angular.ui.IState>{
-                    url: "/vitals",
-                    templateUrl: ""
+                .state("patient.detail.scripts-view", <angular.ui.IState>{
+                    url: "/scripts/view",
+                    templateUrl: "html/scripts-view.html"
                 })
-                .state("patient.detail.documents", <angular.ui.IState>{
-                    url: "/documents",
-                    abstract: true,
-                    template: "<ui-view/>"
+                .state("patient.detail.scripts-edit", <angular.ui.IState>{
+                    url: "scripts/edit",
+                    templateUrl: "html/scripts-edit.html"
                 })
-                .state("patient.detail.documents.view", <angular.ui.IState>{
-                    url: "/view",
+                .state("patient.detail.vitals-view", <angular.ui.IState>{
+                    url: "/vitals/view",
+                    templateUrl: "html/vitals-view.html"
+                })
+                .state("patient.detail.vitals-edit", <angular.ui.IState>{
+                    url: "/vitals/edit",
+                    templateUrl: "html/vitals-edit.html"
+               })
+                .state("patient.detail.documents-view", <angular.ui.IState>{
+                    url: "documents/view",
                     templateUrl: "html/documents-view.html"
                 })
-                .state("patient.detail.documents.edit", <angular.ui.IState>{
-                    url: "/edit",
+                .state("patient.detail.documents-edit", <angular.ui.IState>{
+                    url: "documents/edit",
                     templateUrl: "html/documents-edit.html"
                 })
-                .state("patient.detail.investigations", <angular.ui.IState>{
-                    url: "/investigations",
-                    abstract: true,
-                    template: "<ui-view/>"
-                })
-                .state("patient.detail.investigations.view", <angular.ui.IState>{
-                    url: "/view",
+                .state("patient.detail.investigations-view", <angular.ui.IState>{
+                    url: "investigations/view",
                     templateUrl: "html/investigations-view.html"
                 })
-                .state("patient.detail.investigations.edit", <angular.ui.IState>{
-                    url: "/edit",
+                .state("patient.detail.investigations-edit", <angular.ui.IState>{
+                    url: "investigations/edit",
                     templateUrl: "html/investigations-edit.html"
                 })
-                .state("patient.detail.allergies", <angular.ui.IState>{
-                    url: "/allergies",
-                    abstract: true,
-                    template: "<ui-view/>"
-                })
-                .state("patient.detail.allergies.view", <angular.ui.IState>{
-                    url: "/view",
+                .state("patient.detail.allergies-view", <angular.ui.IState>{
+                    url: "allergies/view",
                     templateUrl: "html/allergies-view.html",
                     controller: "AllergiesListController as vm"
                 })
-                .state("patient.detail.allergies.edit", <angular.ui.IState>{
-                    url: "{allergyId:int}/edit",
+                .state("patient.detail.allergies-edit", <angular.ui.IState>{
+                    url: "allergies/{allergyId:int}/edit",
                     templateUrl: "html/allergies-edit.html",
                     controller: "AllergyDetailsController as vm"
                 })
-                .state("patient.detail.immunisations", <angular.ui.IState>{
-                    url: "/immunisations",
-                    abstract: true,
-                    template: "<ui-view/>"
-                })
-                .state("patient.detail.immunisations.view", <angular.ui.IState>{
-                    url: "/view",
+                .state("patient.detail.immunisations-view", <angular.ui.IState>{
+                    url: "/immunisations/view",
                     templateUrl: "html/immunisations-view.html"
                 })
-                .state("patient.detail.immunisations.edit", <angular.ui.IState>{
-                    url: "/edit",
+                .state("patient.detail.immunisations-edit", <angular.ui.IState>{
+                    url: "/immunisations/edit",
                     templateUrl: "html/immunisations-edit.html"
                 })
-                .state("patient.detail.medicalhistory", <angular.ui.IState>{
-                    url: "/medical-history",
-                    template: "<ui-view/>",
-                    abstract: true
-                })
-                .state("patient.detail.medicalhistory.view", <angular.ui.IState>{
-                    url: "/view",
+                .state("patient.detail.medicalhistory-view", <angular.ui.IState>{
+                    url: "/medical-history/view",
                     templateUrl: "html/medical-history-view.html"
                 })
                 .state("patient.detail.medicalhistory.edit", <angular.ui.IState>{
-                    url: "/edit",
+                    url: "/medical-history/edit",
                     templateUrl: "html/medical-history-edit.html"
                 })
 

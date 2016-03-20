@@ -5,7 +5,9 @@ var app;
     angular.module("app", ["ui.router", "ui.bootstrap", "patient", "appointment", "utilities", "angularMoment", "smart-table"])
         .config(function ($stateProvider, $urlRouterProvider, $locationProvider, $httpProvider) {
         $urlRouterProvider.when("/", "/dashboard");
-        $urlRouterProvider.when("patients/detail/{patientId:int}/demographics", "patients/detail/{patientId:int}/demographics/view");
+        $urlRouterProvider.when("/patients", "/patients/list");
+        $urlRouterProvider.when("/patients/detail/{patientId:int}", "/patients/detail/{patientId:int}/summary");
+        $urlRouterProvider.when("/patients/detail/{patientId:int}/demographics", "patients/detail/{patientId:int}/demographics/view");
         $stateProvider
             .state("dashboard", {
             url: "/dashboard",
@@ -43,8 +45,7 @@ var app;
         })
             .state("patient", {
             url: "/patients",
-            template: "<ui-view/>",
-            abstract: true
+            template: "<ui-view/>"
         })
             .state("patient.list", {
             url: "/list",
@@ -63,116 +64,88 @@ var app;
             templateUrl: "html/patient-summary.html",
             controller: "PatientSummaryController as vm"
         })
-            .state("patient.detail.socialhistory", {
-            url: "/social-history",
-            abstract: true,
-            template: "<ui-view/>"
-        })
-            .state("patient.detail.socialhistory.view", {
+            .state("patient.detail.socialhistory-view", {
             url: "/view",
-            templateUrl: "html/social-history-view.html"
+            templateUrl: "html/social-history-view.html",
         })
-            .state("patient.detail.socialhistory.smoking", {
+            .state("patient.detail.socialhistory-substances-edit", {
             url: "/edit-smoking",
             templateUrl: "html/smoking-history-edit.html"
         })
-            .state("patient.detail.demographics", {
-            url: "/demographics",
-            abstract: true,
-            template: "<ui-view/>"
-        })
-            .state("patient.detail.demographics.edit", {
-            url: "/edit",
+            .state("patient.detail.demographics-edit", {
+            url: "/demographics/edit",
             templateUrl: "html/demographics-edit.html",
             controller: "DemographicsController as vm"
         })
-            .state("patient.detail.demographics.view", {
-            url: "",
+            .state("patient.detail.demographics-view", {
+            url: "/demographics/view",
             templateUrl: "html/demographics-view.html",
             controller: "DemographicsController as vm"
         })
-            .state("patient.detail.encounters", {
-            url: "/encounters",
-            abstract: true,
-            template: "<ui-view/>"
-        })
-            .state("patient.detail.encounters.view", {
-            url: "/view",
+            .state("patient.detail.encounters-view", {
+            url: "/encounters/view",
             templateUrl: "html/encounters-view.html"
         })
-            .state("patient.detail.encounters.edit", {
-            url: "/edit",
+            .state("patient.detail.encounters-edit", {
+            url: "/encounters/edit",
             templateUrl: "html/encounters-edit.html"
         })
-            .state("patient.detail.vitals.view", {
-            url: "/vitals",
-            templateUrl: ""
+            .state("patient.detail.scripts-view", {
+            url: "/scripts/view",
+            templateUrl: "html/scripts-view.html"
         })
-            .state("patient.detail.documents", {
-            url: "/documents",
-            abstract: true,
-            template: "<ui-view/>"
+            .state("patient.detail.scripts-edit", {
+            url: "scripts/edit",
+            templateUrl: "html/scripts-edit.html"
         })
-            .state("patient.detail.documents.view", {
-            url: "/view",
+            .state("patient.detail.vitals-view", {
+            url: "/vitals/view",
+            templateUrl: "html/vitals-view.html"
+        })
+            .state("patient.detail.vitals-edit", {
+            url: "/vitals/edit",
+            templateUrl: "html/vitals-edit.html"
+        })
+            .state("patient.detail.documents-view", {
+            url: "documents/view",
             templateUrl: "html/documents-view.html"
         })
-            .state("patient.detail.documents.edit", {
-            url: "/edit",
+            .state("patient.detail.documents-edit", {
+            url: "documents/edit",
             templateUrl: "html/documents-edit.html"
         })
-            .state("patient.detail.investigations", {
-            url: "/investigations",
-            abstract: true,
-            template: "<ui-view/>"
-        })
-            .state("patient.detail.investigations.view", {
-            url: "/view",
+            .state("patient.detail.investigations-view", {
+            url: "investigations/view",
             templateUrl: "html/investigations-view.html"
         })
-            .state("patient.detail.investigations.edit", {
-            url: "/edit",
+            .state("patient.detail.investigations-edit", {
+            url: "investigations/edit",
             templateUrl: "html/investigations-edit.html"
         })
-            .state("patient.detail.allergies", {
-            url: "/allergies",
-            abstract: true,
-            template: "<ui-view/>"
-        })
-            .state("patient.detail.allergies.view", {
-            url: "/view",
+            .state("patient.detail.allergies-view", {
+            url: "allergies/view",
             templateUrl: "html/allergies-view.html",
             controller: "AllergiesListController as vm"
         })
-            .state("patient.detail.allergies.edit", {
-            url: "{allergyId:int}/edit",
+            .state("patient.detail.allergies-edit", {
+            url: "allergies/{allergyId:int}/edit",
             templateUrl: "html/allergies-edit.html",
             controller: "AllergyDetailsController as vm"
         })
-            .state("patient.detail.immunisations", {
-            url: "/immunisations",
-            abstract: true,
-            template: "<ui-view/>"
-        })
-            .state("patient.detail.immunisations.view", {
-            url: "/view",
+            .state("patient.detail.immunisations-view", {
+            url: "/immunisations/view",
             templateUrl: "html/immunisations-view.html"
         })
-            .state("patient.detail.immunisations.edit", {
-            url: "/edit",
+            .state("patient.detail.immunisations-edit", {
+            url: "/immunisations/edit",
             templateUrl: "html/immunisations-edit.html"
         })
-            .state("patient.detail.medicalhistory", {
-            url: "/medical-history",
-            template: "<ui-view/>",
-            abstract: true
-        })
-            .state("patient.detail.medicalhistory.view", {
-            url: "/view",
+            .state("patient.detail.medicalhistory-view", {
+            url: "/medical-history/view",
             templateUrl: "html/medical-history-view.html"
         })
             .state("patient.detail.medicalhistory.edit", {
-            url: "/edit",
+            url: "/medical-history/edit",
             templateUrl: "html/medical-history-edit.html"
         });
         $locationProvider.html5Mode(true);
