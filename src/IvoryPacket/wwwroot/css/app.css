@@ -7959,7 +7959,8 @@ button.close {
     color: #9E9E9E;
     display: inline;
     font-weight: 100;
-    margin-right: 0.2em; }
+    margin-right: 0.2em;
+    line-height: 30px; }
   #patientBanner .content {
     font-size: 1.1em; }
   #patientBanner .name {
@@ -8039,3 +8040,8 @@ body {
   .patient-list-item:hover {
     background: #ECEFF1;
     border-left: solid 0.25em #D84315; }
+
+.vertical-divider {
+  margin-right: 0.75em;
+  margin-left: 0.75em;
+  border-right: solid 1px #CFD8DC; }

@@ -10,6 +10,7 @@ namespace IvoryPacket.DTOs
         public string FullName { get; set; }
         public string GivenName { get; set; }
         public string FamilyName { get; set; }
+        public string MiddleNames { get; set; }
         public string Title { get; set; }
         public string PreferredName { get; set; }
         public string Gender { get; set; }
@@ -23,10 +24,25 @@ namespace IvoryPacket.DTOs
         public DateTimeOffset? MedicareCardExpiry { get; set; }
         public int? MedicareCardPosition { get; set; }
 
-        public virtual ICollection<PhoneNumber> PhoneNumbers { get; set; }
-        public virtual EmailAddress EmailAddress { get; set; }
-        public virtual ICollection<Address> Addresses { get; set; }
-        public virtual ICollection<Allergy> Allergies { get; set; }
+        public int MobilePhoneId { get; set; }
+        public string MobileNumber { get; set; }
+        public int HomePhoneId { get; set; }
+        public string HomePhoneCountryCode { get; set; }
+        public string HomePhoneAreaCode { get; set; }
+        public string HomePhoneNumber { get; set; }
+        public int WorkPhoneId { get; set; }
+        public string WorkPhoneCountryCode { get; set; }
+        public string WorkPhoneAreaCode { get; set; }
+        public string WorkPhoneNumber { get; set; }
+        public string PreferredContact { get; set; }
 
+        public virtual EmailAddress EmailAddress { get; set; }
+
+        public int ResidentialAddressId { get; set; }
+        public string ResidentialAddressNumber { get; set; }
+        public string ResidentialAddressStreet { get; set; }
+        public string ResidentialAddressState { get; set; }
+        public string ResidentialAddressSuburb { get; set; }
+        public string ResidentialAddressPostalCode { get; set; }
     }
 }

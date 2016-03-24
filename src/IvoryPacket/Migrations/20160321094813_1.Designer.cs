@@ -8,7 +8,7 @@ using IvoryPacket.Models;
 namespace IvoryPacket.Migrations
 {
     [DbContext(typeof(IvoryPacketDbContext))]
-    [Migration("20160127072005_1")]
+    [Migration("20160321094813_1")]
     partial class _1
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -92,7 +92,7 @@ namespace IvoryPacket.Migrations
                     b.Property<int>("PatientId")
                         .ValueGeneratedOnAdd();
 
-                    b.Property<DateTime?>("DateOfBirth")
+                    b.Property<DateTime>("DateOfBirth")
                         .HasAnnotation("Relational:ColumnType", "Date");
 
                     b.Property<string>("Ethnicity");

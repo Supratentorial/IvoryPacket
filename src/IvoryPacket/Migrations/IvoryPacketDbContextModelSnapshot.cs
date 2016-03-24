@@ -91,7 +91,7 @@ namespace IvoryPacket.Migrations
                     b.Property<int>("PatientId")
                         .ValueGeneratedOnAdd();
 
-                    b.Property<DateTime?>("DateOfBirth")
+                    b.Property<DateTime>("DateOfBirth")
                         .HasAnnotation("Relational:ColumnType", "Date");
 
                     b.Property<string>("Ethnicity");

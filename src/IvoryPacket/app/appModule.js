@@ -2,7 +2,7 @@
 /// <reference path="../typings/angularjs/angular.d.ts" />
 var app;
 (function (app) {
-    angular.module("app", ["ui.router", "ui.bootstrap", "patient", "appointment", "utilities", "angularMoment", "smart-table"])
+    angular.module("app", ["ui.router", "ui.bootstrap", "patient", "appointment", "utilities", "angularMoment", "chart.js"])
         .config(function ($stateProvider, $urlRouterProvider, $locationProvider, $httpProvider) {
         $urlRouterProvider.when("/", "/dashboard");
         $urlRouterProvider.when("/patients", "/patients/list");
@@ -64,13 +64,22 @@ var app;
             templateUrl: "html/patient-summary.html",
             controller: "PatientSummaryController as vm"
         })
-            .state("patient.detail.socialhistory-view", {
-            url: "/view",
+            .state("patient.detail.social-history-view", {
+            url: "/social-history/view",
             templateUrl: "html/social-history-view.html",
         })
-            .state("patient.detail.socialhistory-substances-edit", {
-            url: "/edit-smoking",
-            templateUrl: "html/smoking-history-edit.html"
+            .state("patient.detail.social-history-edit", {
+            url: "/social-history/edit",
+            templateUrl: "html/social-history-edit.html"
+        })
+            .state("patient.detail.substance-use-edit", {
+            url: "/social-history/substance-use/edit",
+            templateUrl: "html/substance-use-edit.html",
+            controller: "SubstanceUseController as vm"
+        })
+            .state("patient.detail.family-history-edit", {
+            url: "/social-history/family-history/edit",
+            templateUrl: "html/family-history-edit.html"
         })
             .state("patient.detail.demographics-edit", {
             url: "/demographics/edit",
@@ -100,11 +109,13 @@ var app;
         })
             .state("patient.detail.vitals-view", {
             url: "/vitals/view",
-            templateUrl: "html/vitals-view.html"
+            templateUrl: "html/vitals-view.html",
+            controller: "VitalsController as vm"
         })
             .state("patient.detail.vitals-edit", {
             url: "/vitals/edit",
-            templateUrl: "html/vitals-edit.html"
+            templateUrl: "html/vitals-edit.html",
+            controller: "VitalsController as vm"
         })
             .state("patient.detail.documents-view", {
             url: "documents/view",

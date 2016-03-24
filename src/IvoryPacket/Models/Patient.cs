@@ -34,12 +34,17 @@ namespace IvoryPacket.Models
         }
 
         public string GetFullNameWithTitle() {
-            return Title + " " + GivenName + " " + FamilyName;
+            return GivenName + " " + FamilyName + "(" + Title + ")";
         }
 
         public string GetAgeString() {
             return DateTimeExtensions.ToAgeString(DateOfBirth);
         }
+
+        public void AddPhoneNumber(PhoneNumber number) {
+            PhoneNumbers.Add(number);
+        }
+
 
     }
 }

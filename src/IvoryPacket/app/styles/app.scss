@@ -49,3 +49,9 @@ body {
         border-left: solid 0.25em $md-deep-orange-800;
     }
 }
+
+.vertical-divider{
+    margin-right: 0.75em;
+    margin-left: 0.75em;
+    border-right: solid 1px $md-blue-grey-100;
+}

@@ -1,4 +1,4 @@
-﻿module interfaces.models {
+﻿ module interfaces.models {
     export interface patientDetailed {
         patientId: number;
         title: string;

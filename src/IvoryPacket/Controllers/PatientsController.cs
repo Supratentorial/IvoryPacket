@@ -60,11 +60,11 @@ namespace IvoryPacket.Controllers
                 Title = patient.Title,
                 GivenName = patient.GivenName,
                 FamilyName = patient.FamilyName,
+                MiddleNames = patient.MiddleNames,
                 FullName = patient.GetFullName(),
                 PreferredName = patient.PreferredName,
                 Age = patient.GetAgeString(),
                 DateOfBirth = patient.DateOfBirth,
-                Addresses = patient.Addresses,
                 EmailAddress = patient.EmailAddress,
                 IsActive = patient.IsActive,
                 Gender = patient.Gender,
@@ -72,8 +72,7 @@ namespace IvoryPacket.Controllers
                 Ethnicity = patient.Ethnicity,
                 MedicareCardExpiry = patient.MedicareCardExpiry,
                 MedicareCardNumber = patient.MedicareCardNumber,
-                MedicareCardPosition = patient.MedicareCardPosition,
-                PhoneNumbers = patient.PhoneNumbers
+                MedicareCardPosition = patient.MedicareCardPosition
             };
         }
 
@@ -100,8 +99,21 @@ namespace IvoryPacket.Controllers
         // POST api/patients
         [HttpPost]
         [ValidateModel]
-        public IActionResult Post([FromBody]Patient patient)
+        [Route("api/patients/{patientId}/detailed")]
+        public IActionResult Post([FromBody]PatientDetailedDTO patientDTO)
         {
+
+            var patient = new Patient()
+            {
+                PatientId = patientDTO.PatientId,
+                Title = patientDTO.Title,
+                GivenName = patientDTO.GivenName,
+                MiddleNames = patientDTO.MiddleNames,
+                
+                IsActive = patientDTO.IsActive,
+                
+
+            };
             DbContext.Add(patient);
             DbContext.SaveChanges();
             return new HttpOkObjectResult(patient);

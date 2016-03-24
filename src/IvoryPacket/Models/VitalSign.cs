@@ -5,9 +5,10 @@ using System.Threading.Tasks;
 
 namespace IvoryPacket.Models
 {
-    public class SmokingObservation
+    public class VitalSign
     {
-        public int SmokingObservationId { get; set; }
-        public string SmokingStatus { get; set; }
+        public int VitalSignId { get; set; }
+        public ICollection<Observation> Observations { get; set; }
+
     }
 }
