@@ -1,23 +1,23 @@
 ﻿module patient.services {
-    export class EmailService implements interfaces.services.emailService {
+    export class EmailService {
         static $inject = ["PatientManagerService"];
-        currentPatient: interfaces.models.patientDetailed;
+        currentPatient: interfaces.patientDetailed;
         constructor(private patientManagerService: interfaces.services.patientManagerService) {
 
         }
 
-        getCurrentPatientEmail(): interfaces.models.emailAddress {
-            var emailAddress: interfaces.models.emailAddress = this.createNewEmail();
+        getCurrentPatientEmail(): interfaces.emailAddress {
+            var emailAddress: interfaces.emailAddress = this.createNewEmail();
             angular.copy(this.patientManagerService.getCurrentPatient().emailAddress, emailAddress);
             return emailAddress;
         }
 
-        setCurrentPatientEmail(email: interfaces.models.emailAddress) {
+        setCurrentPatientEmail(email: interfaces.emailAddress) {
             this.patientManagerService.getCurrentPatient().emailAddress = email;
         }
 
-        createNewEmail(): interfaces.models.emailAddress {
-            var email = <interfaces.models.emailAddress>{
+        createNewEmail(): interfaces.emailAddress {
+            var email = <interfaces.emailAddress>{
                 isPreferred: true,
                 emailAddressId: 0,
                 emailValue: ""

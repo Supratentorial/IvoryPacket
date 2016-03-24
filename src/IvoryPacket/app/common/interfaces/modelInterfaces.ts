@@ -1,25 +1,5 @@
 ﻿ module interfaces.models {
-    export interface patientDetailed {
-        patientId: number;
-        title: string;
-        givenName: string;
-        middleNames: string;
-        familyName: string;
-        preferredName: string;
-        gender: string;
-        dateOfBirth: string;
-        ethnicity?: string;
-        isActive: boolean;
-
-        medicareCardNumber?: number;
-        medicareCardExpiry?: string;
-        medicareCardPosition?: number;
-
-        allergies: allergy[];
-        addresses: address[];
-        emailAddress: emailAddress;
-        phoneNumbers: phoneNumber[];
-    }
+    
 
     export interface patientSimple {
         patientId: number;
@@ -45,29 +25,7 @@
         patientId: number;
     }
 
-    export interface phoneNumber {
-        phoneNumberId: number;
-        countryCode: string;
-        areaCode: string;
-        value: string;
-        type: string;
-        isPreferred: boolean;
-    }
-
-    export interface address {
-        addressId: number;
-        type: string;
-        city: string;
-        state: string;
-        postalCode: string;
-        country: string;
-    }
-
-    export interface emailAddress {
-        emailAddressId: number;
-        emailValue: string;
-        isPreferred: boolean;
-    }
+    
 
     export interface encounter {
         encounterId: number;

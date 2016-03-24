@@ -20,12 +20,12 @@
     }
 
     export interface patientManagerService {
-        openPatients: interfaces.models.patientDetailed[];
+        openPatients: interfaces.patientDetailed[];
         currentPatientId: number;
         openPatientById(patientId: number): angular.IPromise<any>;
-        createNewPatient(): interfaces.models.patientDetailed;
-        saveNewPatient(newPatient: interfaces.models.patientDetailed);
-        getCurrentPatient(): interfaces.models.patientDetailed;
+        createNewPatient(): interfaces.patientDetailed;
+        saveNewPatient(newPatient: interfaces.patientDetailed);
+        getCurrentPatient(): interfaces.patientDetailed;
         setCurrentPatientById(patientId: number): void;
         updateCurrentPatient(): any;
         isPatientOpen(patientId: number): boolean;
@@ -33,25 +33,12 @@
     }
 
     export interface phoneNumberService {
-        getCurrentPatientMobileNumber(): interfaces.models.phoneNumber;
-        currentPatientHasMobileNumber(): boolean;
-        createNewMobileNumber(): interfaces.models.phoneNumber;
-        setCurrentPatientMobileNumber(mobileNumber: interfaces.models.phoneNumber): void;
-        //addNewPatientPhoneNumber(phoneNumber: interfaces.models.phoneNumber): void;
-    }
-
-    export interface emailService {
-        getCurrentPatientEmail(): interfaces.models.emailAddress;
-        setCurrentPatientEmail(email: interfaces.models.emailAddress): void;
-    }
-
-    export interface addressService {
-
+        createNewMobileNumber(): interfaces.phoneNumber;
     }
 
     export interface demographicsService {
         getCurrentPatient(): void;
-        currentPatient: interfaces.models.patientDetailed;
+        currentPatient: interfaces.patientDetailed;
     }
 
     export interface sessionService {

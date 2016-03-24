@@ -13,17 +13,16 @@
         gender: string;
         dateOfBirth: Date;
         preferredName: string;
-        homePhone: interfaces.models.phoneNumber;
-        mobilePhone: interfaces.models.phoneNumber;
-        workPhone: interfaces.models.phoneNumber;
-        emailAddress: interfaces.models.emailAddress;
+        homePhone: interfaces.phoneNumber;
+        mobilePhone: interfaces.phoneNumber;
+        workPhone: interfaces.phoneNumber;
+        emailAddress: interfaces.emailAddress;
 
         static $inject = ["PatientManagerService", "moment", "PhoneNumberService", "EmailService", "DemographicsService", "$state"];
         constructor(
             private patientManagerService: interfaces.services.patientManagerService,
             private moment: moment.MomentStatic,
             private phoneNumberService: interfaces.services.phoneNumberService,
-            private emailService: interfaces.services.emailService,
             private demographicsService: interfaces.services.demographicsService,
             private $state: angular.ui.IStateService) {
 
@@ -40,15 +39,7 @@
                         this.preferredName = this.demographicsService.currentPatient.preferredName;
                         this.gender = this.demographicsService.currentPatient.gender;
                         this.dateOfBirth = new Date(this.demographicsService.currentPatient.dateOfBirth);
-                        this.emailAddress = this.emailService.getCurrentPatientEmail();
-                        if (this.phoneNumberService.currentPatientHasMobileNumber()) {
-                            this.mobilePhone = <interfaces.models.phoneNumber>{};
-                            angular.copy(this.phoneNumberService.getCurrentPatientMobileNumber(), this.mobilePhone);
-                            console.log(this.mobilePhone);
-                        }
-                        else {
-                            this.mobilePhone = this.phoneNumberService.createNewMobileNumber();
-                        }
+                        this.emailAddress = this.demographicsService.currentPatient.emailAddress;
                     }).finally(() => {
                         this.isLoading = false;
                     });
@@ -64,10 +55,6 @@
             this.demographicsService.currentPatient.gender = this.gender;
             this.demographicsService.currentPatient.dateOfBirth = moment(this.dateOfBirth).format("YYYY/MM/DD");
             this.demographicsService.currentPatient.preferredName = this.preferredName;
-            this.emailService.setCurrentPatientEmail(this.emailAddress);
-            if (this.mobilePhone.value) {
-                this.phoneNumberService.setCurrentPatientMobileNumber(this.mobilePhone);
-            }
             this.patientManagerService.updateCurrentPatient()
                 .then(
                 () => {
@@ -77,7 +64,7 @@
                 .finally(
                 () => {
                     this.isLoading = false;
-                    this.$state.go("patient.detail.demographics.view");
+                    this.$state.go("patient.detail.demographics-view");
                 })
         }
 

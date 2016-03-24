@@ -18,14 +18,13 @@ namespace IvoryPacket.DTOs
         public string Age { get; set; }
         public bool IsActive { get; set; }
 
-        public string Ethnicity { get; set; }
-
         public int? MedicareCardNumber { get; set; }
         public DateTimeOffset? MedicareCardExpiry { get; set; }
         public int? MedicareCardPosition { get; set; }
 
         public int MobilePhoneId { get; set; }
-        public string MobileNumber { get; set; }
+        public string MobilePhoneCountryCode { get; set; }
+        public string MobilePhoneNumber { get; set; }
         public int HomePhoneId { get; set; }
         public string HomePhoneCountryCode { get; set; }
         public string HomePhoneAreaCode { get; set; }

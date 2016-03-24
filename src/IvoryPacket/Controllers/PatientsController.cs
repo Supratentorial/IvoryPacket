@@ -54,26 +54,46 @@ namespace IvoryPacket.Controllers
                 .Include(p => p.PhoneNumbers)
                 .FirstOrDefault();
 
-            return new PatientDetailedDTO()
+            var patientDTO = new PatientDetailedDTO();
+            patientDTO.PatientId = patient.PatientId;
+            patientDTO.Title = patient.Title;
+            patientDTO.GivenName = patient.GivenName;
+            patientDTO.FamilyName = patient.FamilyName;
+            patientDTO.MiddleNames = patient.MiddleNames;
+            patientDTO.FullName = patient.GetFullName();
+            patientDTO.PreferredName = patient.PreferredName;
+            patientDTO.Age = patient.GetAgeString();
+            patientDTO.DateOfBirth = patient.DateOfBirth;
+            patientDTO.EmailAddress = patient.EmailAddress;
+
+            var mobilePhone = patient.PhoneNumbers.Where(p => p.Type == "Mobile").SingleOrDefault();
+            var homePhone = patient.PhoneNumbers.Where(p => p.Type == "Home").SingleOrDefault();
+            var workPhone = patient.PhoneNumbers.Where(p => p.Type == "Work").SingleOrDefault();
+            if (mobilePhone != null) {
+                patientDTO.MobilePhoneId = mobilePhone.PhoneNumberId;
+                patientDTO.MobilePhoneCountryCode = mobilePhone.CountryCode;
+                patientDTO.MobilePhoneNumber = mobilePhone.Value;
+            }
+            if (homePhone != null)
             {
-                PatientId = patient.PatientId,
-                Title = patient.Title,
-                GivenName = patient.GivenName,
-                FamilyName = patient.FamilyName,
-                MiddleNames = patient.MiddleNames,
-                FullName = patient.GetFullName(),
-                PreferredName = patient.PreferredName,
-                Age = patient.GetAgeString(),
-                DateOfBirth = patient.DateOfBirth,
-                EmailAddress = patient.EmailAddress,
-                IsActive = patient.IsActive,
-                Gender = patient.Gender,
-                Allergies = patient.Allergies,
-                Ethnicity = patient.Ethnicity,
-                MedicareCardExpiry = patient.MedicareCardExpiry,
-                MedicareCardNumber = patient.MedicareCardNumber,
-                MedicareCardPosition = patient.MedicareCardPosition
-            };
+                patientDTO.HomePhoneId = homePhone.PhoneNumberId;
+                patientDTO.HomePhoneCountryCode = homePhone.CountryCode;
+                patientDTO.HomePhoneAreaCode = homePhone.AreaCode;
+                patientDTO.HomePhoneNumber = homePhone.Value;
+            }
+            if (workPhone != null)
+            {
+                patientDTO.WorkPhoneId = workPhone.PhoneNumberId;
+                patientDTO.WorkPhoneCountryCode = workPhone.CountryCode;
+                patientDTO.WorkPhoneAreaCode = workPhone.AreaCode;
+                patientDTO.WorkPhoneNumber = workPhone.Value;
+            }
+            patientDTO.IsActive = patient.IsActive;
+            patientDTO.Gender = patient.Gender;
+            patientDTO.MedicareCardExpiry = patient.MedicareCardExpiry;
+            patientDTO.MedicareCardNumber = patient.MedicareCardNumber;
+            patientDTO.MedicareCardPosition = patient.MedicareCardPosition;
+            return patientDTO;
         }
 
         [HttpGet]
@@ -102,17 +122,46 @@ namespace IvoryPacket.Controllers
         [Route("api/patients/{patientId}/detailed")]
         public IActionResult Post([FromBody]PatientDetailedDTO patientDTO)
         {
+            var mobilePhone = new PhoneNumber()
+            {
+                PhoneNumberId = patientDTO.MobilePhoneId,
+                CountryCode = patientDTO.MobilePhoneCountryCode,
+                Value = patientDTO.MobilePhoneNumber,
+                Type = "Mobile"
+            };
+            var homePhone = new PhoneNumber()
+            {
+                PhoneNumberId = patientDTO.HomePhoneId,
+                CountryCode = patientDTO.HomePhoneCountryCode,
+                AreaCode = patientDTO.HomePhoneAreaCode,
+                Type = "Home",
+                Value = patientDTO.HomePhoneNumber
+            };
+            var workPhone = new PhoneNumber()
+            {
+                PhoneNumberId = patientDTO.WorkPhoneId,
+                CountryCode = patientDTO.WorkPhoneCountryCode,
+                AreaCode = patientDTO.WorkPhoneAreaCode,
+                Type = "Work",
+                Value = patientDTO.WorkPhoneNumber
+            };
 
+            List<PhoneNumber> phoneNumbers = new List<PhoneNumber>();
+            phoneNumbers.Add(mobilePhone);
+            phoneNumbers.Add(homePhone);
+            phoneNumbers.Add(workPhone);
             var patient = new Patient()
             {
                 PatientId = patientDTO.PatientId,
                 Title = patientDTO.Title,
                 GivenName = patientDTO.GivenName,
                 MiddleNames = patientDTO.MiddleNames,
-                
+                FamilyName = patientDTO.FamilyName,
+                EmailAddress = patientDTO.EmailAddress,
+                PhoneNumbers = phoneNumbers,
                 IsActive = patientDTO.IsActive,
-                
-
+                DateOfBirth = patientDTO.DateOfBirth,
+                Gender = patientDTO.Gender
             };
             DbContext.Add(patient);
             DbContext.SaveChanges();

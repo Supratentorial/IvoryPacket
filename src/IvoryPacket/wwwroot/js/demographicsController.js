@@ -4,12 +4,11 @@ var patient;
     (function (controllers) {
         "use strict";
         var DemographicsController = (function () {
-            function DemographicsController(patientManagerService, moment, phoneNumberService, emailService, demographicsService, $state) {
+            function DemographicsController(patientManagerService, moment, phoneNumberService, demographicsService, $state) {
                 var _this = this;
                 this.patientManagerService = patientManagerService;
                 this.moment = moment;
                 this.phoneNumberService = phoneNumberService;
-                this.emailService = emailService;
                 this.demographicsService = demographicsService;
                 this.$state = $state;
                 this.genderOptions = ["Male", "Female"];
@@ -28,15 +27,7 @@ var patient;
                         _this.preferredName = _this.demographicsService.currentPatient.preferredName;
                         _this.gender = _this.demographicsService.currentPatient.gender;
                         _this.dateOfBirth = new Date(_this.demographicsService.currentPatient.dateOfBirth);
-                        _this.emailAddress = _this.emailService.getCurrentPatientEmail();
-                        if (_this.phoneNumberService.currentPatientHasMobileNumber()) {
-                            _this.mobilePhone = {};
-                            angular.copy(_this.phoneNumberService.getCurrentPatientMobileNumber(), _this.mobilePhone);
-                            console.log(_this.mobilePhone);
-                        }
-                        else {
-                            _this.mobilePhone = _this.phoneNumberService.createNewMobileNumber();
-                        }
+                        _this.emailAddress = _this.demographicsService.currentPatient.emailAddress;
                     }).finally(function () {
                         _this.isLoading = false;
                     });
@@ -52,17 +43,13 @@ var patient;
                 this.demographicsService.currentPatient.gender = this.gender;
                 this.demographicsService.currentPatient.dateOfBirth = moment(this.dateOfBirth).format("YYYY/MM/DD");
                 this.demographicsService.currentPatient.preferredName = this.preferredName;
-                this.emailService.setCurrentPatientEmail(this.emailAddress);
-                if (this.mobilePhone.value) {
-                    this.phoneNumberService.setCurrentPatientMobileNumber(this.mobilePhone);
-                }
                 this.patientManagerService.updateCurrentPatient()
                     .then(function () {
                     console.log("patient saved successfully");
                 }, function () { console.log("patient failed to save"); })
                     .finally(function () {
                     _this.isLoading = false;
-                    _this.$state.go("patient.detail.demographics.view");
+                    _this.$state.go("patient.detail.demographics-view");
                 });
             };
             DemographicsController.prototype.updatePhoneNumber = function () {

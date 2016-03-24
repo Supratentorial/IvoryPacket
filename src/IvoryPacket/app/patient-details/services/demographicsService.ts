@@ -1,7 +1,7 @@
 ﻿module patient.services {
     export class DemographicsService implements interfaces.services.demographicsService {
         static $inject = ["$http", "PatientManagerService"];
-        currentPatient: interfaces.models.patientDetailed;
+        currentPatient: interfaces.patientDetailed;
 
         constructor(private $http: angular.IHttpService, private patientManagerService: interfaces.services.patientManagerService) {
               
