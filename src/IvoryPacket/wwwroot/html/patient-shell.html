@@ -10,9 +10,9 @@
         <div class="name">{{vm.patientShellService.currentPatient.fullName}}</div>
         <div>
             <label>Born</label>
-            <a class="content" ui-sref="patient.detail.demographics-edit"> {{(vm.patientShellService.currentPatient.dateOfBirth | date: 'dd/MM/yyyy') || '-'}} ({{vm.patientShellService.currentPatient.age}})</a>
+            <a class="content" ui-sref="patient.detail.demographics-edit"> {{(vm.patientShellService.currentPatient.dateOfBirth | date: 'dd/MM/yyyy')}} ({{vm.patientShellService.currentPatient.age}})</a>
             <label>Gender</label>
-            <span class="content"> {{vm.patientShellService.currentPatient.gender || 'Not recorded.'}}</span>
+            <a class="content" ui-sref="patient.detail.demographics-edit"> {{vm.patientShellService.currentPatient.gender}}</a>
         </div>
     </div>
     <div class="vertical-divider"></div>

@@ -1,7 +1,7 @@
 ﻿module patient.services {
     export class SubstanceUseService implements interfaces.substanceUseService {
         static $inject: Array<string> = ["$http", "PatientManagerService"];
-        constructor(private $http: angular.IHttpService, private patientManagerService: interfaces.services.patientManagerService) {
+        constructor(private $http: angular.IHttpService, private patientManagerService: interfaces.patientShellService) {
             
         }
 
@@ -31,7 +31,7 @@
 
         createNewSmokingObservation() {
             return <interfaces.smokingDTO>{
-                patientId: this.patientManagerService.currentPatientId,
+                patientId: 0,
                 cigarettesPerDay: null,
                 smokingStatus: null,
                 notes: "",

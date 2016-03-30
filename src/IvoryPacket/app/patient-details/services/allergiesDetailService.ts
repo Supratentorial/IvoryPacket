@@ -1,11 +1,11 @@
 ﻿module patient.services {
-    export class AllergiesDetailService implements interfaces.services.allergiesDetailService {
-        static $inject = ["PatientManagerService", "$http"];
+    export class AllergiesDetailService implements interfaces.allergiesDetailService {
+        static $inject = ["PatientShellService", "$http"];
         allergySeverityOptions: string[];
         allergyReactionTypes: string[];
         currentAllergy: interfaces.models.allergy;
 
-        constructor(private patientManagerService: interfaces.services.patientManagerService, private $http: angular.IHttpService) {
+        constructor(private patientShellService: interfaces.patientShellService, private $http: angular.IHttpService) {
             this.allergyReactionTypes = [];
             this.allergySeverityOptions = [];
             this.getAllergySeverityOptions();
@@ -14,19 +14,19 @@
 
         getAllergyById(allergyId: number): angular.IHttpPromise<any> {
             if (allergyId) {
-                return this.$http.get("api/patients/" + this.patientManagerService.currentPatientId + "/allergies/" + allergyId);
+                return this.$http.get("api/patients/" + this.patientShellService.currentPatientId + "/allergies/" + allergyId);
             }
         }
 
         addNewAllergy(allergy: interfaces.models.allergy): angular.IHttpPromise<any> {
             if (allergy.allergyId == 0) {
-                return this.$http.post("api/patients/" + this.patientManagerService.currentPatientId + "/allergies", allergy);
+                return this.$http.post("api/patients/" + this.patientShellService.currentPatientId + "/allergies", allergy);
             }
         }
 
         updateExistingAllergy(allergy: interfaces.models.allergy): angular.IHttpPromise<any> {
             if (allergy.allergyId != 0) {
-                return this.$http.put("apie/patients/" + this.patientManagerService.currentPatientId + "/allergies", allergy);
+                return this.$http.put("apie/patients/" + this.patientShellService.currentPatientId + "/allergies", allergy);
             }
         }
 
