@@ -8,12 +8,12 @@
 
         getCurrentPatientEmail(): interfaces.emailAddress {
             var emailAddress: interfaces.emailAddress = this.createNewEmail();
-            angular.copy(this.patientManagerService.getCurrentPatient().emailAddress, emailAddress);
+            angular.copy(this.patientManagerService.getPatientById().emailAddress, emailAddress);
             return emailAddress;
         }
 
         setCurrentPatientEmail(email: interfaces.emailAddress) {
-            this.patientManagerService.getCurrentPatient().emailAddress = email;
+            this.patientManagerService.getPatientById().emailAddress = email;
         }
 
         createNewEmail(): interfaces.emailAddress {

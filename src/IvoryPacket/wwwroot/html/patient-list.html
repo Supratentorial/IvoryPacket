@@ -32,7 +32,7 @@
                 <h4 class="panel-title">Open Patients</h4>
             </div>
             <div class="panel-body">
-                <div class="patient-list-item" ng-repeat="patient in vm.patientManagerService.openPatients" ui-sref="patient.detail({patientId: (patient.patientId)})">
+                <div class="patient-list-item" ng-repeat="patient in vm.patientShellService.openPatients" ui-sref="patient.detail({patientId: (patient.patientId)})">
                     <div>
                         <span class="list-item-name">{{patient.fullName}}</span>
                     </div>

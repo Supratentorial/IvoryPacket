@@ -27,7 +27,10 @@ namespace IvoryPacket.Controllers
         [HttpGet]
         public void GetSmokingObservation(int patientId)
         {
-            
+            if (patientId != 0) {
+                var patient = DbContext.Patients.Single(p => p.PatientId == patientId);
+
+            }
         }
 
         [Route("api/observations/smoking")]

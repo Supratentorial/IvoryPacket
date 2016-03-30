@@ -17,24 +17,25 @@
         medicareCardPosition?: number;
 
         mobilePhoneId: number;
-        mobilePhoneCountryCode: string;
-        mobilePhoneNumber: string;
+        mobilePhoneCountryCode: number;
+        mobilePhoneNumber: number;
         homePhoneId: number;
-        homePhoneCountryCode: string;
-        homePhoneAreaCode: string;
-        homePhoneNumber: string;
+        homePhoneCountryCode: number;
+        homePhoneAreaCode: number;
+        homePhoneNumber: number;
         workPhoneId: number;
-        workPhoneCountryCode: string;
-        workPhoneAreaCode: string;
-        workPhoneNumber: string;
+        workPhoneCountryCode: number;
+        workPhoneAreaCode: number;
+        workPhoneNumber: number;
         preferredContact: string;
 
         residentialAddressId: number;
-        residentialAddressNumber: string;
-        residentialAddressStreet: string;
+        residentialAddressLine1: string;
+        residentialAddressLine2: string;
         residentialAddressState: string;
         residentialAddressSuburb: string;
         residentialAddressPostalCode: string;
+        residentialAddressCountry: string;
     }
 
     export interface emailAddress {
@@ -45,7 +46,7 @@
 
     export interface phoneNumber {
         phoneNumberId: number;
-        countryCode: string;
+        countryCode: number;
         areaCode: string;
         value: string;
         type: string;

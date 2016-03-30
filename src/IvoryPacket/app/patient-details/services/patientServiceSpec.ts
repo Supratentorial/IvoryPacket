@@ -2,7 +2,7 @@
 describe("patientManagerService", () => {
 
     var httpBackend: angular.IHttpBackendService;
-    var patientManagerService: interfaces.services.patientManagerService;
+    var patientManagerService: interfaces.patientService;
     beforeEach(angular.mock.module("app"));
     beforeEach(angular.mock.module("patient"));
 

@@ -3,24 +3,21 @@ var patient;
     var controllers;
     (function (controllers) {
         var PatientShellController = (function () {
-            function PatientShellController(patientManagerService, $state, demographicsService) {
+            function PatientShellController(patientShellService, patientService, $state) {
                 var _this = this;
-                this.patientManagerService = patientManagerService;
+                this.patientShellService = patientShellService;
+                this.patientService = patientService;
                 this.$state = $state;
-                this.demographicsService = demographicsService;
-                this.isLoading = false;
                 var patientId = this.$state.params["patientId"];
                 if (patientId != 0) {
-                    this.isLoading = true;
-                    this.patientManagerService.openPatientById(patientId).then(function (result) {
-                        _this.patientManagerService.setCurrentPatientById(patientId);
-                        _this.demographicsService.getCurrentPatient();
+                    this.patientService.getPatientById(patientId).then(function (result) {
+                        _this.patientShellService.addPatientToOpenList(result.data);
+                        _this.patientShellService.setCurrentPatient(patientId);
                     }).finally(function () {
-                        _this.isLoading = false;
                     });
                 }
             }
-            PatientShellController.$inject = ["PatientManagerService", "$state", "DemographicsService"];
+            PatientShellController.$inject = ["PatientShellService", "PatientService", "$state"];
             return PatientShellController;
         })();
         controllers.PatientShellController = PatientShellController;

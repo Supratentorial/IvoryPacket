@@ -5,6 +5,7 @@ using IvoryPacket.Models;
 using IvoryPacket.Filters;
 using Microsoft.Data.Entity;
 using IvoryPacket.DTOs;
+using System;
 
 // For more information on enabling Web API for empty projects, visit http://go.microsoft.com/fwlink/?LinkID=397860
 
@@ -69,7 +70,8 @@ namespace IvoryPacket.Controllers
             var mobilePhone = patient.PhoneNumbers.Where(p => p.Type == "Mobile").SingleOrDefault();
             var homePhone = patient.PhoneNumbers.Where(p => p.Type == "Home").SingleOrDefault();
             var workPhone = patient.PhoneNumbers.Where(p => p.Type == "Work").SingleOrDefault();
-            if (mobilePhone != null) {
+            if (mobilePhone != null)
+            {
                 patientDTO.MobilePhoneId = mobilePhone.PhoneNumberId;
                 patientDTO.MobilePhoneCountryCode = mobilePhone.CountryCode;
                 patientDTO.MobilePhoneNumber = mobilePhone.Value;
@@ -147,6 +149,7 @@ namespace IvoryPacket.Controllers
             };
 
             List<PhoneNumber> phoneNumbers = new List<PhoneNumber>();
+
             phoneNumbers.Add(mobilePhone);
             phoneNumbers.Add(homePhone);
             phoneNumbers.Add(workPhone);
@@ -168,18 +171,96 @@ namespace IvoryPacket.Controllers
             return new HttpOkObjectResult(patient);
         }
 
-        // PUT api/values/5
-        [HttpPut("{patientId}")]
-        public IActionResult Put(int patientId, [FromBody]Patient patient)
+        [Route("api/patients/{patientId}")]
+        [HttpPut]
+        public IActionResult Put(int patientId, [FromBody]PatientDetailedDTO patientDTO)
         {
-            DbContext.Entry(patient).State = patient.PatientId == 0 ? EntityState.Added : EntityState.Modified;
-            DbContext.Entry(patient.EmailAddress).State = patient.EmailAddress.EmailAddressId == 0 ? EntityState.Added : EntityState.Modified;
-            foreach (PhoneNumber phone in patient.PhoneNumbers)
+            if (patientDTO.PatientId == 0)
             {
-                DbContext.Entry(phone).State = phone.PhoneNumberId == 0 ? EntityState.Added : EntityState.Modified;
+                return new BadRequestResult();
             }
+
+            var existingPatient = DbContext.Patients
+                .Where(p => p.PatientId == patientDTO.PatientId)
+                .Include(p => p.PhoneNumbers)
+                .Include(p => p.EmailAddress)
+                .Single();
+            if (existingPatient != null)
+            {
+                existingPatient.GivenName = patientDTO.GivenName;
+                existingPatient.FamilyName = patientDTO.FamilyName;
+                existingPatient.MiddleNames = patientDTO.MiddleNames;
+                existingPatient.Title = patientDTO.Title;
+                existingPatient.Gender = patientDTO.Gender;
+                existingPatient.PreferredName = patientDTO.PreferredName;
+
+                var existingMobile = existingPatient.PhoneNumbers.Where(p => p.PhoneNumberId == patientDTO.MobilePhoneId).SingleOrDefault();
+                if (existingMobile != null)
+                {
+                    if (patientDTO.MobilePhoneCountryCode != 0 && !string.IsNullOrEmpty(patientDTO.MobilePhoneNumber))
+                    {
+                        existingMobile.CountryCode = patientDTO.MobilePhoneCountryCode;
+                        existingMobile.Value = patientDTO.MobilePhoneNumber;
+                    }
+                    else {
+                        DbContext.PhoneNumbers.Remove(existingMobile);
+                    }
+                }
+                else {
+                    var newMobilePhone = new PhoneNumber()
+                    {
+                        PhoneNumberId = patientDTO.MobilePhoneId,
+                        CountryCode = patientDTO.MobilePhoneCountryCode,
+                        Type = "Mobile",
+                        Value = patientDTO.MobilePhoneNumber
+                    };
+                    existingPatient.PhoneNumbers.Add(newMobilePhone);
+                }
+
+
+                //    var homePhone = new PhoneNumber()
+                //    {
+                //        PhoneNumberId = patientDTO.HomePhoneId,
+                //        CountryCode = patientDTO.HomePhoneCountryCode,
+                //        AreaCode = patientDTO.HomePhoneAreaCode,
+                //        Type = "Home",
+                //        Value = patientDTO.HomePhoneNumber
+                //    };
+
+                //var workPhone = new PhoneNumber()
+                //{
+                //    PhoneNumberId = patientDTO.WorkPhoneId,
+                //    CountryCode = patientDTO.WorkPhoneCountryCode,
+                //    AreaCode = patientDTO.WorkPhoneAreaCode,
+                //    Type = "Work",
+                //    Value = patientDTO.WorkPhoneNumber
+                //};
+
+                //existingPatient.PhoneNumbers.Add(workPhone);
+                //existingPatient.PhoneNumbers.Add(homePhone);
+
+
+                if (patientDTO.EmailAddress != null && !string.IsNullOrEmpty(patientDTO.EmailAddress.EmailValue))
+                {
+                    if (existingPatient.EmailAddress != null)
+                    {
+                        existingPatient.EmailAddress.EmailValue = patientDTO.EmailAddress.EmailValue;
+                        existingPatient.EmailAddress.IsPreferred = patientDTO.EmailAddress.IsPreferred;
+                    }
+                }
+                else {
+                    existingPatient.EmailAddress = new EmailAddress()
+                    {
+                        EmailValue = patientDTO.EmailAddress.EmailValue,
+                        IsPreferred = patientDTO.EmailAddress.IsPreferred
+                    };
+                }
+
+
+            }
+
             DbContext.SaveChanges();
-            return new HttpOkObjectResult(patient);
+            return new HttpOkObjectResult(patientDTO);
         }
 
         // DELETE api/values/5

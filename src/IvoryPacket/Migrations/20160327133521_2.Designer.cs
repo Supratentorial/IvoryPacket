@@ -8,9 +8,10 @@ using IvoryPacket.Models;
 namespace IvoryPacket.Migrations
 {
     [DbContext(typeof(IvoryPacketDbContext))]
-    partial class IvoryPacketDbContextModelSnapshot : ModelSnapshot
+    [Migration("20160327133521_2")]
+    partial class _2
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
             modelBuilder
                 .HasAnnotation("ProductVersion", "7.0.0-rc1-16348")

@@ -11,37 +11,37 @@
                             <div class="row">
                                 <div class="form-group col-lg-6">
                                     <label>First Name</label>
-                                    <input placeholder="e.g. Harry" ng-model="vm.givenName" class="form-control" />
+                                    <input placeholder="e.g. Harry" ng-model="vm.patientShellService.currentPatient.givenName" class="form-control" />
                                 </div>
                                 <div class="form-group col-lg-6">
                                     <label>Last Name</label>
-                                    <input placeholder="e.g. Potter" ng-model="vm.familyName" class="form-control" />
+                                    <input placeholder="e.g. Potter" ng-model="vm.patientShellService.currentPatient.familyName" class="form-control" />
                                 </div>
                             </div>
                             <div class="row">
                                 <div class="form-group col-lg-6">
                                     <label>Middle Name(s)</label>
-                                    <input placeholder="e.g. James" ng-model="vm.middleNames" class="form-control" />
+                                    <input placeholder="e.g. James" ng-model="vm.patientShellService.currentPatient.middleNames" class="form-control" />
                                 </div>
                                 <div class="form-group col-lg-6">
                                     <label>Preferred Name</label>
-                                    <input placeholder="e.g. Hazza" ng-model="vm.preferredName" class="form-control" />
+                                    <input placeholder="e.g. Hazza" ng-model="vm.patientShellService.currentPatient.preferredName" class="form-control" />
                                 </div>
                             </div>
                             <div class="row">
                                 <div class="form-group col-lg-4">
                                     <label>Title</label>
-                                    <select class="form-control" ng-model="vm.title">
+                                    <select class="form-control" ng-model="vm.patientShellService.currentPatient.title">
                                         <option ng-repeat="title in vm.titleOptions" value="{{title}}">{{title}}</option>
                                     </select>
                                 </div>
                                 <div class="form-group col-lg-4">
                                     <label>Date of Birth</label>
-                                    <input type="date" placeholder="dd/mm/yyyy" ng-model="vm.dateOfBirth" class="form-control">
+                                    <input type="date" placeholder="dd/mm/yyyy" ng-model="vm.patientShellService.currentPatient.dateOfBirth" class="form-control">
                                 </div>
                                 <div class="form-group col-lg-4">
                                     <label>Gender</label>
-                                    <select class="form-control" ng-model="vm.gender">
+                                    <select class="form-control" ng-model="vm.patientShellService.currentPatient.gender">
                                         <option ng-repeat="gender in vm.genderOptions" value="{{gender}}">{{gender}}</option>
                                     </select>
                                 </div>
@@ -63,26 +63,26 @@
                             <div class="col-lg-6">
                                 <div class="form-group">
                                     <label>Medicare Card No.</label>
-                                    <input class="form-control" ng-model="vm.medicareCardNumber" />
+                                    <input class="form-control" ng-model="vm.patientShellService.currentPatient.medicareCardNumber" />
                                 </div>
                             </div>
                             <div class="col-lg-2">
                                 <div class="form-group">
                                     <label>Position</label>
-                                    <input placeholder="e.g. 2" class="form-control" ng-model="vm.medicarePosition" />
+                                    <input placeholder="e.g. 2" class="form-control" ng-model="vm.patientShellService.currentPatient.medicarePosition" />
                                 </div>
                             </div>
                             <div class="col-lg-4">
                                 <div class="form-group">
                                     <label>Expiry</label>
-                                    <input placeholder="e.g. 02/2017" class="form-control" ng-model="vm.medicareCardExpiry" />
+                                    <input placeholder="e.g. 02/2017" class="form-control" ng-model="vm.patientShellService.currentPatient.medicareCardExpiry" />
                                 </div>
                             </div>
                         </div>
                         <div class="row">
                             <div class="col-lg-6">
                                 <label>DVA Card No.</label>
-                                <input class="form-control" ng-model="vm.dvaCardNumber" />
+                                <input class="form-control" ng-model="vm.patientShellService.currentPatient.dvaCardNumber" />
                             </div>
                         </div>
                     </div>
@@ -99,7 +99,10 @@
                 <div class="row">
                     <div class="form-group col-xs-12 col-lg-4">
                         <label>Mobile phone</label>
-                        <input type="text" class="form-control" placeholder="e.g. 0400 123 123" ng-model="vm.mobilePhone.value" />
+                        <div class="input-group">
+                            <span style="cursor: pointer" class="input-group-addon" ng-click="vm.editMobileCountryCode()">+61</span>
+                            <input type="text" class="form-control" placeholder="e.g. 400 123 123" ng-model="vm.patientShellService.currentPatient.mobilePhoneNumber" />
+                        </div>
                     </div>
                     <div class="col-lg-6">
                         <div class="form-group">
@@ -115,14 +118,14 @@
                         <label>Home Phone</label>
                         <div class="input-group">
                             <span class="input-group-addon">+61 3</span>
-                            <input type="text" ng-model="vm.homePhone.value" class="form-control" placeholder="e.g. 9800 1234" />
+                            <input type="text" ng-model="vm.patientShellService.currentPatient.homePhoneNumber" class="form-control" placeholder="e.g. 9800 1234" />
                         </div>
                     </div>
                     <div class="form-group col-xs-12 col-lg-6">
                         <label>Work Phone</label>
                         <div class="input-group">
                             <span class="input-group-addon">+61 3</span>
-                            <input type="text" ng-model="vm.workPhone.value" class="form-control" placeholder="e.g. 9800 1234" />
+                            <input type="text" ng-model="vm.patientworkPhone.value" class="form-control" placeholder="e.g. 9800 1234" />
                         </div>
                     </div>
                 </div>
@@ -140,18 +143,54 @@
                     <div class="col-lg-12">
                         <div class="form-group">
                             <label>Email Address</label>
-                            <input ng-model="vm.emailAddress.emailValue" class="form-control" placeholder="e.g. harry@hogwarts.com.au" />
+                            <input ng-model="vm.patientShellService.currentPatient.emailAddress.emailValue" class="form-control" placeholder="e.g. harry@hogwarts.com.au" />
+                        </div>
+                    </div>
+                </div>
+                <hr />
+                <div class="row">
+                    <div class="col-lg-4">
+                        <div class="form-group">
+                            <label class="control-label">Residential Address Line 1</label>
+                            <input class="form-control" placeholder="e.g. Unit 2" ng-model="vm.patientShellService.currentPatient.residentialAddressLine1"/>
+                        </div>
+                    </div>
+                    <div class="col-lg-8">
+                        <label class="control-label">Residential Address Line 2</label>
+                        <input class="form-control" placeholder="e.g. 4 Privet Drive" ng-model="vm.patientShellService.currentPatient.residentialAddressLine2"/>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-lg-4">
+                        <div class="form-group">
+                            <label class="control-label">Suburb</label>
+                            <input class="form-control" placeholder="e.g. Malvern East" ng-model="vm.patientShellService.currentPatient."/>
+                        </div>
+                    </div>
+                    <div class="col-lg-4">
+                        <div class="form-group">
+                            <label class="control-label">State</label>
+                            <input class="form-control" placeholder="e.g. Victoria" />
+                        </div>
+                    </div>
+                    <div class="col-lg-4">
+                        <div class="form-group">
+                            <label class="control-label">Postcode</label>
+                            <input class="form-control" placeholder="e.g. 3145" />
                         </div>
                     </div>
                 </div>
                 <div class="row">
-                    <div class="col-lg-12">
+                    <div class="col-lg-4">
                         <div class="form-group">
-                            <label>Residential Address</label>
-                            <input class="form-control" type="text" />
+                            <label class="control-label">Country</label>
+                            <select class="form-control">
+
+                            </select>
                         </div>
                     </div>
                 </div>
+                <hr />
                 <div class="row">
                     <div class="col-lg-12">
                         <div class="form-group">

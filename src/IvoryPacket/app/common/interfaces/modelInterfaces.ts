@@ -25,8 +25,6 @@
         patientId: number;
     }
 
-    
-
     export interface encounter {
         encounterId: number;
         patientId: number;

@@ -4,10 +4,10 @@ var patient;
     (function (controllers) {
         "use strict";
         var PatientListController = (function () {
-            function PatientListController(patientListService, patientManagerService, $uibModal) {
+            function PatientListController(patientListService, patientShellService, $uibModal) {
                 var _this = this;
                 this.patientListService = patientListService;
-                this.patientManagerService = patientManagerService;
+                this.patientShellService = patientShellService;
                 this.$uibModal = $uibModal;
                 this.isLoading = false;
                 this.isLoading = true;
@@ -23,7 +23,7 @@ var patient;
                     controller: "CreatePatientModalController"
                 });
             };
-            PatientListController.$inject = ["PatientListService", "PatientManagerService", "$uibModal"];
+            PatientListController.$inject = ["PatientListService", "PatientShellService", "$uibModal"];
             return PatientListController;
         })();
         controllers.PatientListController = PatientListController;

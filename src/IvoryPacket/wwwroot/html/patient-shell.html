@@ -1,29 +1,29 @@
 <div class="row">
     <nav>
         <ul class="nav nav-tabs">
-            <li ui-sref-active="active" role="presentation" ng-repeat="patient in vm.patientManagerService.openPatients"><a ui-sref="patient.detail({patientId : {{patient.patientId}}})">{{patient.fullName}}</a></li>
+            <li ui-sref-active="active" role="presentation" ng-repeat="patient in vm.patientShellService.openPatients"><a ui-sref="patient.detail({patientId : {{patient.patientId}}})">{{patient.fullName}}</a></li>
         </ul>
     </nav>
 </div>
 <div id="patientBanner" class="row banner">
     <div>
-        <div class="name">{{vm.demographicsService.currentPatient.fullName}}</div>
+        <div class="name">{{vm.patientShellService.currentPatient.fullName}}</div>
         <div>
             <label>Born</label>
-            <a class="content" ui-sref="patient.detail.demographics-edit"> {{(vm.demographicsService.currentPatient.dateOfBirth | date: 'dd/MM/yyyy') || '-'}} ({{vm.demographicsService.currentPatient.age}})</a>
+            <a class="content" ui-sref="patient.detail.demographics-edit"> {{(vm.patientShellService.currentPatient.dateOfBirth | date: 'dd/MM/yyyy') || '-'}} ({{vm.patientShellService.currentPatient.age}})</a>
             <label>Gender</label>
-            <span class="content"> {{vm.demographicsService.currentPatient.gender || 'Not recorded.'}}</span>
+            <span class="content"> {{vm.patientShellService.currentPatient.gender || 'Not recorded.'}}</span>
         </div>
     </div>
     <div class="vertical-divider"></div>
     <div>
         <div>
             <label>Phone</label>
-            <span class="content">{{vm.mobilePhone.value || 'Not recorded.'}}</span>
+            <span class="content">{{vm.patientShellService.currentPatient.mobilePhoneNumber || 'Not recorded.'}}</span>
         </div>
         <div>
             <label>Address</label>
-            <span class="content">{{vm.addressService.currentPatient.address || 'Not recorded.'}}</span>
+            <span class="content">{{vm.patientShellService.currentPatient.address || 'Not recorded.'}}</span>
         </div>
     </div>
    <div class="vertical-divider"></div>
@@ -31,7 +31,7 @@
     <label>Alerts</label>
 
 </div>
-<div class="row">
+<div style="overflow: auto; margin-bottom: 60px" class="row">
     <div class="col-lg-2">
         <div class="list-group">
             <a class="list-group-item" ui-sref-active="active" ui-sref="patient.detail.summary">Summary</a>

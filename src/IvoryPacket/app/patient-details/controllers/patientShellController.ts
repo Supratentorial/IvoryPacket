@@ -1,18 +1,14 @@
 ﻿module patient.controllers {
     export class PatientShellController {
-        static $inject = ["PatientManagerService", "$state", "DemographicsService"];
-        fullName: string;
-        age: string;
-        isLoading: boolean = false;
-        constructor(private patientManagerService: interfaces.services.patientManagerService, private $state: angular.ui.IState, private demographicsService: interfaces.services.demographicsService) {
+        static $inject = ["PatientShellService","PatientService", "$state"];
+        constructor(private patientShellService: interfaces.patientShellService, private patientService: interfaces.patientService, private $state: angular.ui.IState) {
             var patientId: number = this.$state.params["patientId"];
             if (patientId != 0) {
-                this.isLoading = true;
-                this.patientManagerService.openPatientById(patientId).then((result) => {
-                    this.patientManagerService.setCurrentPatientById(patientId)
-                    this.demographicsService.getCurrentPatient();
+                this.patientService.getPatientById(patientId).then((result) => {
+                    this.patientShellService.addPatientToOpenList(result.data);
+                    this.patientShellService.setCurrentPatient(patientId);
                 }).finally(() => {
-                    this.isLoading = false;
+
                 });
             }
         }

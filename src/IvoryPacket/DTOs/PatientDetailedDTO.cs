@@ -23,14 +23,14 @@ namespace IvoryPacket.DTOs
         public int? MedicareCardPosition { get; set; }
 
         public int MobilePhoneId { get; set; }
-        public string MobilePhoneCountryCode { get; set; }
+        public int MobilePhoneCountryCode { get; set; }
         public string MobilePhoneNumber { get; set; }
         public int HomePhoneId { get; set; }
-        public string HomePhoneCountryCode { get; set; }
+        public int HomePhoneCountryCode { get; set; }
         public string HomePhoneAreaCode { get; set; }
         public string HomePhoneNumber { get; set; }
         public int WorkPhoneId { get; set; }
-        public string WorkPhoneCountryCode { get; set; }
+        public int WorkPhoneCountryCode { get; set; }
         public string WorkPhoneAreaCode { get; set; }
         public string WorkPhoneNumber { get; set; }
         public string PreferredContact { get; set; }

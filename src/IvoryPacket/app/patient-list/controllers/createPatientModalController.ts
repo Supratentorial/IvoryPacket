@@ -2,7 +2,7 @@
     export class CreatePatientModalController {
         newPatient: interfaces.patientDetailed;
         static $inject: Array<string> = ["$uibModalInstance", "PatientManagerService"];
-        constructor(private $uibModalInstance: angular.ui.bootstrap.IModalServiceInstance, private patientManagerService: interfaces.services.patientManagerService ) {
+        constructor(private $uibModalInstance: angular.ui.bootstrap.IModalServiceInstance, private patientManagerService: interfaces.patientService ) {
             this.newPatient = this.patientManagerService.createNewPatient();
         }
 

@@ -14,10 +14,8 @@ namespace IvoryPacket.Models
         public string FamilyName { get; set; }
         public string PreferredName { get; set; }
         public string Gender { get; set; }
-        [Column(TypeName ="Date")]
+        [Column(TypeName = "Date")]
         public DateTime DateOfBirth { get; set; }
-
-        public string Ethnicity { get; set; }
 
         public int? MedicareCardNumber { get; set; }
         public DateTimeOffset? MedicareCardExpiry { get; set; }
@@ -29,22 +27,20 @@ namespace IvoryPacket.Models
         public virtual ICollection<Address> Addresses { get; set; }
         public virtual ICollection<Allergy> Allergies { get; set; }
 
-        public string GetFullName() {
+        public string GetFullName()
+        {
             return GivenName + " " + FamilyName;
         }
 
-        public string GetFullNameWithTitle() {
-            return GivenName + " " + FamilyName + "(" + Title + ")";
-        }
+        public string GetFullNameWithTitle()
+        {
+            return FamilyName.ToUpper() + ", " + GivenName + "(" + Title + ")";
+        }  
 
-        public string GetAgeString() {
+        public string GetAgeString()
+        {
             return DateTimeExtensions.ToAgeString(DateOfBirth);
         }
-
-        public void AddPhoneNumber(PhoneNumber number) {
-            PhoneNumbers.Add(number);
-        }
-
 
     }
 }
