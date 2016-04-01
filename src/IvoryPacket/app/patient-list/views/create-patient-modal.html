@@ -22,7 +22,9 @@
                 <div class="form-group col-lg-4">
                     <label>Gender</label>
                     <select class="form-control" ng-model="vm.newPatient.gender">
-                        <option ng-repeat="gender in vm.genderOptions" value="{{gender}}">{{gender}}</option>
+                        <option ng-model="vm.newPatient.gender" value="Male">Male</option>
+                        <option ng-model="vm.newPatient.gender" value="Female">Female</option>
+                        <option ng-model="vm.newPatient.gender" value="Other">Other</option>
                     </select>
                 </div>
             </div>

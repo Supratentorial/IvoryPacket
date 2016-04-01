@@ -48,9 +48,19 @@ namespace IvoryPacket.Controllers
 
         [Route("api/observations/vitals")]
         [HttpPost]
-        public void PostVitalsObservation(int id, [FromBody]VitalsDTO vitalsDTO)
+        public IActionResult PostVitalsObservation(int patientId, [FromBody]VitalSign vitalSign)
         {
-            
+            if (patientId == 0) {
+                return new BadRequestResult();
+            }
+            if (vitalSign.VitalSignId != 0)
+            {
+                return new BadRequestResult();
+            }
+
+            var existingPatient = DbContext.Patients.Where(p => p.PatientId == patientId).SingleOrDefault();
+            existingPatient.VitalSigns.Add(vitalSign);
+            return new HttpOkObjectResult(existingPatient);
         }
 
         // DELETE api/values/5

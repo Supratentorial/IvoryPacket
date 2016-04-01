@@ -17,16 +17,16 @@
         medicareCardPosition?: number;
 
         mobilePhoneId: number;
-        mobilePhoneCountryCode: number;
-        mobilePhoneNumber: number;
+        mobilePhoneCountryCode: string;
+        mobilePhoneNumber: string;
         homePhoneId: number;
-        homePhoneCountryCode: number;
-        homePhoneAreaCode: number;
-        homePhoneNumber: number;
+        homePhoneCountryCode: string;
+        homePhoneAreaCode: string;
+        homePhoneNumber: string;
         workPhoneId: number;
-        workPhoneCountryCode: number;
-        workPhoneAreaCode: number;
-        workPhoneNumber: number;
+        workPhoneCountryCode: string;
+        workPhoneAreaCode: string;
+        workPhoneNumber: string;
         preferredContact: string;
 
         residentialAddressId: number;

@@ -26,6 +26,8 @@ namespace IvoryPacket.Models
         public virtual EmailAddress EmailAddress { get; set; }
         public virtual ICollection<Address> Addresses { get; set; }
         public virtual ICollection<Allergy> Allergies { get; set; }
+        public virtual ICollection<VitalSign> VitalSigns { get; set; }
+        public virtual SocialHistoryObservation SocialHistoryObservation { get; set; }
 
         public string GetFullName()
         {

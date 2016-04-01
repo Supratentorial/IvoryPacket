@@ -95,6 +95,8 @@ namespace IvoryPacket.Controllers
             patientDTO.MedicareCardExpiry = patient.MedicareCardExpiry;
             patientDTO.MedicareCardNumber = patient.MedicareCardNumber;
             patientDTO.MedicareCardPosition = patient.MedicareCardPosition;
+            patientDTO.SocialHistoryObservation = patient.SocialHistoryObservation;
+            patientDTO.VitalSigns = patient.VitalSigns;
             return patientDTO;
         }
 
@@ -121,38 +123,46 @@ namespace IvoryPacket.Controllers
         // POST api/patients
         [HttpPost]
         [ValidateModel]
-        [Route("api/patients/{patientId}/detailed")]
+        [Route("api/patients")]
         public IActionResult Post([FromBody]PatientDetailedDTO patientDTO)
         {
-            var mobilePhone = new PhoneNumber()
-            {
-                PhoneNumberId = patientDTO.MobilePhoneId,
-                CountryCode = patientDTO.MobilePhoneCountryCode,
-                Value = patientDTO.MobilePhoneNumber,
-                Type = "Mobile"
-            };
-            var homePhone = new PhoneNumber()
-            {
-                PhoneNumberId = patientDTO.HomePhoneId,
-                CountryCode = patientDTO.HomePhoneCountryCode,
-                AreaCode = patientDTO.HomePhoneAreaCode,
-                Type = "Home",
-                Value = patientDTO.HomePhoneNumber
-            };
-            var workPhone = new PhoneNumber()
-            {
-                PhoneNumberId = patientDTO.WorkPhoneId,
-                CountryCode = patientDTO.WorkPhoneCountryCode,
-                AreaCode = patientDTO.WorkPhoneAreaCode,
-                Type = "Work",
-                Value = patientDTO.WorkPhoneNumber
-            };
-
             List<PhoneNumber> phoneNumbers = new List<PhoneNumber>();
+            if (!string.IsNullOrEmpty(patientDTO.MobilePhoneCountryCode) && !string.IsNullOrEmpty(patientDTO.MobilePhoneNumber))
+            {
+                var mobilePhone = new PhoneNumber()
+                {
+                    PhoneNumberId = patientDTO.MobilePhoneId,
+                    CountryCode = patientDTO.MobilePhoneCountryCode,
+                    Value = patientDTO.MobilePhoneNumber,
+                    Type = "Mobile"
+                };
+                phoneNumbers.Add(mobilePhone);
+            }
+            if (!string.IsNullOrEmpty(patientDTO.HomePhoneCountryCode) && !string.IsNullOrEmpty(patientDTO.HomePhoneNumber))
+            {
+                var homePhone = new PhoneNumber()
+                {
+                    PhoneNumberId = patientDTO.HomePhoneId,
+                    CountryCode = patientDTO.HomePhoneCountryCode,
+                    AreaCode = patientDTO.HomePhoneAreaCode,
+                    Type = "Home",
+                    Value = patientDTO.HomePhoneNumber
+                };
+                phoneNumbers.Add(homePhone);
+            }
+            if (!string.IsNullOrEmpty(patientDTO.WorkPhoneCountryCode) && !string.IsNullOrEmpty(patientDTO.WorkPhoneNumber))
+            {
+                var workPhone = new PhoneNumber()
+                {
+                    PhoneNumberId = patientDTO.WorkPhoneId,
+                    CountryCode = patientDTO.WorkPhoneCountryCode,
+                    AreaCode = patientDTO.WorkPhoneAreaCode,
+                    Type = "Work",
+                    Value = patientDTO.WorkPhoneNumber
+                };
+                phoneNumbers.Add(workPhone);
+            }
 
-            phoneNumbers.Add(mobilePhone);
-            phoneNumbers.Add(homePhone);
-            phoneNumbers.Add(workPhone);
             var patient = new Patient()
             {
                 PatientId = patientDTO.PatientId,
@@ -184,6 +194,7 @@ namespace IvoryPacket.Controllers
                 .Where(p => p.PatientId == patientDTO.PatientId)
                 .Include(p => p.PhoneNumbers)
                 .Include(p => p.EmailAddress)
+                .Include(p => p.SocialHistoryObservation)
                 .Single();
             if (existingPatient != null)
             {
@@ -193,72 +204,8 @@ namespace IvoryPacket.Controllers
                 existingPatient.Title = patientDTO.Title;
                 existingPatient.Gender = patientDTO.Gender;
                 existingPatient.PreferredName = patientDTO.PreferredName;
-
-                var existingMobile = existingPatient.PhoneNumbers.Where(p => p.PhoneNumberId == patientDTO.MobilePhoneId).SingleOrDefault();
-                if (existingMobile != null)
-                {
-                    if (patientDTO.MobilePhoneCountryCode != 0 && !string.IsNullOrEmpty(patientDTO.MobilePhoneNumber))
-                    {
-                        existingMobile.CountryCode = patientDTO.MobilePhoneCountryCode;
-                        existingMobile.Value = patientDTO.MobilePhoneNumber;
-                    }
-                    else {
-                        DbContext.PhoneNumbers.Remove(existingMobile);
-                    }
-                }
-                else {
-                    var newMobilePhone = new PhoneNumber()
-                    {
-                        PhoneNumberId = patientDTO.MobilePhoneId,
-                        CountryCode = patientDTO.MobilePhoneCountryCode,
-                        Type = "Mobile",
-                        Value = patientDTO.MobilePhoneNumber
-                    };
-                    existingPatient.PhoneNumbers.Add(newMobilePhone);
-                }
-
-
-                //    var homePhone = new PhoneNumber()
-                //    {
-                //        PhoneNumberId = patientDTO.HomePhoneId,
-                //        CountryCode = patientDTO.HomePhoneCountryCode,
-                //        AreaCode = patientDTO.HomePhoneAreaCode,
-                //        Type = "Home",
-                //        Value = patientDTO.HomePhoneNumber
-                //    };
-
-                //var workPhone = new PhoneNumber()
-                //{
-                //    PhoneNumberId = patientDTO.WorkPhoneId,
-                //    CountryCode = patientDTO.WorkPhoneCountryCode,
-                //    AreaCode = patientDTO.WorkPhoneAreaCode,
-                //    Type = "Work",
-                //    Value = patientDTO.WorkPhoneNumber
-                //};
-
-                //existingPatient.PhoneNumbers.Add(workPhone);
-                //existingPatient.PhoneNumbers.Add(homePhone);
-
-
-                if (patientDTO.EmailAddress != null && !string.IsNullOrEmpty(patientDTO.EmailAddress.EmailValue))
-                {
-                    if (existingPatient.EmailAddress != null)
-                    {
-                        existingPatient.EmailAddress.EmailValue = patientDTO.EmailAddress.EmailValue;
-                        existingPatient.EmailAddress.IsPreferred = patientDTO.EmailAddress.IsPreferred;
-                    }
-                }
-                else {
-                    existingPatient.EmailAddress = new EmailAddress()
-                    {
-                        EmailValue = patientDTO.EmailAddress.EmailValue,
-                        IsPreferred = patientDTO.EmailAddress.IsPreferred
-                    };
-                }
-
-
+                existingPatient.EmailAddress = patientDTO.EmailAddress;
             }
-
             DbContext.SaveChanges();
             return new HttpOkObjectResult(patientDTO);
         }

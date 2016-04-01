@@ -1,13 +1,19 @@
 ﻿module patient.controllers {
     export class CreatePatientModalController {
         newPatient: interfaces.patientDetailed;
-        static $inject: Array<string> = ["$uibModalInstance", "PatientManagerService"];
-        constructor(private $uibModalInstance: angular.ui.bootstrap.IModalServiceInstance, private patientManagerService: interfaces.patientService ) {
-            this.newPatient = this.patientManagerService.createNewPatient();
+        static $inject: Array<string> = ["$uibModalInstance", "PatientService", "$state"];
+        constructor(private $uibModalInstance: angular.ui.bootstrap.IModalServiceInstance, private patientService: interfaces.patientService, private $state: angular.ui.IStateService) {
+            this.newPatient = this.patientService.createNewPatient();
         }
 
         saveNewPatient() {
-            this.patientManagerService.saveNewPatient(this.newPatient);
+            this.patientService.saveNewPatient(this.newPatient).then(
+                (result) => {
+                    this.$uibModalInstance.dismiss();
+                    this.$state.go("patient.detail.summary", { "patientId": result.data.patientId });
+                },
+                () => {
+                });
         }
 
         cancel() {

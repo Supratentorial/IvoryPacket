@@ -18,15 +18,15 @@ module patient.services {
                 gender: null,
                 dateOfBirth: null,
                 mobilePhoneId: 0,
-                mobilePhoneCountryCode: +61,
+                mobilePhoneCountryCode: "+61",
                 mobilePhoneNumber: null,
                 homePhoneId: 0,
-                homePhoneCountryCode: +61,
-                homePhoneAreaCode: 3,
+                homePhoneCountryCode: "+61",
+                homePhoneAreaCode: "3",
                 homePhoneNumber: null,
                 workPhoneId: 0,
-                workPhoneCountryCode: +61,
-                workPhoneAreaCode: 3,
+                workPhoneCountryCode: "+61",
+                workPhoneAreaCode: "3",
                 workPhoneNumber: null,
                 preferredContact: null,
                 residentialAddressId: 0,
@@ -35,6 +35,7 @@ module patient.services {
                 residentialAddressSuburb: null,
                 residentialAddressState: null,
                 residentialAddressPostalCode: null,
+                residentialAddressCountry: null,
                 isActive: true,
                 medicareCardNumber: null,
                 medicareCardExpiry: null,
@@ -51,7 +52,7 @@ module patient.services {
 
         saveNewPatient(newPatient: interfaces.patientDetailed): angular.IPromise<any> {
             if (newPatient.patientId === 0) {
-                return this.$http.post("api/patients/", newPatient);
+                return this.$http.post("api/patients", newPatient);
             }
         }
 

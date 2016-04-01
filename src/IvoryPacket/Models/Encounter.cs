@@ -7,6 +7,7 @@ namespace IvoryPacket.Models
     {
         public int EncounterId { get; set; }
         public DateTimeOffset RecordedDate { get; set; }
+
         public virtual StaffMember Clinician { get; set; }
         public int ClinicianId { get; set; }
         public virtual Patient Patient { get; set; }

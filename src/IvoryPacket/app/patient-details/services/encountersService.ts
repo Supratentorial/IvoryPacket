@@ -1,12 +1,12 @@
 ﻿module patient.services {
     export class EncountersService {
-        static $inject = ["http", "PatientManagerService"];
-        constructor(private $http: angular.IHttpService, private patientManagerService: interfaces.services.patientManagerService) {
+        static $inject = ["http", "PatientShellService"];
+        constructor(private $http: angular.IHttpService, private patientShellService: interfaces.patientShellService) {
 
         }
 
         getCurrentPatientPastEncounters(patientId: number) {
-            return this.$http.get("api/patients/" + this.patientManagerService.currentPatientId + "/encounters");
+            return this.$http.get("api/patients/" + this.patientShellService.currentPatient.patientId + "/encounters");
         }
 
         saveEncounter(encounter: interfaces.models.encounter) { }

@@ -4,8 +4,8 @@
         static $inject = ["PatientManagerService", "AllergiesDetailService", "$state"];
         
         constructor(
-            private patientManagerService: interfaces.services.patientManagerService,
-            private allergiesDetailService: interfaces.services.allergiesDetailService,
+            private patientShellService: interfaces.patientShellService,
+            private allergiesDetailService: interfaces.allergiesDetailService,
             private $state: angular.ui.IStateService) {
             this.currentAllergy = <interfaces.models.allergy>{};
 
@@ -34,7 +34,7 @@
                 substance: "",
                 clinicalManifestation: "",
                 note: "",
-                patientId: this.patientManagerService.currentPatientId
+                patientId: this.patientShellService.currentPatient.patientId
             }
         }
 

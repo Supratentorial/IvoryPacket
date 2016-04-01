@@ -6,7 +6,7 @@ namespace IvoryPacket.Models
     {
         public int PhoneNumberId { get; set; }
         [Required(AllowEmptyStrings = false)]
-        public int CountryCode { get; set; }
+        public string CountryCode { get; set; }
         public string AreaCode { get; set; }
         [Required(AllowEmptyStrings =false)]
         public string Value { get; set; }

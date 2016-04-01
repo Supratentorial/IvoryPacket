@@ -14,19 +14,19 @@
 
         getAllergyById(allergyId: number): angular.IHttpPromise<any> {
             if (allergyId) {
-                return this.$http.get("api/patients/" + this.patientShellService.currentPatientId + "/allergies/" + allergyId);
+                return this.$http.get("api/patients/" + this.patientShellService.currentPatient.patientId + "/allergies/" + allergyId);
             }
         }
 
         addNewAllergy(allergy: interfaces.models.allergy): angular.IHttpPromise<any> {
             if (allergy.allergyId == 0) {
-                return this.$http.post("api/patients/" + this.patientShellService.currentPatientId + "/allergies", allergy);
+                return this.$http.post("api/patients/" + this.patientShellService.currentPatient.patientId + "/allergies", allergy);
             }
         }
 
         updateExistingAllergy(allergy: interfaces.models.allergy): angular.IHttpPromise<any> {
             if (allergy.allergyId != 0) {
-                return this.$http.put("apie/patients/" + this.patientShellService.currentPatientId + "/allergies", allergy);
+                return this.$http.put("apie/patients/" + this.patientShellService.currentPatient.patientId + "/allergies", allergy);
             }
         }
 

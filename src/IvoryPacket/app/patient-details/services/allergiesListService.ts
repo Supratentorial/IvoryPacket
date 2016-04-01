@@ -2,13 +2,13 @@
     export class AllergiesListService {
         static $inject = ["$http", "$q", "PatientManagerService"];
         currentPatientAllergies: interfaces.models.allergy[];
-        constructor(private $http: angular.IHttpService, private $q: angular.IQService, private patientManagerService: interfaces.services.patientManagerService) {
+        constructor(private $http: angular.IHttpService, private $q: angular.IQService, private patientShellService: interfaces.patientShellService) {
             this.currentPatientAllergies = [];
         }
 
         getCurrentPatientAllergies(): angular.IPromise<any> {
             var deferred = this.$q.defer();
-            return this.$http.get("api/patients/" + this.patientManagerService.currentPatientId + "/allergies").then(
+            return this.$http.get("api/patients/" + this.patientShellService.currentPatient.patientId + "/allergies").then(
                 (response) => {
                     angular.copy(response.data, this.currentPatientAllergies);
                     deferred.resolve();
