@@ -66,30 +66,9 @@ namespace IvoryPacket.Controllers
             patientDTO.Age = patient.GetAgeString();
             patientDTO.DateOfBirth = patient.DateOfBirth;
             patientDTO.EmailAddress = patient.EmailAddress;
-
-            var mobilePhone = patient.PhoneNumbers.Where(p => p.Type == "Mobile").SingleOrDefault();
-            var homePhone = patient.PhoneNumbers.Where(p => p.Type == "Home").SingleOrDefault();
-            var workPhone = patient.PhoneNumbers.Where(p => p.Type == "Work").SingleOrDefault();
-            if (mobilePhone != null)
-            {
-                patientDTO.MobilePhoneId = mobilePhone.PhoneNumberId;
-                patientDTO.MobilePhoneCountryCode = mobilePhone.CountryCode;
-                patientDTO.MobilePhoneNumber = mobilePhone.Value;
-            }
-            if (homePhone != null)
-            {
-                patientDTO.HomePhoneId = homePhone.PhoneNumberId;
-                patientDTO.HomePhoneCountryCode = homePhone.CountryCode;
-                patientDTO.HomePhoneAreaCode = homePhone.AreaCode;
-                patientDTO.HomePhoneNumber = homePhone.Value;
-            }
-            if (workPhone != null)
-            {
-                patientDTO.WorkPhoneId = workPhone.PhoneNumberId;
-                patientDTO.WorkPhoneCountryCode = workPhone.CountryCode;
-                patientDTO.WorkPhoneAreaCode = workPhone.AreaCode;
-                patientDTO.WorkPhoneNumber = workPhone.Value;
-            }
+            patientDTO.MobilePhoneNumber = patient.PhoneNumbers.Where(p => p.Type == "Mobile").SingleOrDefault();
+            patientDTO.HomePhoneNumber = patient.PhoneNumbers.Where(p => p.Type == "Home").SingleOrDefault();
+            patientDTO.WorkPhoneNumber = patient.PhoneNumbers.Where(p => p.Type == "Work").SingleOrDefault();
             patientDTO.IsActive = patient.IsActive;
             patientDTO.Gender = patient.Gender;
             patientDTO.MedicareCardExpiry = patient.MedicareCardExpiry;
@@ -126,43 +105,10 @@ namespace IvoryPacket.Controllers
         [Route("api/patients")]
         public IActionResult Post([FromBody]PatientDetailedDTO patientDTO)
         {
+            if (patientDTO.PatientId != 0) {
+                return new BadRequestResult();
+            }
             List<PhoneNumber> phoneNumbers = new List<PhoneNumber>();
-            if (!string.IsNullOrEmpty(patientDTO.MobilePhoneCountryCode) && !string.IsNullOrEmpty(patientDTO.MobilePhoneNumber))
-            {
-                var mobilePhone = new PhoneNumber()
-                {
-                    PhoneNumberId = patientDTO.MobilePhoneId,
-                    CountryCode = patientDTO.MobilePhoneCountryCode,
-                    Value = patientDTO.MobilePhoneNumber,
-                    Type = "Mobile"
-                };
-                phoneNumbers.Add(mobilePhone);
-            }
-            if (!string.IsNullOrEmpty(patientDTO.HomePhoneCountryCode) && !string.IsNullOrEmpty(patientDTO.HomePhoneNumber))
-            {
-                var homePhone = new PhoneNumber()
-                {
-                    PhoneNumberId = patientDTO.HomePhoneId,
-                    CountryCode = patientDTO.HomePhoneCountryCode,
-                    AreaCode = patientDTO.HomePhoneAreaCode,
-                    Type = "Home",
-                    Value = patientDTO.HomePhoneNumber
-                };
-                phoneNumbers.Add(homePhone);
-            }
-            if (!string.IsNullOrEmpty(patientDTO.WorkPhoneCountryCode) && !string.IsNullOrEmpty(patientDTO.WorkPhoneNumber))
-            {
-                var workPhone = new PhoneNumber()
-                {
-                    PhoneNumberId = patientDTO.WorkPhoneId,
-                    CountryCode = patientDTO.WorkPhoneCountryCode,
-                    AreaCode = patientDTO.WorkPhoneAreaCode,
-                    Type = "Work",
-                    Value = patientDTO.WorkPhoneNumber
-                };
-                phoneNumbers.Add(workPhone);
-            }
-
             var patient = new Patient()
             {
                 PatientId = patientDTO.PatientId,

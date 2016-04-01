@@ -22,18 +22,9 @@ namespace IvoryPacket.DTOs
         public DateTimeOffset? MedicareCardExpiry { get; set; }
         public int? MedicareCardPosition { get; set; }
 
-        public int MobilePhoneId { get; set; }
-        public string MobilePhoneCountryCode { get; set; }
-        public string MobilePhoneNumber { get; set; }
-        public int HomePhoneId { get; set; }
-        public string HomePhoneCountryCode { get; set; }
-        public string HomePhoneAreaCode { get; set; }
-        public string HomePhoneNumber { get; set; }
-        public int WorkPhoneId { get; set; }
-        public string WorkPhoneCountryCode { get; set; }
-        public string WorkPhoneAreaCode { get; set; }
-        public string WorkPhoneNumber { get; set; }
-        public string PreferredContact { get; set; }
+        public PhoneNumber MobilePhoneNumber { get; set; }
+        public PhoneNumber HomePhoneNumber { get; set; }
+        public PhoneNumber WorkPhoneNumber { get; set; }
 
         public virtual EmailAddress EmailAddress { get; set; }
 
