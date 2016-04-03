@@ -12,6 +12,7 @@
             private patientShellService: interfaces.patientShellService,
             private phoneNumberService: interfaces.phoneNumberService,
             private $state: angular.ui.IStateService) {
+            
         }
 
         savePatient(): void {

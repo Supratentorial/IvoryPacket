@@ -101,7 +101,7 @@
                         <label>Mobile phone</label>
                         <div class="input-group">
                             <span style="cursor: pointer" class="input-group-addon" ng-click="vm.editMobileCountryCode()">+61</span>
-                            <input type="text" class="form-control" placeholder="e.g. 400 123 123" ng-model="vm.patientShellService.currentPatient.mobilePhoneNumber" />
+                            <input type="text" class="form-control" placeholder="e.g. 400 123 123" ng-model="vm.patientShellService.currentPatient.mobilePhoneNumber.value" />
                         </div>
                     </div>
                     <div class="col-lg-6">
@@ -118,14 +118,14 @@
                         <label>Home Phone</label>
                         <div class="input-group">
                             <span class="input-group-addon">+61 3</span>
-                            <input type="text" ng-model="vm.patientShellService.currentPatient.homePhoneNumber" class="form-control" placeholder="e.g. 9800 1234" />
+                            <input type="text" ng-model="vm.patientShellService.currentPatient.homePhoneNumber.value" class="form-control" placeholder="e.g. 9800 1234" />
                         </div>
                     </div>
                     <div class="form-group col-xs-12 col-lg-6">
                         <label>Work Phone</label>
                         <div class="input-group">
                             <span class="input-group-addon">+61 3</span>
-                            <input type="text" ng-model="vm.patientworkPhone.value" class="form-control" placeholder="e.g. 9800 1234" />
+                            <input type="text" ng-model="vm.patientShellService.currentPatient.patientWorkPhone.value" class="form-control" placeholder="e.g. 9800 1234" />
                         </div>
                     </div>
                 </div>

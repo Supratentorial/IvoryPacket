@@ -1,3 +1,4 @@
+
 <div class="row">
     <div class="col-lg-4">
         <div class="panel panel-default">
@@ -39,11 +40,11 @@
                 <table ng-hide="vm.isLoading" class="table panel-table">
                     <tr>
                         <td class="col-lg-4 table-label top">Mobile</td>
-                        <td class="top">{{vm.patientShellService.currentPatient.mobilePhoneNumber || "Not recorded."}}</td>
+                        <td class="top">{{vm.patientShellService.currentPatient.mobilePhoneNumber.value || "Not recorded."}}</td>
                     </tr>
                     <tr>
                         <td class="col-lg-4 table-label">Home</td>
-                        <td>{{vm.homePhone.value || "Not recorded."}}</td>
+                        <td>{{vm.patientShellService.currentPatient.homePhoneNumber.value || "Not recorded."}}</td>
                     </tr>
                     <tr>
                         <td class="col-lg-4 table-label">Residential Address</td>

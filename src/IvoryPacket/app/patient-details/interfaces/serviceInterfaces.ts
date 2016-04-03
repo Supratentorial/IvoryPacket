@@ -54,6 +54,8 @@
 
     export interface phoneNumberService {
         createNewMobileNumber(): interfaces.phoneNumber;
+        createNewHomeNumber(): interfaces.phoneNumber;
+        createNewWorkNumber(): interfaces.phoneNumber;
     }
 
 }

@@ -1,7 +1,7 @@
 ﻿module common.services {
     export class PhoneNumberService implements interfaces.phoneNumberService {
-        static $inject = ["PatientManagerService"];
-        constructor(private patientManagerService: interfaces.patientService) {
+        static $inject = ["PatientShellService"];
+        constructor(private patientShellService: interfaces.patientService) {
 
         }
 
@@ -11,26 +11,40 @@
                 countryCode: "61",
                 areaCode: "3",
                 isPreferred: false,
-                type: "mobile",
+                type: "Mobile",
                 value: ""
             }
         }
 
-        updatePhoneNumber(phoneNumber: interfaces.phoneNumber) {
-
+        createNewHomeNumber(): interfaces.phoneNumber {
+            return <interfaces.phoneNumber>{
+                phoneNumberId: 0,
+                countryCode: "61",
+                areaCode: "3",
+                isPreferred: false,
+                type: "Home",
+                value: ""
+            }
         }
 
-        saveNewPhoneNumber(phoneNumber: interfaces.phoneNumber) {
-            
+        createNewWorkNumber(): interfaces.phoneNumber {
+            return <interfaces.phoneNumber>{
+                phoneNumberId: 0,
+                countryCode: "61",
+                areaCode: "3",
+                isPreferred: false,
+                type: "Work",
+                value: ""
+            }
         }
 
-    isValidPhoneNumber(phoneNumber: interfaces.phoneNumber): boolean {
-        if (phoneNumber.value === "") {
-            return false;
+        isValidPhoneNumber(phoneNumber: interfaces.phoneNumber): boolean {
+            if (phoneNumber.value === "") {
+                return false;
+            }
+            return true;
         }
-        return true;
+
     }
-
-}
-angular.module("patient").service("PhoneNumberService", PhoneNumberService);
+    angular.module("patient").service("PhoneNumberService", PhoneNumberService);
 }

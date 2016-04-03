@@ -188,6 +188,15 @@ namespace IvoryPacket.Controllers
                         DbContext.PhoneNumbers.Remove(existingPhoneNumber);
                     }
                 }
+                foreach (var phoneNumber in newPhoneNumbers)
+                {
+                    // Is the child NOT in DB?
+                    if (!existingPhoneNumbers.Any(p => p.PhoneNumberId == phoneNumber.PhoneNumberId))
+                    {
+                        // Yes: Add it as a new child
+                        existingPatient.PhoneNumbers.Add(phoneNumber);
+                    }
+                }
             }
             DbContext.SaveChanges();
             return this.Ok(patientDTO);
