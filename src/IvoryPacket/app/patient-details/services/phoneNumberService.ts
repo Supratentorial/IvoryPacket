@@ -8,7 +8,7 @@
         createNewMobileNumber(): interfaces.phoneNumber {
             return <interfaces.phoneNumber>{
                 phoneNumberId: 0,
-                countryCode: 61,
+                countryCode: "61",
                 areaCode: "3",
                 isPreferred: false,
                 type: "mobile",

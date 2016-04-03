@@ -5,6 +5,7 @@
         givenName: string;
         middleNames: string;
         familyName: string;
+        fullName: string;
         preferredName: string;
         gender: string;
         dateOfBirth: string;
@@ -16,26 +17,13 @@
         medicareCardExpiry?: string;
         medicareCardPosition?: number;
 
-        mobilePhoneId: number;
-        mobilePhoneCountryCode: string;
-        mobilePhoneNumber: string;
-        homePhoneId: number;
-        homePhoneCountryCode: string;
-        homePhoneAreaCode: string;
-        homePhoneNumber: string;
-        workPhoneId: number;
-        workPhoneCountryCode: string;
-        workPhoneAreaCode: string;
-        workPhoneNumber: string;
-        preferredContact: string;
+        mobilePhoneNumber: phoneNumber;
+        homePhoneNumber: phoneNumber;
+        workPhoneNumber: phoneNumber;
 
-        residentialAddressId: number;
-        residentialAddressLine1: string;
-        residentialAddressLine2: string;
-        residentialAddressState: string;
-        residentialAddressSuburb: string;
-        residentialAddressPostalCode: string;
-        residentialAddressCountry: string;
+        residentialAddress: address;
+        socialHistoryObservation: socialHistoryObservation;
+        vitalSigns : vitalSign[];
     }
 
     export interface emailAddress {
@@ -46,8 +34,8 @@
 
     export interface phoneNumber {
         phoneNumberId: number;
-        countryCode: number;
-        areaCode: string;
+        countryCode: string;
+        areaCode?: string;
         value: string;
         type: string;
         isPreferred: boolean;
@@ -60,5 +48,33 @@
         state: string;
         postalCode: string;
         country: string;
+    }
+
+    export interface socialHistoryObservation {
+        socialHistoryObservationId: number;
+        smokingStatus: string;
+        cigarettesPerDay: string;
+        ageSmokingCommenced: number;
+        ageSmokingCeased: number;
+
+        alcoholStatus: string;
+        drinksPerDay: string;
+
+        ethnicity: string;
+        occupation: string;
+    }
+
+    export interface vitalSign {
+        vitalSignId: number;
+        dateRecorded: Date;
+        temperature: number;
+        heartRate: number;
+        respiratoryRate: number;
+        oxygenSaturation: number;
+        systolicBloodPressure: number;
+        diastolicBloodPressure: number;
+        height: number;
+        weight: number;
+        bmi: number;
     }
 }

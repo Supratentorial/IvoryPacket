@@ -105,7 +105,8 @@ namespace IvoryPacket.Controllers
         [Route("api/patients")]
         public IActionResult Post([FromBody]PatientDetailedDTO patientDTO)
         {
-            if (patientDTO.PatientId != 0) {
+            if (patientDTO.PatientId != 0)
+            {
                 return new BadRequestResult();
             }
             List<PhoneNumber> phoneNumbers = new List<PhoneNumber>();
@@ -131,9 +132,13 @@ namespace IvoryPacket.Controllers
         [HttpPut]
         public IActionResult Put(int patientId, [FromBody]PatientDetailedDTO patientDTO)
         {
+            if (!ModelState.IsValid)
+            {
+                return this.HttpBadRequest(ModelState);
+            }
             if (patientDTO.PatientId == 0)
             {
-                return new BadRequestResult();
+                return this.HttpNotFound();
             }
 
             var existingPatient = DbContext.Patients
@@ -151,9 +156,41 @@ namespace IvoryPacket.Controllers
                 existingPatient.Gender = patientDTO.Gender;
                 existingPatient.PreferredName = patientDTO.PreferredName;
                 existingPatient.EmailAddress = patientDTO.EmailAddress;
+                var existingPhoneNumbers = existingPatient.PhoneNumbers.ToList();
+                var newPhoneNumbers = new List<PhoneNumber>();
+                if (patientDTO.MobilePhoneNumber != null)
+                {
+                    newPhoneNumbers.Add(patientDTO.MobilePhoneNumber);
+                }
+                if (patientDTO.HomePhoneNumber != null)
+                {
+                    newPhoneNumbers.Add(patientDTO.HomePhoneNumber);
+                }
+                if (patientDTO.WorkPhoneNumber != null)
+                {
+                    newPhoneNumbers.Add(patientDTO.WorkPhoneNumber);
+                }
+                foreach (var existingPhoneNumber in existingPhoneNumbers)
+                {
+                    // Is the phone number still there?
+                    var phoneNumber = newPhoneNumbers.SingleOrDefault(p => p.PhoneNumberId == existingPhoneNumber.PhoneNumberId);
+
+                    if (phoneNumber != null)
+                    {
+                        // Yes: Update scalar/complex properties of child
+                        existingPhoneNumber.Value = phoneNumber.Value;
+                        existingPhoneNumber.AreaCode = phoneNumber.AreaCode;
+                        existingPhoneNumber.CountryCode = phoneNumber.CountryCode;
+                        existingPhoneNumber.IsPreferred = phoneNumber.IsPreferred;
+                    }
+                    else {
+                        // No: Delete it
+                        DbContext.PhoneNumbers.Remove(existingPhoneNumber);
+                    }
+                }
             }
             DbContext.SaveChanges();
-            return new HttpOkObjectResult(patientDTO);
+            return this.Ok(patientDTO);
         }
 
         // DELETE api/values/5
