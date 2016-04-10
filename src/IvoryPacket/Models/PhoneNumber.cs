@@ -1,4 +1,5 @@
-﻿using System.ComponentModel.DataAnnotations;
+﻿using Newtonsoft.Json;
+using System.ComponentModel.DataAnnotations;
 
 namespace IvoryPacket.Models
 {
@@ -13,7 +14,7 @@ namespace IvoryPacket.Models
         [Required(AllowEmptyStrings = false)]
         public string Type { get; set; }
         public bool? IsPreferred { get; set; }
-
+        [JsonIgnore]
         public virtual Patient Patient { get; set; }
         public int PatientId { get; set; }
     }

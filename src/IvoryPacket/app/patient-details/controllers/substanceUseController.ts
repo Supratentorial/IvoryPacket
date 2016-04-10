@@ -1,46 +1,29 @@
 ﻿module patient.controllers {
     export class SubstanceUseController {
-        static $inject: Array<string> = ["SubstanceUseService"];
-        smokingObservation: interfaces.smokingDTO;
-        alcoholObservation: interfaces.alcoholDTO;
-        drugObservation: interfaces.drugDTO;
+        static $inject: Array<string> = ["SocialHistoryService", "PatientShellService", "$state"];
+
         isLoading: boolean = false;
-        constructor(private substanceUseService: interfaces.substanceUseService) {
-            this.getSmokingObservation();
-            this.getAlcoholObservation();
-            this.getDrugObservation();
+        constructor(private socialHistoryService: interfaces.socialHistoryService, private patientShellService: interfaces.patientShellService, private $state: angular.ui.IStateService) {
+
         }
 
-        getSmokingObservation() {
+        yearsSmoking() {
+            var yearsSmoking: number = null;
+            if (this.patientShellService.currentPatient.smokingHistory.smokingStatus === "Current smoker") {
+                
+            }
+            var yearsSmoking = this.patientShellService.currentPatient.smokingHistory.ageSmokingCommenced - this.patientShellService.currentPatient.smokingHistory.ageSmokingCeased;
+            return yearsSmoking;
+        }
+
+        saveSocialHistoryObservations() {
             this.isLoading = true;
-            this.substanceUseService.getSmokingObservation()
-                .then((smokingDTO: interfaces.smokingDTO) => {
-                    if (smokingDTO.smokingObservationId) {
-                        angular.copy(smokingDTO, this.smokingObservation)
-                    } else {
-                        this.smokingObservation = this.substanceUseService.createNewSmokingObservation();
-                    }
-                })
-                .finally(() => {
-                    this.isLoading = false;
-                    console.log(this.smokingObservation);
-                });
-        }
+            this.patientShellService.saveCurrentPatient().then(() => {
 
-        getAlcoholObservation() {
-            
-        }
-
-        getDrugObservation() {
-
-        }
-
-        saveObservations() {
-            console.log(this.smokingObservation);
-            this.isLoading = true;
-            this.substanceUseService.saveSmokingObservation(this.smokingObservation)
-                .then((result) => { angular.copy(result, this.smokingObservation) })
-                .finally(() => { this.isLoading = false; });
+            }).finally(() => {
+                this.isLoading = false;
+                this.$state.go("patient.detail.social-history-view");
+            });
         }
     }
     angular.module("patient").controller("SubstanceUseController", SubstanceUseController);

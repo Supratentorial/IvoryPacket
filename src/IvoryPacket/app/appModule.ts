@@ -70,7 +70,8 @@ module app {
                 })
                 .state("patient.detail.social-history-edit", <angular.ui.IState>{
                     url: "/social-history/edit",
-                    templateUrl: "html/social-history-edit.html"
+                    templateUrl: "html/social-history-edit.html",
+                    controller: "SocialHistoryController as vm"
                 })
                 .state("patient.detail.substance-use-edit", <angular.ui.IState>{
                     url: "/social-history/substance-use/edit",
@@ -110,12 +111,12 @@ module app {
                 .state("patient.detail.vitals-view", <angular.ui.IState>{
                     url: "/vitals/view",
                     templateUrl: "html/vitals-view.html",
-                    controller: "VitalsController as vm"
+                    controller: "VitalsListController as vm"
                 })
                 .state("patient.detail.vitals-edit", <angular.ui.IState>{
-                    url: "/vitals/edit",
+                    url: "/vitals/{vitalsId:int}/edit",
                     templateUrl: "html/vitals-edit.html",
-                    controller: "VitalsController as vm"
+                    controller: "VitalsDetailController as vm"
                })
                 .state("patient.detail.documents-view", <angular.ui.IState>{
                     url: "documents/view",

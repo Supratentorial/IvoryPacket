@@ -14,15 +14,19 @@ namespace IvoryPacket.Controllers
 
     public class PatientsController : Controller
     {
-        [FromServices]
-        public IvoryPacketDbContext DbContext { get; set; }
+        private IvoryPacketDbContext dbContext { get; set; }
+
+        public PatientsController(IvoryPacketDbContext context)
+        {
+            dbContext = context;
+        }
 
         [Route("api/patients")]
         // GET: api/patients
         [HttpGet]
         public IActionResult Get()
         {
-            var patients = DbContext.Patients.Take(40);
+            var patients = dbContext.Patients.Take(40);
             List<PatientSimpleDTO> patientDTOs = new List<PatientSimpleDTO>();
             foreach (Patient patient in patients)
             {
@@ -49,11 +53,16 @@ namespace IvoryPacket.Controllers
         [Route("api/patients/{patientId}/detailed")]
         public PatientDetailedDTO GetDetailedPatient(int patientId)
         {
-            var patient = DbContext.Patients
+            var patient = dbContext.Patients
                 .Where(p => p.PatientId == patientId)
                 .Include(p => p.EmailAddress)
                 .Include(p => p.PhoneNumbers)
-                .FirstOrDefault();
+                .Include(p => p.SocialHistory)
+                .Include(p => p.SmokingHistory)
+                .Include(p => p.AlcoholHistory)
+                .Include(p => p.DrugHistory)
+                .Include(p => p.VitalSigns)
+                .SingleOrDefault();
 
             var patientDTO = new PatientDetailedDTO();
             patientDTO.PatientId = patient.PatientId;
@@ -74,7 +83,10 @@ namespace IvoryPacket.Controllers
             patientDTO.MedicareCardExpiry = patient.MedicareCardExpiry;
             patientDTO.MedicareCardNumber = patient.MedicareCardNumber;
             patientDTO.MedicareCardPosition = patient.MedicareCardPosition;
-            patientDTO.SocialHistoryObservation = patient.SocialHistoryObservation;
+            patientDTO.SocialHistory = patient.SocialHistory;
+            patientDTO.SmokingHistory = patient.SmokingHistory;
+            patientDTO.AlcoholHistory = patient.AlcoholHistory;
+            patientDTO.DrugHistory = patient.DrugHistory;
             patientDTO.VitalSigns = patient.VitalSigns;
             return patientDTO;
         }
@@ -83,7 +95,7 @@ namespace IvoryPacket.Controllers
         [Route("api/patients/{patientId}/simple")]
         public PatientSimpleDTO GetSimplePatient(int patientId)
         {
-            var patient = DbContext.Patients.Where(p => p.PatientId == patientId).FirstOrDefault();
+            var patient = dbContext.Patients.Where(p => p.PatientId == patientId).FirstOrDefault();
             return new PatientSimpleDTO()
             {
                 PatientId = patient.PatientId,
@@ -99,7 +111,6 @@ namespace IvoryPacket.Controllers
             };
         }
 
-        // POST api/patients
         [HttpPost]
         [ValidateModel]
         [Route("api/patients")]
@@ -123,8 +134,8 @@ namespace IvoryPacket.Controllers
                 DateOfBirth = patientDTO.DateOfBirth,
                 Gender = patientDTO.Gender
             };
-            DbContext.Add(patient);
-            DbContext.SaveChanges();
+            dbContext.Add(patient);
+            dbContext.SaveChanges();
             return new HttpOkObjectResult(patient);
         }
 
@@ -134,18 +145,22 @@ namespace IvoryPacket.Controllers
         {
             if (!ModelState.IsValid)
             {
-                return this.HttpBadRequest(ModelState);
+                return HttpBadRequest(ModelState);
             }
             if (patientDTO.PatientId == 0)
             {
-                return this.HttpNotFound();
+                return HttpNotFound();
             }
 
-            var existingPatient = DbContext.Patients
+            var existingPatient = dbContext.Patients
                 .Where(p => p.PatientId == patientDTO.PatientId)
                 .Include(p => p.PhoneNumbers)
                 .Include(p => p.EmailAddress)
-                .Include(p => p.SocialHistoryObservation)
+                .Include(p => p.SocialHistory)
+                .Include(p => p.SmokingHistory)
+                .Include(p => p.AlcoholHistory)
+                .Include(p => p.DrugHistory)
+                .Include(p => p.VitalSigns)
                 .Single();
             if (existingPatient != null)
             {
@@ -155,7 +170,37 @@ namespace IvoryPacket.Controllers
                 existingPatient.Title = patientDTO.Title;
                 existingPatient.Gender = patientDTO.Gender;
                 existingPatient.PreferredName = patientDTO.PreferredName;
-                existingPatient.EmailAddress = patientDTO.EmailAddress;
+                if (patientDTO.VitalSigns != null)
+                {
+                    var existingVitalSigns = existingPatient.VitalSigns.ToList();
+                    foreach (var existingVitalSign in existingVitalSigns)
+                    {
+                        var vitalSign = patientDTO.VitalSigns.SingleOrDefault(v => v.VitalSignId == existingVitalSign.VitalSignId);
+                        if (vitalSign != null)
+                        {
+                            existingVitalSign.HeartRate = vitalSign.HeartRate;
+                            existingVitalSign.OxygenSaturation = vitalSign.OxygenSaturation;
+                            existingVitalSign.RespiratoryRate = vitalSign.RespiratoryRate;
+                            existingVitalSign.SystolicBloodPressure = vitalSign.SystolicBloodPressure;
+                            existingVitalSign.DiastolicBloodPressure = vitalSign.DiastolicBloodPressure;
+                            existingVitalSign.Temperature = vitalSign.Temperature;
+                            existingVitalSign.Height = vitalSign.Height;
+                            existingVitalSign.Weight = vitalSign.Weight;
+                        }
+                        else {
+                            dbContext.VitalSigns.Remove(existingVitalSign);
+                        }
+                    }
+                    foreach (var vitalSign in patientDTO.VitalSigns)
+                    {
+                        // Is the child NOT in DB?
+                        if (!existingVitalSigns.Any(v => v.VitalSignId == vitalSign.VitalSignId))
+                        {
+                            // Yes: Add it as a new child
+                            existingPatient.VitalSigns.Add(vitalSign);
+                        }
+                    }
+                }
                 var existingPhoneNumbers = existingPatient.PhoneNumbers.ToList();
                 var newPhoneNumbers = new List<PhoneNumber>();
                 if (patientDTO.MobilePhoneNumber != null)
@@ -170,6 +215,7 @@ namespace IvoryPacket.Controllers
                 {
                     newPhoneNumbers.Add(patientDTO.WorkPhoneNumber);
                 }
+
                 foreach (var existingPhoneNumber in existingPhoneNumbers)
                 {
                     // Is the phone number still there?
@@ -185,7 +231,7 @@ namespace IvoryPacket.Controllers
                     }
                     else {
                         // No: Delete it
-                        DbContext.PhoneNumbers.Remove(existingPhoneNumber);
+                        dbContext.PhoneNumbers.Remove(existingPhoneNumber);
                     }
                 }
                 foreach (var phoneNumber in newPhoneNumbers)
@@ -197,8 +243,56 @@ namespace IvoryPacket.Controllers
                         existingPatient.PhoneNumbers.Add(phoneNumber);
                     }
                 }
+                if (existingPatient.EmailAddress != null)
+                {
+                    if (patientDTO.EmailAddress != null)
+                    {
+                        existingPatient.EmailAddress.EmailValue = patientDTO.EmailAddress.EmailValue;
+                    }
+                    else if (patientDTO.EmailAddress == null)
+                    {
+                        dbContext.EmailAddresses.Remove(existingPatient.EmailAddress);
+                    }
+                }
+                else {
+                    existingPatient.EmailAddress = patientDTO.EmailAddress;
+                }
+
+                if (existingPatient.SmokingHistory != null)
+                {
+                    if (patientDTO.SmokingHistory != null)
+                    {
+                        existingPatient.SmokingHistory.SmokingStatus = patientDTO.SmokingHistory.SmokingStatus;
+                        existingPatient.SmokingHistory.CigarettesPerDay = patientDTO.SmokingHistory.CigarettesPerDay;
+                        existingPatient.SmokingHistory.AgeSmokingCommenced = patientDTO.SmokingHistory.AgeSmokingCommenced;
+                        existingPatient.SmokingHistory.AgeSmokingCeased = patientDTO.SmokingHistory.AgeSmokingCeased;
+                        existingPatient.SmokingHistory.Notes = patientDTO.SmokingHistory.Notes;
+                    }
+                    else if (patientDTO.SmokingHistory == null)
+                    {
+
+                    }
+                }
+                else if (patientDTO.SmokingHistory != null)
+                {
+                    existingPatient.SmokingHistory = patientDTO.SmokingHistory;
+                }
+
+                if (existingPatient.SocialHistory != null)
+                {
+                    if (patientDTO.SocialHistory != null)
+                    {
+                        existingPatient.SocialHistory.Ethnicity = patientDTO.SocialHistory.Ethnicity;
+                        existingPatient.SocialHistory.MaritalStatus = patientDTO.SocialHistory.MaritalStatus;
+                        existingPatient.SocialHistory.Occupation = patientDTO.SocialHistory.Occupation;
+                        existingPatient.SocialHistory.Religion = patientDTO.SocialHistory.Religion;
+                    }
+                }
+                else if (patientDTO.SmokingHistory != null) {
+                    existingPatient.SocialHistory = patientDTO.SocialHistory;
+                }
             }
-            DbContext.SaveChanges();
+            dbContext.SaveChanges();
             return this.Ok(patientDTO);
         }
 

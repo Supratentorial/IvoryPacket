@@ -22,7 +22,10 @@
         workPhoneNumber: phoneNumber;
 
         residentialAddress: address;
-        socialHistoryObservation: socialHistoryObservation;
+        socialHistory: socialHistory;
+        smokingHistory: smokingHistory;
+        alcoholHistory: alcoholHistory;
+        drugHistory: drugHistory;
         vitalSigns : vitalSign[];
     }
 
@@ -50,31 +53,5 @@
         country: string;
     }
 
-    export interface socialHistoryObservation {
-        socialHistoryObservationId: number;
-        smokingStatus: string;
-        cigarettesPerDay: string;
-        ageSmokingCommenced: number;
-        ageSmokingCeased: number;
-
-        alcoholStatus: string;
-        drinksPerDay: string;
-
-        ethnicity: string;
-        occupation: string;
-    }
-
-    export interface vitalSign {
-        vitalSignId: number;
-        dateRecorded: Date;
-        temperature: number;
-        heartRate: number;
-        respiratoryRate: number;
-        oxygenSaturation: number;
-        systolicBloodPressure: number;
-        diastolicBloodPressure: number;
-        height: number;
-        weight: number;
-        bmi: number;
-    }
+    
 }

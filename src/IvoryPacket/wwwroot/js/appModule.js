@@ -70,7 +70,8 @@ var app;
         })
             .state("patient.detail.social-history-edit", {
             url: "/social-history/edit",
-            templateUrl: "html/social-history-edit.html"
+            templateUrl: "html/social-history-edit.html",
+            controller: "SocialHistoryController as vm"
         })
             .state("patient.detail.substance-use-edit", {
             url: "/social-history/substance-use/edit",
@@ -110,12 +111,12 @@ var app;
             .state("patient.detail.vitals-view", {
             url: "/vitals/view",
             templateUrl: "html/vitals-view.html",
-            controller: "VitalsController as vm"
+            controller: "VitalsListController as vm"
         })
             .state("patient.detail.vitals-edit", {
-            url: "/vitals/edit",
+            url: "/vitals/{vitalsId:int}/edit",
             templateUrl: "html/vitals-edit.html",
-            controller: "VitalsController as vm"
+            controller: "VitalsDetailController as vm"
         })
             .state("patient.detail.documents-view", {
             url: "documents/view",

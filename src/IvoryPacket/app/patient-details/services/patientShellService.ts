@@ -4,8 +4,8 @@
         openPatients: interfaces.patientDetailed[] = [];
         currentPatient: interfaces.patientDetailed;
 
-        static $inject: Array<string> = ["PatientService"];
-        constructor(private patientService: interfaces.patientService) {
+        static $inject: Array<string> = ["PatientService", "DemographicsService"];
+        constructor(private patientService: interfaces.patientService, private demographicsService: interfaces.demographicsService) {
 
         }
 
@@ -44,7 +44,16 @@
         }
 
         saveCurrentPatient(): angular.IPromise<any> {
-           return this.patientService.updatePatient(this.currentPatient).then((result) => {
+            if (!this.demographicsService.isValidPhoneNumber(this.currentPatient.homePhoneNumber)) {
+                this.currentPatient.homePhoneNumber = null;
+            };
+            if (!this.demographicsService.isValidPhoneNumber(this.currentPatient.mobilePhoneNumber)) {
+                this.currentPatient.mobilePhoneNumber = null;
+            };
+            if (!this.demographicsService.isValidPhoneNumber(this.currentPatient.workPhoneNumber)) {
+                this.currentPatient.workPhoneNumber = null;
+            }
+            return this.patientService.updatePatient(this.currentPatient).then((result) => {
                 angular.copy(result.data, this.currentPatient);
             })
         }

@@ -29,7 +29,12 @@ namespace IvoryPacket.DTOs
         public virtual EmailAddress EmailAddress { get; set; }
 
         public virtual Address ResidentialAddress { get; set; }
-        public virtual SocialHistoryObservation SocialHistoryObservation { get; set; }
+
+        public virtual SocialHistory SocialHistory { get; set; }
+        public virtual SmokingHistory SmokingHistory { get; set; }
+        public virtual AlcoholHistory AlcoholHistory { get; set; }
+        public virtual DrugHistory DrugHistory { get; set; }
+
         public virtual ICollection<VitalSign> VitalSigns { get; set; }
     }
 }

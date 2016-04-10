@@ -4,9 +4,8 @@ var patient;
     (function (controllers) {
         "use strict";
         var DemographicsController = (function () {
-            function DemographicsController(patientShellService, phoneNumberService, $state) {
+            function DemographicsController(patientShellService, $state) {
                 this.patientShellService = patientShellService;
-                this.phoneNumberService = phoneNumberService;
                 this.$state = $state;
                 this.genderOptions = ["Male", "Female"];
                 this.titleOptions = ["Mr", "Mrs", "Master", "Ms", "Doctor"];
@@ -24,7 +23,7 @@ var patient;
                     _this.$state.go("patient.detail.demographics-view");
                 });
             };
-            DemographicsController.$inject = ["PatientShellService", "PhoneNumberService", "$state"];
+            DemographicsController.$inject = ["PatientShellService", "$state"];
             return DemographicsController;
         })();
         controllers.DemographicsController = DemographicsController;

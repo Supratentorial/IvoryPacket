@@ -19,11 +19,11 @@
     <div>
         <div>
             <label>Phone</label>
-            <span class="content">{{vm.patientShellService.currentPatient.mobilePhoneNumber.value || 'Not recorded.'}}</span>
+            <a class="content" ui-sref="patient.detail.demographics-edit">{{vm.patientShellService.currentPatient.mobilePhoneNumber.value || 'Not recorded.'}}</a>
         </div>
         <div>
             <label>Address</label>
-            <span class="content">{{vm.patientShellService.currentPatient.address || 'Not recorded.'}}</span>
+            <a class="content" ui-sref="patient.detail.demographics-edit">{{vm.patientShellService.currentPatient.address || 'Not recorded.'}}</a>
         </div>
     </div>
    <div class="vertical-divider"></div>

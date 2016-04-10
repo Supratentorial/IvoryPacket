@@ -7,12 +7,10 @@
         contactOptions: string[] = ["Mobile", "Home", "Work", "Email"];
         isLoading: boolean = false;
 
-        static $inject = ["PatientShellService", "PhoneNumberService", "$state"];
+        static $inject = ["PatientShellService", "$state"];
         constructor(
             private patientShellService: interfaces.patientShellService,
-            private phoneNumberService: interfaces.phoneNumberService,
             private $state: angular.ui.IStateService) {
-            
         }
 
         savePatient(): void {

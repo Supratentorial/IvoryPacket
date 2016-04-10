@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Newtonsoft.Json;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations.Schema;
 using System.Linq;
@@ -18,6 +19,7 @@ namespace IvoryPacket.Models
 
         [ForeignKey("PatientId")]
         public int PatientId { get; set; }
+        [JsonIgnore]
         public virtual Patient Patient { get; set; } 
     }
 }

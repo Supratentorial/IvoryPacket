@@ -1,17 +1,15 @@
 ﻿module interfaces {
-    export interface substanceUseService {
-        saveSmokingObservation(smokingDTO: smokingDTO): angular.IPromise<any>;
-        getSmokingObservation(): angular.IPromise<any>;
-        getAlcoholObservation(): angular.IPromise<any>;
-        saveAlcoholObservation(alcoholDTO: alcoholDTO): angular.IPromise<any>;
-        saveDrugObservation(drugDTO: drugDTO): angular.IPromise<any>;
-        getDrugObservation(): angular.IPromise<any>;
-        createNewSmokingObservation(): smokingDTO;
-    }
 
     export interface vitalsService {
-        saveNewVitalSigns(vitalSignsDTO: vitalSignsDTO): angular.IPromise<any>;
-        getPatientVitalSigns(): angular.IPromise<any>;
+        createNewVitalSigns(): interfaces.vitalSign;
+        getVitalsById(vitalsId: number): interfaces.vitalSign;
+        saveVitalSigns(vitalSign): void;
+        getHeartRateValues(): Array<number>;
+        getHeartRateLabels(): Array<string>;
+    }
+
+    export interface socialHistoryService {
+        createNewSocialHistory(): interfaces.socialHistory;
     }
 
     export interface patientService {
@@ -31,11 +29,6 @@
         saveCurrentPatient(): angular.IPromise<any>;
     }
 
-    export interface demographicsService {
-        getCurrentPatient(): void;
-        currentPatient: interfaces.patientDetailed;
-    }
-
     export interface allergiesDetailService {
         getAllergySeverityOptions(): any;
         getAllergyReactionTypes(): any;
@@ -52,10 +45,10 @@
         getCurrentPatientAllergies(): void;
     }
 
-    export interface phoneNumberService {
-        createNewMobileNumber(): interfaces.phoneNumber;
-        createNewHomeNumber(): interfaces.phoneNumber;
-        createNewWorkNumber(): interfaces.phoneNumber;
+    export interface demographicsService {
+        createNewPhoneNumber(type: string): interfaces.phoneNumber;
+        createNewAddress(type: string): interfaces.address;
+        isValidPhoneNumber(phoneNumber: interfaces.phoneNumber): boolean;
     }
 
 }

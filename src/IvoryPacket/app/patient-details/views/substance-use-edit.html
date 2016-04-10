@@ -9,36 +9,30 @@
                     <div class="form-group">
                         <label class="control-label">Smoking status</label>
                         <div>
-                            <label class="radio-inline"> <input type="radio" name="smoking" value="never" ng-model="vm.smokingObservation.smokingStatus"> Never smoked </label>
-                            <label class="radio-inline"> <input type="radio" name="smoking" value="ex-smoker" ng-model="vm.smokingObservation.smokingStatus"> Ex-smoker </label>
-                            <label class="radio-inline"> <input type="radio" name="smoking" value="current" ng-model="vm.smokingObservation.smokingStatus"> Current smoker </label>
-                            <label class="radio-inline"> <input type="radio" name="smoking" value="passive" ng-model="vm.smokingObservation.smokingStatus" /> Passive smoker </label>
+                            <label class="radio-inline"> <input type="radio" name="smoking" value="Never smoked" ng-model="vm.patientShellService.currentPatient.smokingHistory.smokingStatus"> Never smoked </label>
+                            <label class="radio-inline"> <input type="radio" name="smoking" value="Ex-smoker" ng-model="vm.patientShellService.currentPatient.smokingHistory.smokingStatus"> Ex-smoker </label>
+                            <label class="radio-inline"> <input type="radio" name="smoking" value="Current smoker" ng-model="vm.patientShellService.currentPatient.smokingHistory.smokingStatus"> Current smoker </label>
+                            <label class="radio-inline"> <input type="radio" name="smoking" value="Passive smoke" ng-model="vm.patientShellService.currentPatient.smokingHistory.smokingStatus" /> Passive smoker </label>
                         </div>
                     </div>
-                    <div class="form-group" ng-show="vm.smokingObservation.smokingStatus == 'ex-smoker' || vm.smokingObservation.smokingStatus == 'current'">
-                        <label class="control-label">Cigarettes/day</label>
-                        <div>
-                            <label class="radio-inline"><input type="radio" name="measure" value="<5" ng-model="vm.smokingObservation.cigarettesPerDay" /> Less than 5 </label>
-                            <label class="radio-inline"><input type="radio" name="measure" value="5 - 10" ng-model="vm.smokingObservation.cigarettesPerDay" /> 5 - 10 </label>
-                            <label class="radio-inline"><input type="radio" name="measure" value="10 - 20" ng-model="vm.smokingObservation.cigarettesPerDay" /> 10 - 20 </label>
-                            <label class="radio-inline"><input type="radio" name="measure" value="20 - 30" ng-model="vm.smokingObservation.cigarettesPerDay" /> 20 - 30 </label>
-                            <label class="radio-inline"><input type="radio" name="measure" value=">30" ng-model="vm.smokingObservation.cigarettesPerDay" /> More than 30 </label>
+                    <div class="row" ng-show="vm.patientShellService.currentPatient.smokingHistory.smokingStatus == 'Ex-smoker' || vm.patientShellService.currentPatient.smokingHistory.smokingStatus == 'Current smoker'">
+                        <div class="form-group col-lg-3">
+                            <label class="control-label">Cigarettes/day</label>
+                            <input class="form-control" ng-model="vm.patientShellService.currentPatient.smokingHistory.cigarettesPerDay" />
                         </div>
-                    </div>
-                    <div class="row" ng-show="vm.smokingObservation.smokingStatus == 'ex-smoker' || vm.smokingObservation.smokingStatus == 'current'">
-                        <div class="form-group col-lg-3 col-md-4">
+                        <div class="form-group col-lg-3">
                             <label class="control-label">Age started</label>
-                            <input class="form-control" />
+                            <input class="form-control" ng-model="vm.patientShellService.currentPatient.smokingHistory.ageSmokingCommenced" />
                         </div>
-                        <div class="form-group col-lg-3 col-md-4">
+                        <div class="form-group col-lg-3">
                             <label class="control-label">Age ceased</label>
-                            <input class="form-control" />
+                            <input ng-model="vm.patientShellService.currentPatient.smokingHistory.ageSmokingCeased" class="form-control" />
                         </div>
                     </div>
-                    <div class="row" ng-show="vm.smokingObservation.smokingStatus == 'ex-smoker' || vm.smokingObservation.smokingStatus == 'current'">
+                    <div class="row" ng-show="vm.patientShellService.currentPatient.smokingHistory.smokingStatus == 'Ex-smoker' || vm.patientShellService.currentPatient.smokingHistory.smokingStatus == 'Current smoker'">
                         <div class="form-group col-lg-12">
                             <label class="control-label">Notes</label>
-                            <input class="form-control" />
+                            <input class="form-control" ng-model="vm.patientShellService.currentPatient.smokingHistory.smokingNotes" />
                         </div>
                     </div>
                 </form>
@@ -72,15 +66,20 @@
             </div>
             <div class="panel-body">
                 <form>
+                    
                     <div class="form-group">
-                        <label class="control-label"></label>
+                        <label class="control-label">Notes</label>
+                        <input class="form-control" ng-model="vm.patientShellService.currentPatient.drugHistory.drugNotes" />
                     </div>
+
                 </form>
             </div>
         </div>
     </div>
 </div>
 <div class="footer">
-    <button class="btn btn-lg btn-success save-btn" ng-click="vm.saveObservations()"><i class="fa fa-save"></i> Save</button>
+    <button class="btn btn-lg btn-success save-btn" ng-click="vm.saveSocialHistoryObservations()" ng-disabled="vm.isLoading">
+    <i class="fa fa-save"></i>
+    <i class="fa fa-spinner fa-pulse" ng-show="vm.isLoading"></i> Save</button>
     <button class="btn btn-lg btn-default"><i class="fa fa-ban"></i> Cancel</button>
 </div>

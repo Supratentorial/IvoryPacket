@@ -27,7 +27,11 @@ namespace IvoryPacket.Models
         public virtual ICollection<Address> Addresses { get; set; }
         public virtual ICollection<Allergy> Allergies { get; set; }
         public virtual ICollection<VitalSign> VitalSigns { get; set; }
-        public virtual SocialHistoryObservation SocialHistoryObservation { get; set; }
+
+        public virtual AlcoholHistory AlcoholHistory { get; set; }
+        public virtual SmokingHistory SmokingHistory { get; set; }
+        public virtual DrugHistory DrugHistory { get; set; }
+        public virtual SocialHistory SocialHistory { get; set; }
 
         public string GetFullName()
         {

@@ -1,30 +1,26 @@
 ﻿module interfaces {
-    export interface smokingDTO {
-        lastUpdated: Date;
+    export interface socialHistory {
+        socialHistoryId: number;
+        ethnicity: string;
+        occupation: string;
+        maritalStatus: string;
+    }
+
+    export interface smokingHistory {
         smokingStatus: string;
-        cigarettesPerDay: number;
-        ageStarted: number;
-        ageCeased: number;
-        notes: string;
-        patientId: number;
-        smokingObservationId: number;
+        cigarettesPerDay: string;
+        ageSmokingCommenced: number;
+        ageSmokingCeased: number;
+    }
+
+    export interface alcoholHistory {
+        alcoholHistory: number;
+        alcoholStatus: string;
+        drinksPerDay: string;
     }
     
-    export interface alcoholDTO {
+    export interface drugHistory {
+        drugHistoryId: number;
 
-    }
-
-    export interface drugDTO {
-
-    }
-
-
-    export interface vitalSignsDTO {
-        vitalSignsId: number;
-        heartRate: number;
-        systolicBloodPressure: number;
-        diastolicBloodPressure: number;
-        oxygenSaturation: number;
-        respiratoryRate: number;
     }
 }
