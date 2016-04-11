@@ -17,7 +17,7 @@
                 height: null,
                 weight: null,
                 bmi: null,
-                dateRecorded: null
+                dateRecorded: Date.now();
             }
         }
 
@@ -46,7 +46,9 @@
                 var heartRateLables: Array<string> = [];
                 for (var i = 0; i < this.patientShellService.currentPatient.vitalSigns.length; i++) {
                     if (this.patientShellService.currentPatient.vitalSigns[i].heartRate) {
-                        heartRateLables.push(this.patientShellService.currentPatient.vitalSigns[i].dateRecorded.toDateString());
+                        if (this.patientShellService.currentPatient.vitalSigns[i].dateRecorded) {
+                            heartRateLables.push(this.patientShellService.currentPatient.vitalSigns[i].dateRecorded.toDateString());
+                        }
                     }
                 }
                 return heartRateLables;
