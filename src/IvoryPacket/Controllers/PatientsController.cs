@@ -14,7 +14,7 @@ namespace IvoryPacket.Controllers
 
     public class PatientsController : Controller
     {
-        private IvoryPacketDbContext dbContext { get; set; }
+        private IvoryPacketDbContext dbContext;
 
         public PatientsController(IvoryPacketDbContext context)
         {

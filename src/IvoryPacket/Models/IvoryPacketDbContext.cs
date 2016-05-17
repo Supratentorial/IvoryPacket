@@ -16,6 +16,7 @@ namespace IvoryPacket.Models
         public DbSet<Encounter> Encounters { get; set; }
         public DbSet<VitalSign> VitalSigns { get; set; }
         public DbSet<Appointment> Appointments { get; set; }
+        public DbSet<User> Users { get; set; }
 
 
         protected override void OnModelCreating(ModelBuilder modelBuilder) {
