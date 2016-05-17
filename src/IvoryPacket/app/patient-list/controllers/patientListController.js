@@ -25,7 +25,7 @@ var patient;
             };
             PatientListController.$inject = ["PatientListService", "PatientShellService", "$uibModal"];
             return PatientListController;
-        })();
+        }());
         controllers.PatientListController = PatientListController;
         angular.module("patient").controller("PatientListController", PatientListController);
     })(controllers = patient.controllers || (patient.controllers = {}));

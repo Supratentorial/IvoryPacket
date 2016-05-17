@@ -24,34 +24,37 @@ namespace IvoryPacket.Controllers
         [Route("api/patients")]
         // GET: api/patients
         [HttpGet]
-        public IActionResult Get()
+        public IActionResult GetPatients(string searchString = "", bool isActive = true, bool hasAppointmentToday = false, bool detailed = false)
         {
-            var patients = dbContext.Patients.Take(40);
-            List<PatientSimpleDTO> patientDTOs = new List<PatientSimpleDTO>();
-            foreach (Patient patient in patients)
+            var patients = dbContext.Patients.AsQueryable();
+            if (!string.IsNullOrEmpty(searchString))
             {
-                var patientDTO = new PatientSimpleDTO()
-                {
-                    PatientId = patient.PatientId,
-                    GivenName = patient.GivenName,
-                    FamilyName = patient.FamilyName,
-                    DateOfBirth = patient.DateOfBirth,
-                    Gender = patient.Gender,
-                    Age = patient.GetAgeString(),
-                    FullName = patient.GetFullName(),
-                    IsActive = patient.IsActive,
-                    PreferredName = patient.PreferredName,
-                    Title = patient.Title
-                };
-                patientDTOs.Add(patientDTO);
+                patients = patients.Where(p => p.GivenName.Contains(searchString) || p.FamilyName.Contains(searchString));
             }
-            return new HttpOkObjectResult(patientDTOs);
+            //patients = patients.Where(p => p.IsActive == isActive);
+            if (hasAppointmentToday)
+            {
+                //TODO: Change to check for appointments today
+                patients = patients.Where(p => p.Appointments.Any());
+            }
+            if (detailed)
+            {
+                patients = patients
+                .Include(p => p.EmailAddress)
+                .Include(p => p.PhoneNumbers)
+                .Include(p => p.SocialHistory)
+                .Include(p => p.SmokingHistory)
+                .Include(p => p.AlcoholHistory)
+                .Include(p => p.DrugHistory)
+                .Include(p => p.VitalSigns);
+            }
+            return new HttpOkObjectResult(patients.ToList());
         }
 
         // GET api/values/5
         [HttpGet]
-        [Route("api/patients/{patientId}/detailed")]
-        public PatientDetailedDTO GetDetailedPatient(int patientId)
+        [Route("api/patients/{patientId}")]
+        public PatientDetailedDTO GetPatientById(int patientId, bool detailed = false)
         {
             var patient = dbContext.Patients
                 .Where(p => p.PatientId == patientId)
@@ -89,26 +92,6 @@ namespace IvoryPacket.Controllers
             patientDTO.DrugHistory = patient.DrugHistory;
             patientDTO.VitalSigns = patient.VitalSigns;
             return patientDTO;
-        }
-
-        [HttpGet]
-        [Route("api/patients/{patientId}/simple")]
-        public PatientSimpleDTO GetSimplePatient(int patientId)
-        {
-            var patient = dbContext.Patients.Where(p => p.PatientId == patientId).FirstOrDefault();
-            return new PatientSimpleDTO()
-            {
-                PatientId = patient.PatientId,
-                GivenName = patient.GivenName,
-                FamilyName = patient.FamilyName,
-                DateOfBirth = patient.DateOfBirth,
-                Gender = patient.Gender,
-                Age = patient.GetAgeString(),
-                FullName = patient.GetFullName(),
-                IsActive = patient.IsActive,
-                PreferredName = patient.PreferredName,
-                Title = patient.Title
-            };
         }
 
         [HttpPost]
@@ -187,7 +170,8 @@ namespace IvoryPacket.Controllers
                             existingVitalSign.Height = vitalSign.Height;
                             existingVitalSign.Weight = vitalSign.Weight;
                         }
-                        else {
+                        else
+                        {
                             dbContext.VitalSigns.Remove(existingVitalSign);
                         }
                     }
@@ -229,7 +213,8 @@ namespace IvoryPacket.Controllers
                         existingPhoneNumber.CountryCode = phoneNumber.CountryCode;
                         existingPhoneNumber.IsPreferred = phoneNumber.IsPreferred;
                     }
-                    else {
+                    else
+                    {
                         // No: Delete it
                         dbContext.PhoneNumbers.Remove(existingPhoneNumber);
                     }
@@ -254,7 +239,8 @@ namespace IvoryPacket.Controllers
                         dbContext.EmailAddresses.Remove(existingPatient.EmailAddress);
                     }
                 }
-                else {
+                else
+                {
                     existingPatient.EmailAddress = patientDTO.EmailAddress;
                 }
 
@@ -288,7 +274,8 @@ namespace IvoryPacket.Controllers
                         existingPatient.SocialHistory.Religion = patientDTO.SocialHistory.Religion;
                     }
                 }
-                else if (patientDTO.SmokingHistory != null) {
+                else if (patientDTO.SmokingHistory != null)
+                {
                     existingPatient.SocialHistory = patientDTO.SocialHistory;
                 }
             }

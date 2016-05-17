@@ -12,7 +12,9 @@
 
         createAppointment() {
             this.$uibModal.open({
-                templateUrl: "html/create-appointment-modal.html"
+                templateUrl: "html/create-appointment-modal.html",
+                controller: "CreateAppointmentModalController",
+                controllerAs: "vm"
             })
         }
 

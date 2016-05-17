@@ -3,31 +3,41 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.AspNet.Mvc;
-
-// For more information on enabling Web API for empty projects, visit http://go.microsoft.com/fwlink/?LinkID=397860
+using IvoryPacket.Models;
 
 namespace IvoryPacket.Controllers
 {
-    [Route("api/appointments")]
+    
     public class AppointmentsController : Controller
     {
-        [HttpGet]
-        public IEnumerable<string> Get()
+
+        private IvoryPacketDbContext dbContext { get; set; }
+
+        public AppointmentsController(IvoryPacketDbContext context)
         {
-            return new string[] { "value1", "value2" };
+            dbContext = context;
         }
 
-        // GET api/values/5
-        [HttpGet("{id}")]
-        public string Get(int id)
+        [HttpGet]
+        [Route("api/appointments")]
+        public IEnumerable<Appointment> GetAppointments()
+        {
+            List<Appointment> appointmentList = new List<Appointment>();
+            return appointmentList;
+        }
+
+        [Route("api/appointments/{appointmentId}")]
+        [HttpGet]
+        public string GetAppointmentsById(int appointmentId)
         {
             return "value";
         }
 
-        // POST api/values
+        [Route("api/appointments")]
         [HttpPost]
-        public void Post([FromBody]string value)
+        public void Post([FromBody]Appointment appointment)
         {
+            dbContext.Appointments.Add(appointment);
         }
 
         // PUT api/values/5

@@ -11,7 +11,7 @@
         }
 
         getAllPatients(): angular.IPromise<any> {
-            return this.$http.get("api/patients").then((result) => {
+            return this.$http.get("api/patients/?hasAppointmentToday=true").then((result) => {
                 angular.copy(result.data, this.patientsWithAppointmentToday);
             });
         }

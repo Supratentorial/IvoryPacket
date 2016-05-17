@@ -1,8 +1,5 @@
-﻿/// <reference path="../typings/angular-ui-router/angular-ui-router.d.ts" />
-/// <reference path="../typings/angularjs/angular.d.ts" />
-
-module app {
-    angular.module("app", ["ui.router", "ui.bootstrap", "patient", "appointment", "utilities", "angularMoment", "chart.js"])
+﻿module app {
+    angular.module("app", ["ui.router", "ui.bootstrap", "patient", "appointment", "utilities", "common"])
         .config(($stateProvider: angular.ui.IStateProvider, $urlRouterProvider: angular.ui.IUrlRouterProvider, $locationProvider: angular.ILocationProvider, $httpProvider: angular.IHttpProvider) => {
             $urlRouterProvider.when("/", "/dashboard");
             $urlRouterProvider.when("/patients", "/patients/list");

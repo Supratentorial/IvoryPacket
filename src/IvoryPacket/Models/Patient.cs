@@ -33,6 +33,8 @@ namespace IvoryPacket.Models
         public virtual DrugHistory DrugHistory { get; set; }
         public virtual SocialHistory SocialHistory { get; set; }
 
+        public virtual ICollection<Appointment> Appointments { get; set; }
+
         public string GetFullName()
         {
             return GivenName + " " + FamilyName;

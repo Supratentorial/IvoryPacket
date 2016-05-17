@@ -23,6 +23,7 @@ var patient;
                         if (_this.patientShellService.currentPatient.residentialAddress === null) {
                             _this.patientShellService.currentPatient.residentialAddress = _this.demographicsService.createNewAddress("Residential");
                         }
+                        _this.patientShellService.currentPatient.fullName = _this.demographicsService.getFullNameWithTitle();
                     }).finally(function () {
                     });
                 }
