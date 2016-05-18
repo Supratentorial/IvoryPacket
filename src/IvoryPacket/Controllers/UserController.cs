@@ -37,7 +37,7 @@ namespace IvoryPacket.Controllers
         [HttpPost]
         public void Post([FromBody]User user)
         {
-            this.dbContext.Users.Add()
+            dbContext.Users.Add(user);    
         }
 
         // PUT api/values/5

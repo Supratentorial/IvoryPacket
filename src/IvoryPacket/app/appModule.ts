@@ -1,5 +1,5 @@
 ﻿module app {
-    angular.module("app", ["ui.router", "ui.bootstrap", "patient", "appointment", "utilities", "common"])
+    angular.module("app", ["ui.router", "ui.bootstrap", "patient", "appointment", "utilities", "common", "settings"])
         .config(($stateProvider: angular.ui.IStateProvider, $urlRouterProvider: angular.ui.IUrlRouterProvider, $locationProvider: angular.ILocationProvider, $httpProvider: angular.IHttpProvider) => {
             $urlRouterProvider.when("/", "/dashboard");
             $urlRouterProvider.when("/patients", "/patients/list");
@@ -156,6 +156,18 @@
                 .state("patient.detail.medicalhistory.edit", <angular.ui.IState>{
                     url: "/medical-history/edit",
                     templateUrl: "html/medical-history-edit.html"
+                })
+                .state("settings", <angular.ui.IState>{
+                    url: "/settings",
+                    templateUrl: "html/settings-shell.html",
+                    controller: "SettingsShellController",
+                    controllerAs: "vm"
+                })
+                .state("settings.users", <angular.ui.IState>{
+                    url: "/users",
+                    templateUrl: "html/users-list.html",
+                    controller: "UsersListController",
+                    controllerAs: "vm"
                 })
 
             $locationProvider.html5Mode(true);

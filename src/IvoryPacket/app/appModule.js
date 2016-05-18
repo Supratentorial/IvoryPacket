@@ -1,6 +1,6 @@
 var app;
 (function (app) {
-    angular.module("app", ["ui.router", "ui.bootstrap", "patient", "appointment", "utilities", "common"])
+    angular.module("app", ["ui.router", "ui.bootstrap", "patient", "appointment", "utilities", "common", "settings"])
         .config(function ($stateProvider, $urlRouterProvider, $locationProvider, $httpProvider) {
         $urlRouterProvider.when("/", "/dashboard");
         $urlRouterProvider.when("/patients", "/patients/list");
@@ -157,6 +157,18 @@ var app;
             .state("patient.detail.medicalhistory.edit", {
             url: "/medical-history/edit",
             templateUrl: "html/medical-history-edit.html"
+        })
+            .state("settings", {
+            url: "/settings",
+            templateUrl: "html/settings-shell.html",
+            controller: "SettingsShellController",
+            controllerAs: "vm"
+        })
+            .state("settings.users", {
+            url: "/users",
+            templateUrl: "html/users-list.html",
+            controller: "UsersListController",
+            controllerAs: "vm"
         });
         $locationProvider.html5Mode(true);
     });
