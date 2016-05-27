@@ -9,8 +9,8 @@
             appointmentDateTime: null
         };
 
-        static $inject: Array<string> = ["AppointmentService", "PatientService"]
-        constructor(private appointmentService: interfaces.appointmentService, private patientService: interfaces.patientService) {
+        static $inject: Array<string> = ["AppointmentService", "PatientService", "$uibModalInstance"]
+        constructor(private appointmentService: interfaces.appointmentService, private patientService: interfaces.patientService, private $uibModalInstance: angular.ui.bootstrap.IModalServiceInstance) {
 
         }
 
@@ -26,6 +26,10 @@
 
         patientSelected() {
             this.showCreateAppointment = true;
+        }
+
+        cancelCreateAppointment() {
+            this.$uibModalInstance.dismiss();
         }
         
     }

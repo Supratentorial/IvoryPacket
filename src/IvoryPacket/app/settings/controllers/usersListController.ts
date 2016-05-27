@@ -9,7 +9,7 @@
                 templateUrl: "html/add-user-modal.html",
                 backdrop: "static",
                 controllerAs: "vm",
-                controller: ""
+                controller: "AddUserModalController"
             })
         }
     }
