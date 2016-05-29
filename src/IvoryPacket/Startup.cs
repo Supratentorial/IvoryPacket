@@ -1,13 +1,13 @@
 ﻿using Microsoft.AspNet.Builder;
 using Microsoft.AspNet.Hosting;
 using IvoryPacket.Models;
-using Microsoft.Data.Entity;
+using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.PlatformAbstractions;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
-using Microsoft.AspNet.Authentication.Cookies;
+
 using Microsoft.Extensions.Logging;
-using Microsoft.AspNet.Mvc.Formatters;
+
 using Newtonsoft.Json.Serialization;
 using Newtonsoft.Json;
 
@@ -44,7 +44,7 @@ namespace IvoryPacket
                 options.SerializerSettings.ContractResolver = new CamelCasePropertyNamesContractResolver();
                 options.SerializerSettings.ReferenceLoopHandling = ReferenceLoopHandling.Ignore;
             });
-            services.AddEntityFramework().AddSqlServer().AddDbContext<IvoryPacketDbContext>(
+            services.AddDbContext<IvoryPacketDbContext>(
                 options => options.UseSqlServer(Configuration["Data:DefaultConnection:ConnectionString"])
                 );
         }

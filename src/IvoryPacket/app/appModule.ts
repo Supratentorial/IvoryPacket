@@ -5,6 +5,7 @@
             $urlRouterProvider.when("/patients", "/patients/list");
             $urlRouterProvider.when("/patients/detail/{patientId:int}", "/patients/detail/{patientId:int}/summary");
             $urlRouterProvider.when("/patients/detail/{patientId:int}/demographics", "patients/detail/{patientId:int}/demographics/view");
+            $urlRouterProvider.when("/settings", "settings/users");
             $stateProvider
                 .state("dashboard", <angular.ui.IState>{
                     url: "/dashboard",

@@ -1,11 +1,9 @@
 ﻿using System.Collections.Generic;
 using System.Linq;
-using Microsoft.AspNet.Mvc;
 using IvoryPacket.Models;
-using IvoryPacket.Filters;
-using Microsoft.Data.Entity;
+using Microsoft.EntityFrameworkCore;
 using IvoryPacket.DTOs;
-using System;
+using Microsoft.AspNetCore.Mvc;
 
 // For more information on enabling Web API for empty projects, visit http://go.microsoft.com/fwlink/?LinkID=397860
 
@@ -48,7 +46,7 @@ namespace IvoryPacket.Controllers
                 .Include(p => p.DrugHistory)
                 .Include(p => p.VitalSigns);
             }
-            return new HttpOkObjectResult(patients.ToList());
+            return Ok(patients.ToList());
         }
 
         // GET api/values/5
@@ -95,7 +93,6 @@ namespace IvoryPacket.Controllers
         }
 
         [HttpPost]
-        [ValidateModel]
         [Route("api/patients")]
         public IActionResult Post([FromBody]PatientDetailedDTO patientDTO)
         {
@@ -119,7 +116,7 @@ namespace IvoryPacket.Controllers
             };
             dbContext.Add(patient);
             dbContext.SaveChanges();
-            return new HttpOkObjectResult(patient);
+            return Ok(patient);
         }
 
         [Route("api/patients/{patientId}")]
@@ -128,11 +125,11 @@ namespace IvoryPacket.Controllers
         {
             if (!ModelState.IsValid)
             {
-                return HttpBadRequest(ModelState);
+                return BadRequest(ModelState);
             }
             if (patientDTO.PatientId == 0)
             {
-                return HttpNotFound();
+                return NotFound();
             }
 
             var existingPatient = dbContext.Patients

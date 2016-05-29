@@ -1,17 +1,15 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.Linq;
-using System.Threading.Tasks;
-using Microsoft.AspNet.Mvc;
 using IvoryPacket.Models;
-using Microsoft.Data.Entity;
 using Microsoft.Extensions.Logging;
+using Microsoft.AspNetCore.Mvc;
+using Microsoft.EntityFrameworkCore;
 
 // For more information on enabling Web API for empty projects, visit http://go.microsoft.com/fwlink/?LinkID=397860
 
 namespace IvoryPacket.Controllers
 {
-    
+
     public class AllergiesController : Controller
     {
 
@@ -26,40 +24,39 @@ namespace IvoryPacket.Controllers
         [Route("api/patients/{patientId}/allergies")]
         public IActionResult GetAllergiesByPatientId(int patientId) {
             var allergies = dbContext.Allergies.Where(a => a.PatientId == patientId);
-            return new HttpOkObjectResult(allergies);
+            return Ok(allergies);
         }
 
         [Route("api/patients/{patientId}/allergies/{allergyId}")]
         [HttpGet]
         public IActionResult GetAllergyById(int allergyId) {
             var allergy = dbContext.Allergies.SingleOrDefault(a => a.AllergyId == allergyId);
-            return new HttpOkObjectResult(allergy);
+            return Ok(allergy);
         }
 
         [Route("api/patients/{patientId}/allergies")]
         [HttpPost]
         public IActionResult Post([FromBody]Allergy allergy)
         {
-            
             if (allergy.AllergyId != 0) {
-                return HttpBadRequest();
+                return BadRequest();
             }
             if (allergy.PatientId == 0) {
-                return HttpBadRequest();
+                return BadRequest();
             }
             try
             {
                 var patient = dbContext.Patients.SingleOrDefault(p => p.PatientId == allergy.PatientId);
                 if (patient == null) {
-                    return new HttpNotFoundResult();
+                    return NotFound();
                 }
                 dbContext.Allergies.Add(allergy);
                 dbContext.SaveChanges();
-                return new HttpOkObjectResult(allergy);
+                return Ok(allergy);
             }
             catch (Exception exception) {
                 logger.LogInformation(exception.Message);
-                return HttpBadRequest();
+                return BadRequest();
             }
         }
 
@@ -70,11 +67,11 @@ namespace IvoryPacket.Controllers
         {
             this.logger.LogInformation("Allergy ID is " + allergy.AllergyId);
             if (allergy.AllergyId == 0) {
-                return HttpBadRequest();
+                return BadRequest();
             }
             dbContext.Entry(allergy).State = EntityState.Modified;
             dbContext.SaveChanges();
-            return new HttpOkObjectResult(allergy);
+            return Ok(allergy);
         }
 
         // DELETE api/values/5
