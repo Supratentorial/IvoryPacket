@@ -98,7 +98,7 @@ namespace IvoryPacket.Controllers
         {
             if (patientDTO.PatientId != 0)
             {
-                return new BadRequestResult();
+                return BadRequest();
             }
             List<PhoneNumber> phoneNumbers = new List<PhoneNumber>();
             var patient = new Patient()
@@ -277,7 +277,7 @@ namespace IvoryPacket.Controllers
                 }
             }
             dbContext.SaveChanges();
-            return this.Ok(patientDTO);
+            return Ok(patientDTO);
         }
 
         // DELETE api/values/5

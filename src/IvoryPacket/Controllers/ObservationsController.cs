@@ -1,10 +1,8 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using System.Linq;
-using System.Threading.Tasks;
-using Microsoft.AspNet.Mvc;
 using IvoryPacket.DTOs;
 using IvoryPacket.Models;
+using Microsoft.AspNetCore.Mvc;
 
 // For more information on enabling Web API for empty projects, visit http://go.microsoft.com/fwlink/?LinkID=397860
 
@@ -12,9 +10,12 @@ namespace IvoryPacket.Controllers
 {
     public class ObservationsController : Controller
     {
-
-        [FromServices]
+        
         public IvoryPacketDbContext DbContext { get; set; }
+
+        public ObservationsController(IvoryPacketDbContext dbContext) {
+
+        }
 
         // GET: api/values
         [HttpGet]
@@ -60,7 +61,7 @@ namespace IvoryPacket.Controllers
 
             var existingPatient = DbContext.Patients.Where(p => p.PatientId == patientId).SingleOrDefault();
             existingPatient.VitalSigns.Add(vitalSign);
-            return new HttpOkObjectResult(existingPatient);
+            return Ok(existingPatient);
         }
 
         // DELETE api/values/5

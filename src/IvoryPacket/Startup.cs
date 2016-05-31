@@ -1,21 +1,19 @@
-﻿using Microsoft.AspNet.Builder;
-using Microsoft.AspNet.Hosting;
-using IvoryPacket.Models;
+﻿using IvoryPacket.Models;
 using Microsoft.EntityFrameworkCore;
-using Microsoft.Extensions.PlatformAbstractions;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
-
 using Microsoft.Extensions.Logging;
-
 using Newtonsoft.Json.Serialization;
 using Newtonsoft.Json;
+using Microsoft.AspNetCore.Hosting;
+using Microsoft.AspNetCore.Builder;
+using Microsoft.Extensions.PlatformAbstractions;
 
 namespace IvoryPacket
 {
     public class Startup
     {
-        public Startup(IHostingEnvironment env, IApplicationEnvironment appEnv)
+        public Startup(IHostingEnvironment env, ApplicationEnvironment appEnv)
         {
             // Setup configuration sources.
 
@@ -52,8 +50,7 @@ namespace IvoryPacket
         // Configure is called after ConfigureServices is called.
         public void Configure(IApplicationBuilder app, IHostingEnvironment env, ILoggerFactory loggerFactory)
         {
-            loggerFactory.MinimumLevel = LogLevel.Information;
-            loggerFactory.AddConsole();
+
 
             // Configure the HTTP request pipeline.
 
@@ -70,22 +67,12 @@ namespace IvoryPacket
                 app.UseExceptionHandler("/Home/Error");
             }
 
-            // Add the platform handler to the request pipeline.
-            app.UseIISPlatformHandler();
-
             app.UseDefaultFiles();
 
             // Add static files to the request pipeline.
             app.UseStaticFiles();
 
             // Add OpenIdConnect middleware so you can login using Azure AD.
-            app.UseOpenIdConnectAuthentication(options =>
-            {
-                options.ClientId = Configuration["Authentication:AzureAd:ClientId"];
-                options.Authority = Configuration["Authentication:AzureAd:AADInstance"] + Configuration["Authentication:AzureAd:TenantId"];
-                options.PostLogoutRedirectUri = Configuration["Authentication:AzureAd:PostLogoutRedirectUri"];
-                options.SignInScheme = CookieAuthenticationDefaults.AuthenticationScheme;
-            });
 
             // Add MVC to the request pipeline.
             app.UseMvc();
