@@ -18,8 +18,8 @@ namespace IvoryPacket.Controllers
         [HttpGet]
         public IActionResult GetUsers()
         {
-            
-            return Ok();
+            var users = dbContext.Users;
+            return Ok(users);
         }
 
         // GET api/values/5
@@ -29,11 +29,12 @@ namespace IvoryPacket.Controllers
             return "value";
         }
 
-        // POST api/values
+        [Route("api/users")]
         [HttpPost]
         public void Post([FromBody]User user)
         {
-            dbContext.Users.Add(user);    
+            dbContext.Users.Add(user);
+            dbContext.SaveChanges();   
         }
 
         // PUT api/values/5

@@ -11,16 +11,8 @@
     "IIS Express": {
       "commandName": "IISExpress",
       "launchBrowser": true,
-      "launchUrl": "http://localhost:64454/patients/list",
       "environmentVariables": {
-        "ASPNET_ENV": "Development"
-      },
-      "sdkVersion": "dnx-coreclr-win-x86.1.0.0-rc1-final"
-    },
-    "web": {
-      "commandName": "web",
-      "environmentVariables": {
-        "Hosting:Environment": "Development"
+        "ASPNETCORE_ENVIRONMENT": "Development"
       }
     }
   }

@@ -10,7 +10,7 @@ namespace IvoryPacket.Models
         }
         public IvoryPacketDbContext(DbContextOptions<IvoryPacketDbContext> options) : base(options)
         {
-
+            Database.EnsureCreated();
         }
 
         public DbSet<Allergy> Allergies { get; set; }

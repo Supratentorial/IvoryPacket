@@ -5,7 +5,9 @@
                 <h4 class="panel-title">Users</h4>
                 <button class="btn btn-default" ng-click="vm.addNewUser()"><i class="fa fa-plus"></i> Add User</button>
             </div>
-            <div class="panel-body">Random</div>
+            <div class="panel-body">
+                <div ng-repeat="user in vm.users">{{user.givenName}} {{user.familyName}}</div>
+            </div>
         </div>
     </div>
 </div> 

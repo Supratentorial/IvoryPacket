@@ -13,16 +13,16 @@ namespace IvoryPacket
 {
     public class Startup
     {
-        public Startup(IHostingEnvironment env, ApplicationEnvironment appEnv)
+        public Startup(IHostingEnvironment hostingEnvironment)
         {
             // Setup configuration sources.
 
             var builder = new ConfigurationBuilder()
-                .SetBasePath(appEnv.ApplicationBasePath)
+                .SetBasePath(hostingEnvironment.ContentRootPath)
                 .AddJsonFile("appsettings.json")
-                .AddJsonFile($"appsettings.{env.EnvironmentName}.json", optional: true);
+                .AddJsonFile($"appsettings.{hostingEnvironment.EnvironmentName}.json", optional: true);
 
-            if (env.IsDevelopment())
+            if (hostingEnvironment.IsDevelopment())
             {
                 // This reads the configuration keys from the secret store.
                 // For more details on using the user secret store see http://go.microsoft.com/fwlink/?LinkID=532709
@@ -68,13 +68,7 @@ namespace IvoryPacket
             }
 
             app.UseDefaultFiles();
-
-            // Add static files to the request pipeline.
             app.UseStaticFiles();
-
-            // Add OpenIdConnect middleware so you can login using Azure AD.
-
-            // Add MVC to the request pipeline.
             app.UseMvc();
 
             AutoMapperConfig.RegisterMappings();
