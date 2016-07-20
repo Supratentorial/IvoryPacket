@@ -1,5 +1,6 @@
 ﻿using IvoryPacket.Models;
 using Microsoft.AspNetCore.Mvc;
+using System.Linq;
 
 // For more information on enabling Web API for empty projects, visit http://go.microsoft.com/fwlink/?LinkID=397860
 
@@ -16,9 +17,14 @@ namespace IvoryPacket.Controllers
         // GET: api/values
         [Route("api/users")]
         [HttpGet]
-        public IActionResult GetUsers()
+        public IActionResult GetUsers(string type)
         {
-            var users = dbContext.Users;
+            var users = dbContext.Users.AsQueryable();
+            if (!string.IsNullOrEmpty(type))
+            {
+                users = users.Where(u => )
+            }
+            
             return Ok(users);
         }
 
