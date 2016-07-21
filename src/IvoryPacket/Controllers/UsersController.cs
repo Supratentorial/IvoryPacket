@@ -6,11 +6,12 @@ using System.Linq;
 
 namespace IvoryPacket.Controllers
 {
-    public class UserController : Controller
+    public class UsersController : Controller
     {
         private IvoryPacketDbContext dbContext;
 
-        public UserController(IvoryPacketDbContext dbContext) {
+        public UsersController(IvoryPacketDbContext dbContext)
+        {
             this.dbContext = dbContext;
         }
 
@@ -22,9 +23,9 @@ namespace IvoryPacket.Controllers
             var users = dbContext.Users.AsQueryable();
             if (!string.IsNullOrEmpty(type))
             {
-                users = users.Where(u => )
+                users = users.Where(u => u.Type == type);
             }
-            
+
             return Ok(users);
         }
 
@@ -37,10 +38,15 @@ namespace IvoryPacket.Controllers
 
         [Route("api/users")]
         [HttpPost]
-        public void Post([FromBody]User user)
+        public IActionResult Post([FromBody]User user)
         {
+            if (!ModelState.IsValid || user == null)
+            {
+                return BadRequest();
+            }
             dbContext.Users.Add(user);
-            dbContext.SaveChanges();   
+            dbContext.SaveChanges();
+            return Ok(user);
         }
 
         // PUT api/values/5

@@ -11,7 +11,7 @@
     "gulp-notify": "2.2.0",
     "gulp-plumber": "1.0.1",
     "gulp-rename": "1.2.2",
-    "gulp-sass": "2.0.4",
+    "gulp-sass": "^2.3.2",
     "gulp-sourcemaps": "1.6.0",
     "gulp-tslint": "3.4.0",
     "gulp-typescript": "2.9.2",
