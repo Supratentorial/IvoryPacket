@@ -27,8 +27,15 @@ namespace IvoryPacket.Controllers
             var patients = dbContext.Patients.AsQueryable();
             if (!string.IsNullOrEmpty(searchString))
             {
-                patients = patients.Where(p => p.GivenName.Contains(searchString) || p.FamilyName.Contains(searchString));
+                string[] searchStrings = searchString.Split(' ');
+                foreach (string term in searchStrings)
+                {
+                    patients = patients.Where(p => p.GivenName.Contains(term) || p.FamilyName.Contains(term) || p.PreferredName.Contains(term));
+                }
+                
             }
+  
+
             //patients = patients.Where(p => p.IsActive == isActive);
             if (hasAppointmentToday)
             {

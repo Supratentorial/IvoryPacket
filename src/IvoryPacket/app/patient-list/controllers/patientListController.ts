@@ -2,8 +2,10 @@
     "use strict"
     export class PatientListController {
         isLoading: boolean = false;
-        static $inject = ["PatientListService", "PatientShellService", "$uibModal"];
-        constructor(private patientListService: interfaces.services.patientListService, private patientShellService: interfaces.patientShellService, private $uibModal: angular.ui.bootstrap.IModalService) {
+        searchString: string = "";
+        static $inject = ["PatientListService", "PatientShellService", "PatientService", "$uibModal", "$state"];
+
+        constructor(private patientListService: interfaces.patientListService, private patientShellService: interfaces.patientShellService, private patientService: interfaces.patientService, private $uibModal: angular.ui.bootstrap.IModalService, private $state: angular.ui.IStateService) {
             this.isLoading = true;
             this.patientListService.getAllPatients().then().finally(() => {
                 this.isLoading = false;
@@ -17,6 +19,22 @@
                 controllerAs: "vm",
                 controller: "CreatePatientModalController"
             })
+        }
+
+        searchPatients(searchString: string) {
+            return this.patientService.searchPatients(searchString).then(
+                //Success function
+                (response) => {
+                    return response.data;
+                },
+                //Failure function
+                () => { });
+        }
+
+        patientSelected(patient: interfaces.patientDetailed) {
+            console.log(patient.patientId);
+            this.$state.go("patient.detail", { patientId: patient.patientId });
+
         }
 
     }

@@ -1,5 +1,5 @@
 ﻿module patient.services {
-    export class PatientListService implements interfaces.services.patientListService {
+    export class PatientListService implements interfaces.patientListService {
         static $inject = ["$http"];
         patientsWithAppointmentToday = [];
         constructor(private $http: angular.IHttpService) {
@@ -8,6 +8,10 @@
         
         getRecentPatients() {
 
+        }
+
+        searchPatients(searchString: string) {
+            return this.$http.get("api/patients/?search=" + searchString);
         }
 
         getAllPatients(): angular.IPromise<any> {
