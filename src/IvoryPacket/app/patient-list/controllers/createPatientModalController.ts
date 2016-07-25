@@ -1,6 +1,6 @@
 ﻿module patient.controllers {
     export class CreatePatientModalController {
-        newPatient: interfaces.patientDetailed;
+        newPatient: interfaces.patient;
         static $inject: Array<string> = ["$uibModalInstance", "PatientService", "$state"];
         constructor(private $uibModalInstance: angular.ui.bootstrap.IModalServiceInstance, private patientService: interfaces.patientService, private $state: angular.ui.IStateService) {
             this.newPatient = this.patientService.createNewPatient();

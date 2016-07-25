@@ -6,7 +6,7 @@
         getFullNameWithTitle(): string;
     }
 
-    export interface patientDetailed {
+    export interface patient {
         patientId: number;
         title: string;
         givenName: string;
@@ -24,11 +24,9 @@
         medicareCardExpiry?: string;
         medicareCardPosition?: number;
 
-        mobilePhoneNumber: phoneNumber;
-        homePhoneNumber: phoneNumber;
-        workPhoneNumber: phoneNumber;
+        phoneNumbers: phoneNumber[];
 
-        residentialAddress: address;
+        addresses: address[];
         socialHistory: socialHistory;
         smokingHistory: smokingHistory;
         alcoholHistory: alcoholHistory;

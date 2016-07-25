@@ -1,15 +1,15 @@
 ﻿module patient.services {
     "use strict"
     export class PatientShellService {
-        openPatients: interfaces.patientDetailed[] = [];
-        currentPatient: interfaces.patientDetailed;
+        openPatients: interfaces.patient[] = [];
+        currentPatient: interfaces.patient;
 
         static $inject: Array<string> = ["PatientService", "DemographicsService"];
         constructor(private patientService: interfaces.patientService, private demographicsService: interfaces.demographicsService) {
 
         }
 
-        addPatientToOpenList(patient: interfaces.patientDetailed): void {
+        addPatientToOpenList(patient: interfaces.patient): void {
             if (!this.isPatientOpen(patient.patientId)) {
                 this.openPatients.push(patient);
             }

@@ -7,8 +7,8 @@ module patient.services {
             
         }
 
-        createNewPatient(): interfaces.patientDetailed {
-            return <interfaces.patientDetailed>{
+        createNewPatient(): interfaces.patient {
+            return <interfaces.patient>{
                 patientId: 0,
                 title: null,
                 givenName: null,
@@ -42,13 +42,13 @@ module patient.services {
             return this.$http.get("api/patients/" + patientId + "?detailed=true");
         }
 
-        saveNewPatient(newPatient: interfaces.patientDetailed): angular.IPromise<any> {
+        saveNewPatient(newPatient: interfaces.patient): angular.IPromise<any> {
             if (newPatient.patientId === 0) {
                 return this.$http.post("api/patients", newPatient);
             }
         }
 
-        updatePatient(updatedPatient: interfaces.patientDetailed): angular.IPromise<any> {
+        updatePatient(updatedPatient: interfaces.patient): angular.IPromise<any> {
             return this.$http.put("api/patients/" + updatedPatient.patientId, updatedPatient);
         }
 

@@ -1,6 +1,5 @@
 ﻿using System.Collections.Generic;
 using System.Linq;
-using IvoryPacket.DTOs;
 using IvoryPacket.Models;
 using Microsoft.AspNetCore.Mvc;
 
@@ -36,14 +35,14 @@ namespace IvoryPacket.Controllers
 
         [Route("api/observations/smoking")]
         [HttpPost]
-        public void PostSmokingObservation([FromBody]SmokingDTO smokingDTO)
+        public void PostSmokingObservation([FromBody]SmokingHistory smokingHistory)
         {
             
         }
 
         [Route("api/observations/alcohol")]
         [HttpPost]
-        public void PostAlcoholObservation([FromBody]AlcoholDTO alcoholDTO) {
+        public void PostAlcoholObservation([FromBody]AlcoholHistory alcoholHistory) {
 
         }
 
