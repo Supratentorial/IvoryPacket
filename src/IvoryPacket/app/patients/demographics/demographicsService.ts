@@ -1,6 +1,6 @@
 ﻿module patient.services {
     export class DemographicsService implements interfaces.demographicsService {
-        static $inject = [];
+        static $inject = ["PatientShellService"];
         constructor(private patientShellService: interfaces.patientShellService) {
 
         }
@@ -36,6 +36,7 @@
         }
 
         getFullNameWithTitle(): string {
+            console.log(this.patientShellService.currentPatient);
             var givenName = this.patientShellService.currentPatient.givenName;
             var familyName = this.patientShellService.currentPatient.familyName.toUpperCase();
             var middleNames = this.patientShellService.currentPatient.middleNames;

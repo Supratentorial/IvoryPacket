@@ -34,19 +34,6 @@
         vitalSigns: vitalSign[];
     }
 
-    export interface patientSimple {
-        patientId: number;
-        title: string;
-        givenName: string;
-        middleNames: string;
-        familyName: string;
-        fullName: string;
-        preferredName: string;
-        gender: string;
-        dateOfBirth: string;
-        isActive: boolean;
-    }
-
     export interface emailAddress {
         emailAddressId: number;
         emailValue: string;

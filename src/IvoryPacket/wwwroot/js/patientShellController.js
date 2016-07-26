@@ -14,15 +14,16 @@ var patient;
                     this.patientService.getPatientById(patientId).then(function (result) {
                         _this.patientShellService.addPatientToOpenList(result.data);
                         _this.patientShellService.setCurrentPatient(patientId);
-                        if (_this.patientShellService.currentPatient.mobilePhoneNumber === null) {
-                            _this.patientShellService.currentPatient.mobilePhoneNumber = _this.demographicsService.createNewPhoneNumber("Mobile");
-                        }
-                        if (_this.patientShellService.currentPatient.homePhoneNumber === null) {
-                            _this.patientShellService.currentPatient.homePhoneNumber = _this.demographicsService.createNewPhoneNumber("Home");
-                        }
-                        if (_this.patientShellService.currentPatient.residentialAddress === null) {
-                            _this.patientShellService.currentPatient.residentialAddress = _this.demographicsService.createNewAddress("Residential");
-                        }
+                        console.log(_this.patientShellService.currentPatient);
+                        //if (this.patientShellService.currentPatient.mobilePhoneNumber === null) {
+                        //    this.patientShellService.currentPatient.mobilePhoneNumber = this.demographicsService.createNewPhoneNumber("Mobile");
+                        //}
+                        //if (this.patientShellService.currentPatient.homePhoneNumber === null) {
+                        //    this.patientShellService.currentPatient.homePhoneNumber = this.demographicsService.createNewPhoneNumber("Home");
+                        //}
+                        //if (this.patientShellService.currentPatient.residentialAddress === null) {
+                        //    this.patientShellService.currentPatient.residentialAddress = this.demographicsService.createNewAddress("Residential");
+                        //}
                         _this.patientShellService.currentPatient.fullName = _this.demographicsService.getFullNameWithTitle();
                     }).finally(function () {
                     });

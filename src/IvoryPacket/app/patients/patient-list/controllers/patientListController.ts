@@ -31,7 +31,7 @@
                 () => { });
         }
 
-        patientSelected(patient: interfaces.patientDetailed) {
+        patientSelected(patient: interfaces.patient) {
             console.log(patient.patientId);
             this.$state.go("patient.detail", { patientId: patient.patientId });
 
