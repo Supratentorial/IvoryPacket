@@ -7914,21 +7914,21 @@ button.close {
     border-radius: 0px; }
   .nav-tabs > li.active {
     border: none;
-    background: #D84315;
-    margin: 0px; }
+    background: #ffffff;
+    margin: -1px; }
     .nav-tabs > li.active a {
-      background: #D84315;
-      color: #ffffff;
+      background: #ffffff;
+      color: black;
       border: none;
       font-weight: bold; }
       .nav-tabs > li.active a:hover {
-        background: #D84315;
-        color: #ffffff;
+        background: #ffffff;
+        color: black;
         cursor: pointer;
         border: none; }
       .nav-tabs > li.active a:focus {
-        background: #D84315;
-        color: #ffffff;
+        background: #ffffff;
+        color: black;
         cursor: pointer;
         border: none; }
 

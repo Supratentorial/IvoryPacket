@@ -4,27 +4,28 @@
         background: $white;
         border: none;
         border-radius: 0px;
+        color: $tab-font-color;
     }
 
     > li.active {
         border: none;
-        background: $primary-accent;
-        margin: 0px;
+        background: $white;
+        margin: -1px;
         a {
-            background: $primary-accent;
-            color: $white;
+            background: $white;
+            color: $tab-font-color;
             border: none;
             font-weight: bold;
             &:hover {
-                background: $primary-accent;
-                color: $white;
+                background: $white;
+                color: black;
                 cursor: pointer;
                 border: none;
             }
 
             &:focus {
-                background: $primary-accent;
-                color: $white;
+                background: $white;
+                color: black;
                 cursor: pointer;
                 border: none;
             }
