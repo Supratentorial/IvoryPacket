@@ -3,7 +3,7 @@
         createNewPhoneNumber(type: string): interfaces.phoneNumber;
         createNewAddress(type: string): interfaces.address;
         isValidPhoneNumber(phoneNumber: interfaces.phoneNumber): boolean;
-        getFullNameWithTitle(): string;
+        getFullNameWithTitle(familyName: string, givenName: string, middleNames: string, title: string): string;
     }
 
     export interface patient {

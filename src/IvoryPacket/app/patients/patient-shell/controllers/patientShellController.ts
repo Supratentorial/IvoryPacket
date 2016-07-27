@@ -7,7 +7,6 @@
                 this.patientService.getPatientById(patientId).then((result) => {
                     this.patientShellService.addPatientToOpenList(result.data);
                     this.patientShellService.setCurrentPatient(patientId);
-                    console.log(this.patientShellService.currentPatient);
                     //if (this.patientShellService.currentPatient.mobilePhoneNumber === null) {
                     //    this.patientShellService.currentPatient.mobilePhoneNumber = this.demographicsService.createNewPhoneNumber("Mobile");
                     //}
@@ -17,7 +16,6 @@
                     //if (this.patientShellService.currentPatient.residentialAddress === null) {
                     //    this.patientShellService.currentPatient.residentialAddress = this.demographicsService.createNewAddress("Residential");
                     //}
-                    this.patientShellService.currentPatient.fullName = this.demographicsService.getFullNameWithTitle();
                 }).finally(() => {
 
                 });

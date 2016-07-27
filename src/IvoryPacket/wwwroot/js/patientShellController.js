@@ -14,7 +14,6 @@ var patient;
                     this.patientService.getPatientById(patientId).then(function (result) {
                         _this.patientShellService.addPatientToOpenList(result.data);
                         _this.patientShellService.setCurrentPatient(patientId);
-                        console.log(_this.patientShellService.currentPatient);
                         //if (this.patientShellService.currentPatient.mobilePhoneNumber === null) {
                         //    this.patientShellService.currentPatient.mobilePhoneNumber = this.demographicsService.createNewPhoneNumber("Mobile");
                         //}
@@ -24,7 +23,6 @@ var patient;
                         //if (this.patientShellService.currentPatient.residentialAddress === null) {
                         //    this.patientShellService.currentPatient.residentialAddress = this.demographicsService.createNewAddress("Residential");
                         //}
-                        _this.patientShellService.currentPatient.fullName = _this.demographicsService.getFullNameWithTitle();
                     }).finally(function () {
                     });
                 }

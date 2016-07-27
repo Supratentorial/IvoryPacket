@@ -1,7 +1,7 @@
 ﻿module patient.services {
     export class DemographicsService implements interfaces.demographicsService {
-        static $inject = ["PatientShellService"];
-        constructor(private patientShellService: interfaces.patientShellService) {
+        static $inject = [];
+        constructor() {
 
         }
 
@@ -35,15 +35,16 @@
             }
         }
 
-        getFullNameWithTitle(): string {
-            var givenName = this.patientShellService.currentPatient.givenName;
-            var familyName = this.patientShellService.currentPatient.familyName.toUpperCase();
-            var middleNames = this.patientShellService.currentPatient.middleNames;
-            var title = this.patientShellService.currentPatient.title;
-            return familyName + ", " + givenName + " " + middleNames + " (" + title + ")"; 
+        getFullNameWithTitle(familyName: string, givenName: string, middleNames: string, title: string): string {
+            var fullName: string = familyName + ", " + givenName;
+            if (middleNames) {
+                fullName += " " + middleNames;
+            }
+            if (title) {
+                fullName += " (" + title + ")";
+            }
+            return fullName;
         }
-
-
     }
     angular.module("patient").service("DemographicsService", DemographicsService);
 }

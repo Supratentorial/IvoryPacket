@@ -1,34 +1,53 @@
 ﻿.nav-tabs {
+    border-bottom: 1px solid $nav-tabs-border-color;
     background: $md-blue-grey-900;
     > li {
-        background: $white;
-        border: none;
-        border-radius: 0px;
-        color: $tab-font-color;
-    }
+        // Actual tabs (as links)
+        > a {
+            border: 1px solid transparent;
+            border-radius: 0;
+            background: $md-blue-grey-50;
 
-    > li.active {
+            &:hover {
+                border-color: $nav-tabs-link-hover-border-color $nav-tabs-link-hover-border-color $nav-tabs-border-color;
+            }
+        }
+        // Active state, and its :hover to override normal :hover
+        &.active > a {
+            &,
+            &:hover,
+            &:focus {
+                color: $nav-tabs-active-link-hover-color;
+                background-color: $white;
+                border: 1px solid $nav-tabs-active-link-hover-border-color;
+                border-bottom-color: transparent;
+                cursor: default;
+            }
+        }
+    }
+}
+
+/*> li.active {
         border: none;
         background: $white;
-        margin: -1px;
+        margin: 0px;
         a {
             background: $white;
             color: $tab-font-color;
             border: none;
-            font-weight: bold;
             &:hover {
                 background: $white;
-                color: black;
+                color: $tab-font-color;
                 cursor: pointer;
                 border: none;
             }
 
             &:focus {
                 background: $white;
-                color: black;
+                color: $tab-font-color;
                 cursor: pointer;
                 border: none;
             }
         }
     }
-}
+}*/

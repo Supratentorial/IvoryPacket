@@ -4,14 +4,15 @@
         openPatients: interfaces.patient[] = [];
         currentPatient: interfaces.patient;
 
-        static $inject: Array<string> = ["PatientService"];
-        constructor(private patientService: interfaces.patientService) {
+        static $inject: Array<string> = ["PatientService", "DemographicsService"];
+        constructor(private patientService: interfaces.patientService, private demographicsService: interfaces.demographicsService) {
 
         }
 
         addPatientToOpenList(patient: interfaces.patient): void {
             if (!this.isPatientOpen(patient.patientId)) {
                 this.openPatients.push(patient);
+                patient.fullName = this.demographicsService.getFullNameWithTitle(patient.familyName, patient.givenName, patient.middleNames, patient.title);
             }
         }
 
@@ -46,6 +47,7 @@
         saveCurrentPatient(): angular.IPromise<any> {
             return this.patientService.updatePatient(this.currentPatient).then((result) => {
                 angular.copy(result.data, this.currentPatient);
+                this.currentPatient.fullName = this.demographicsService.getFullNameWithTitle(this.currentPatient.familyName, this.currentPatient.givenName, this.currentPatient.middleNames, this.currentPatient.title);
             })
         }
 
