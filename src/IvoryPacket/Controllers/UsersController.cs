@@ -23,7 +23,7 @@ namespace IvoryPacket.Controllers
             var users = dbContext.Users.AsQueryable();
             if (!string.IsNullOrEmpty(type))
             {
-                users = users.Where(u => u.Type == type);
+                users = users.Where(u => u.Role == type);
             }
 
             return Ok(users);
@@ -40,7 +40,7 @@ namespace IvoryPacket.Controllers
         [HttpPost]
         public IActionResult Post([FromBody]User user)
         {
-            if (!ModelState.IsValid || user == null)
+            if (!ModelState.IsValid || user == null || user.UserId != 0)
             {
                 return BadRequest();
             }

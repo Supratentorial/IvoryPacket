@@ -11,6 +11,6 @@ namespace IvoryPacket.Models
         public string FamilyName { get; set; }
         public string Title { get; set; }
         [Required]
-        public string Type { get; set; }
+        public string Role { get; set; }
     }
 }
