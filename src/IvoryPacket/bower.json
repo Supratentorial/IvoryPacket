@@ -19,6 +19,6 @@
   },
   "devDependencies": {},
   "resolutions": {
-    "angular": "1.4.12"
+    "angular": "1.5.9-build.4966+sha.31f20b6"
   }
 }

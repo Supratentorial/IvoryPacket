@@ -28,10 +28,12 @@ paths.distHTMLDir = paths.webroot + "html";
 paths.distJSFiles = paths.webroot + "js/**/*.js";
 paths.distFontDir = paths.webroot + "fonts/";
 paths.distIndexFile = paths.webroot + "index.html";
+paths.distImageDir = paths.webroot + "images/";
 paths.srcSCSSFiles = "app/styles/**/*.{scss, css}";
 paths.srcTSFiles = "app/**/*.ts";
 paths.srcIndexFile = "app/index.html";
 paths.srcHTMLFiles = "app/**/*.html";
+paths.srcImages = "app/images";
 paths.typings = "./typings/**/*.d.ts";
 paths.bower = "bower_components/";
 
@@ -59,6 +61,11 @@ gulp.task("clean:html", function (cb) {
 
 gulp.task("clean:index", function (cb) {
     rimraf(paths.distIndexFile, cb);
+});
+
+gulp.task("copy-images", function () {
+    var images = gulp.src(paths.srcImages);
+    gulp.dest(paths.distImageDir);
 });
 
 //Transpiles app SCSS files into minifed CSS and writes them to webroot.
@@ -151,6 +158,7 @@ gulp.task("watch", function () {
     gulp.watch(paths.srcTSFiles, ["default"]);
     gulp.watch(paths.srcIndexFile, ["default"]);
     gulp.watch(paths.srcHTMLFiles, ["default"]);
+    gulp.watch(paths.distImageDir, ["default"]);
 });
 
-gulp.task("default", ["copy-html","copy-vendor-fonts", "wiredep"], function () { });
+gulp.task("default", ["copy-html","copy-vendor-fonts", "copy-images", "wiredep"], function () { });
