@@ -1,6 +1,6 @@
 ﻿module patient.controllers {
     export class CreateAppointmentModalController {
-
+        clinicians: interfaces.user[] = [];
         showCreateAppointment: boolean = false;
         newAppointment: interfaces.appointment = {
             appointmentId: 0,
@@ -9,8 +9,14 @@
             appointmentDateTime: null
         };
 
-        static $inject: Array<string> = ["AppointmentService", "PatientService", "$uibModalInstance"]
-        constructor(private appointmentService: interfaces.appointmentService, private patientService: interfaces.patientService, private $uibModalInstance: angular.ui.bootstrap.IModalServiceInstance) {
+        static $inject: Array<string> = ["AppointmentService", "PatientService", "$uibModalInstance", "UserManagerService"]
+        constructor(private appointmentService: interfaces.appointmentService,
+            private patientService: interfaces.patientService,
+            private $uibModalInstance: angular.ui.bootstrap.IModalServiceInstance,
+            private userManagerService: interfaces.userManagerService) {
+            this.userManagerService.getAllUsers().then((result) => {
+                angular.copy(result, this.clinicians);
+            });
 
         }
 

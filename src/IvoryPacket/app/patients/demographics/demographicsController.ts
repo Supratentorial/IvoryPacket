@@ -23,7 +23,7 @@
                 .finally(
                 () => {
                     this.isLoading = false;
-                    this.$state.go("patient.detail.demographics-view");
+                    this.$state.go("patient.detail.summary");
                 })
         }
 

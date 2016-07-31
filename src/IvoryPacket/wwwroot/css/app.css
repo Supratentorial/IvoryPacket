@@ -7922,38 +7922,12 @@ button.close {
     border-bottom-color: transparent;
     cursor: default; }
 
-/*> li.active {
-        border: none;
-        background: $white;
-        margin: 0px;
-        a {
-            background: $white;
-            color: $tab-font-color;
-            border: none;
-            &:hover {
-                background: $white;
-                color: $tab-font-color;
-                cursor: pointer;
-                border: none;
-            }
-
-            &:focus {
-                background: $white;
-                color: $tab-font-color;
-                cursor: pointer;
-                border: none;
-            }
-        }
-    }
-}*/
 .panel-heading {
-  background: #ECEFF1 !important;
+  background: #ffffff !important;
   display: flex;
   flex-flow: row;
   align-items: center;
-  padding-top: 4px;
-  min-height: 42px;
-  padding-bottom: 4px; }
+  min-height: 30px; }
   .panel-heading h4 {
     flex-grow: 1;
     font-size: 1.3em; }
@@ -7979,6 +7953,11 @@ button.close {
     font-size: 1.1em; }
   #patientBanner .name {
     font-size: 1.5em; }
+
+.vertical-divider {
+  margin-right: 0.75em;
+  margin-left: 0.75em;
+  border-right: solid 1px #CFD8DC; }
 
 .week-container {
   display: flex; }
@@ -8025,7 +8004,7 @@ button.close {
   margin-right: 10px; }
 
 body {
-  background: #455A64;
+  background: #ECEFF1;
   padding-top: 50px; }
 
 .active-top-level {
@@ -8054,8 +8033,3 @@ body {
   .patient-list-item:hover {
     background: #ECEFF1;
     border-left: solid 0.25em #D84315; }
-
-.vertical-divider {
-  margin-right: 0.75em;
-  margin-left: 0.75em;
-  border-right: solid 1px #CFD8DC; }

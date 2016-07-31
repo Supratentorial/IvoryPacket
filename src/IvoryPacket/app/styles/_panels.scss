@@ -1,11 +1,9 @@
 ﻿.panel-heading {
-    background: $md-blue-grey-50 !important;
+    background: $white !important;
     display: flex;
     flex-flow: row;
     align-items: center;
-    padding-top: 4px;
-    min-height: 42px;
-    padding-bottom: 4px;
+    min-height: 30px;
 
     h4 {
         flex-grow: 1;

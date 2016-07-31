@@ -1,11 +1,63 @@
 <div class="row">
-    <div class="col-lg-12">
+    <div class="col-lg-4">
         <div class="panel panel-default">
             <div class="panel-heading">
-                <h4 class="panel-title">Summary</h4>
+                <h4 class="panel-title">Basic</h4>
+                <button class="btn btn-default" ui-sref="patient.detail.demographics-edit"><i class="fa fa-pencil"></i> Edit</button>
             </div>
-            <div class="panel-body">
-
+            <div class="panel-body no-padding">
+                <div ng-show="vm.isLoading" class="loader-container">
+                    <i class="fa fa-spinner fa-pulse loader fa-2x"></i>
+                </div>
+                <table ng-hide="vm.isLoading" class="table panel-table">
+                    <tr>
+                        <td class="table-label top">Full name</td>
+                        <td class="top">{{vm.patientShellService.currentPatient.fullName}}</td>
+                    </tr>
+                    <tr>
+                        <td class="table-label">Born</td>
+                        <td>{{vm.patientShellService.currentPatient.dateOfBirth | date:'dd/MM/yyyy' || "Not recorded."}} ({{vm.patientShellService.currentPatient.age}})</td>
+                    </tr>
+                    <tr>
+                        <td class="table-label">Gender</td>
+                        <td>{{vm.patientShellService.currentPatient.gender || "Not recorded."}}</td>
+                    </tr>
+                </table>
+            </div>
+        </div>
+    </div>
+    <div class="col-lg-4">
+        <div class="panel panel-default">
+            <div class="panel-heading">
+                <h4 class="panel-title">Contact</h4>
+                <button class="btn btn-default" ui-sref="patient.detail.demographics-edit"><i class="fa fa-pencil"></i> Edit</button>
+            </div>
+            <div class="panel-body no-padding">
+                <div ng-show="vm.isLoading" class="loader-container">
+                    <i class="fa fa-spinner fa-pulse loader fa-2x"></i>
+                </div>
+                <table ng-hide="vm.isLoading" class="table panel-table">
+                    <tr>
+                        <td class="col-lg-4 table-label top">Mobile Phone</td>
+                        <td class="top">{{vm.patientShellService.currentPatient.mobilePhoneNumber.value || "Not recorded."}}</td>
+                    </tr>
+                    <tr>
+                        <td class="col-lg-4 table-label">Home Phone</td>
+                        <td>{{vm.patientShellService.currentPatient.homePhoneNumber.value || "Not recorded."}}</td>
+                    </tr>
+                    <tr>
+                        <td class="col-lg-4 table-label">Work Phone</td>
+                        <td>{{vm.patientShellService.currentPatient.workPhoneNumber.value || "Not recorded."}}</td>
+                    </tr>
+                    <tr>
+                        <td class="col-lg-4 table-label">Residential Address</td>
+                        <td>{{vm.address.value || "Not recorded."}}</td>
+                    </tr>
+                    <tr>
+                        <td class="col-lg-4 table-label">Email</td>
+                        <td>{{vm.patientShellService.currentPatient.emailAddress.emailValue || "Not recorded."}}</td>
+                    </tr>
+                </table>
             </div>
         </div>
     </div>

@@ -12,5 +12,9 @@ namespace IvoryPacket.Models
         public string Title { get; set; }
         [Required]
         public string Role { get; set; }
+        public string ProviderNumber { get; set; }
+
+
+
     }
 }

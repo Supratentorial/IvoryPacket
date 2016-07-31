@@ -20,7 +20,7 @@ var patient;
                 }, function () { console.log("patient failed to save"); })
                     .finally(function () {
                     _this.isLoading = false;
-                    _this.$state.go("patient.detail.demographics-view");
+                    _this.$state.go("patient.detail.summary");
                 });
             };
             DemographicsController.$inject = ["PatientShellService", "$state"];

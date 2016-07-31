@@ -6,11 +6,11 @@ namespace IvoryPacket.Models
     {
         public IvoryPacketDbContext() : base()
         {
-            Database.EnsureCreated();
+            //Database.EnsureCreated();
         }
         public IvoryPacketDbContext(DbContextOptions<IvoryPacketDbContext> options) : base(options)
         {
-            Database.EnsureCreated();
+            //Database.EnsureCreated();
         }
 
         public DbSet<Allergy> Allergies { get; set; }

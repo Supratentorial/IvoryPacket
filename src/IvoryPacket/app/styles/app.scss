@@ -12,7 +12,7 @@
 @import "_buttons.scss";
 
 body {
-    background: $md-blue-grey-700;
+    background: $md-blue-grey-50;
     padding-top: 50px;
 }
 
@@ -50,8 +50,3 @@ body {
     }
 }
 
-.vertical-divider{
-    margin-right: 0.75em;
-    margin-left: 0.75em;
-    border-right: solid 1px $md-blue-grey-100;
-}
