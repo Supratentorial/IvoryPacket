@@ -3,8 +3,11 @@ var patient;
     var controllers;
     (function (controllers) {
         var PatientSummaryController = (function () {
-            function PatientSummaryController() {
+            function PatientSummaryController(patientShellService) {
+                this.patientShellService = patientShellService;
+                this.isLoading = false;
             }
+            PatientSummaryController.$inject = ["PatientShellService"];
             return PatientSummaryController;
         })();
         controllers.PatientSummaryController = PatientSummaryController;

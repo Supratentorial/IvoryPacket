@@ -1,96 +1,40 @@
 <div class="row">
-    <div class="col-lg-4">
-        <div class="panel panel-default">
-            <div class="panel-heading">
-                <h4 class="panel-title">Basic</h4>
-                <button class="btn btn-default" ui-sref="patient.detail.demographics-edit"><i class="fa fa-pencil"></i> Edit</button>
-            </div>
-            <div class="panel-body no-padding">
-                <div ng-show="vm.isLoading" class="loader-container">
-                    <i class="fa fa-spinner fa-pulse loader fa-2x"></i>
-                </div>
-                <table ng-hide="vm.isLoading" class="table panel-table">
-                    <tr>
-                        <td class="table-label top">Full name</td>
-                        <td class="top">{{vm.patientShellService.currentPatient.fullName}}</td>
-                    </tr>
-                    <tr>
-                        <td class="table-label">Born</td>
-                        <td>{{vm.patientShellService.currentPatient.dateOfBirth | date:'dd/MM/yyyy' || "Not recorded."}} ({{vm.patientShellService.currentPatient.age}})</td>
-                    </tr>
-                    <tr>
-                        <td class="table-label">Gender</td>
-                        <td>{{vm.patientShellService.currentPatient.gender || "Not recorded."}}</td>
-                    </tr>
-                </table>
-            </div>
-        </div>
-    </div>
-    <div class="col-lg-4">
+    <div class="col-lg-5">
         <div class="panel panel-default">
             <div class="panel-heading">
                 <h4 class="panel-title">Basic Details</h4>
-            </div>
-            <div class="panel-body">
-                <div class="row">
-                    <div class="col-lg-4">
-                        <img class="pull-left patient-profile-picture" src="https://lh3.googleusercontent.com/-85RT0BjPDHM/VboIYVoUCSI/AAAAAAAAAAA/IzUl0jJyVB0/s180-c-k-no/photo.jpg" />
-                    </div>
-                    <div class="col-lg-8">
-                        <h4>Mumford, Blake (Dr)</h4>
-                        <div>
-                            <span class="table-label">Born</span>
-                            <span>15 June 1990</span>
-                            <span>(26 years)</span>
-                        </div>
-                        <div>
-                            <span class="table-label">Phone</span>
-                            <span>(M)</span>
-                            <span>0400 939 291</span>
-                            <span>(H)</span>
-                            <span>03 9000 0000</span>
-                        </div>
-                        <div>
-                            <span class="table-label">Address</span>
-                            <span>4/24 Hyslop Parade Malvern East, Victoria, 3145</span>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </div>
-    <div class="col-lg-4">
-        <div class="panel panel-default">
-            <div class="panel-heading">
-                <h4 class="panel-title">Contact</h4>
                 <button class="btn btn-default" ui-sref="patient.detail.demographics-edit"><i class="fa fa-pencil"></i> Edit</button>
             </div>
-            <div class="panel-body no-padding">
-                <div ng-show="vm.isLoading" class="loader-container">
-                    <i class="fa fa-spinner fa-pulse loader fa-2x"></i>
+            <div class="panel-body">
+                <div class="media">
+                    <div class="media-left media-top">
+                        <img class="media-object media-left patient-profile-picture" src="images/user-icon.svg" />
+                    </div>
+                    <div class="media-body">
+                        <h4 class="media-heading">{{vm.patientShellService.currentPatient.fullName}}</h4>
+                        <div>
+                            <img class="summary-icon" src="images/birthday-icon.svg" />
+                            <span class="summary-text">{{vm.patientShellService.currentPatient.dateOfBirth | date:'dd/MM/yyyy' || "Not recorded."}} ({{vm.patientShellService.currentPatient.age}})</span>
+                            <span class="summary-text">{{vm.patientShellService.currentPatient.gender || "Not recorded."}}</span>
+                        </div>
+                        <div>
+                            <img class="summary-icon" src="images/mobile-phone-icon.svg" />
+                            <span class="summary-text">{{vm.patientShellService.currentPatient.mobilePhoneNumber.value || "Not recorded."}}</span>
+                            <img class="summary-icon" src="images/home-phone-icon.svg" />
+                            <span class="summary-text">{{vm.patientShellService.currentPatient.homePhoneNumber.value || "Not recorded."}}</span>
+                            <img class="summary-icon" src="images/work-phone-icon.svg" />
+                            <span class="summary-text">{{vm.patientShellService.currentPatient.workPhoneNumber.value || "Not recorded."}}</span>
+                        </div>
+                        <div>
+                            <img class="summary-icon" src="images/home-icon.svg" />
+                            <span class="summary-text">{{vm.address.value || "Not recorded."}}</span>
+                        </div>
+                        <div>
+                            <img class="summary-icon" src="images/email-icon.svg"/>
+                            <span class="summary-text">{{vm.patientShellService.currentPatient.emailAddress.emailValue || "Not recorded."}}</span>
+                        </div>
+                    </div>
                 </div>
-                <table ng-hide="vm.isLoading" class="table panel-table">
-                    <tr>
-                        <td class="col-lg-4 table-label top">Mobile Phone</td>
-                        <td class="top">{{vm.patientShellService.currentPatient.mobilePhoneNumber.value || "Not recorded."}}</td>
-                    </tr>
-                    <tr>
-                        <td class="col-lg-4 table-label">Home Phone</td>
-                        <td>{{vm.patientShellService.currentPatient.homePhoneNumber.value || "Not recorded."}}</td>
-                    </tr>
-                    <tr>
-                        <td class="col-lg-4 table-label">Work Phone</td>
-                        <td>{{vm.patientShellService.currentPatient.workPhoneNumber.value || "Not recorded."}}</td>
-                    </tr>
-                    <tr>
-                        <td class="col-lg-4 table-label">Residential Address</td>
-                        <td>{{vm.address.value || "Not recorded."}}</td>
-                    </tr>
-                    <tr>
-                        <td class="col-lg-4 table-label">Email</td>
-                        <td>{{vm.patientShellService.currentPatient.emailAddress.emailValue || "Not recorded."}}</td>
-                    </tr>
-                </table>
             </div>
         </div>
     </div>

@@ -7,14 +7,15 @@
    xmlns="http://www.w3.org/2000/svg"
    xmlns:sodipodi="http://sodipodi.sourceforge.net/DTD/sodipodi-0.dtd"
    xmlns:inkscape="http://www.inkscape.org/namespaces/inkscape"
+   height="50"
+   width="50"
+   viewBox="0 0 50 50"
    id="svg2"
    version="1.1"
    inkscape:version="0.91 r13725"
-   sodipodi:docname="mobile-icon.svg"
-   width="50"
-   height="50">
+   sodipodi:docname="male-icon.svg">
   <metadata
-     id="metadata15">
+     id="metadata13">
     <rdf:RDF>
       <cc:Work
          rdf:about="">
@@ -26,7 +27,7 @@
     </rdf:RDF>
   </metadata>
   <defs
-     id="defs13" />
+     id="defs11" />
   <sodipodi:namedview
      pagecolor="#ffffff"
      bordercolor="#666666"
@@ -38,39 +39,33 @@
      inkscape:pageshadow="2"
      inkscape:window-width="1920"
      inkscape:window-height="1137"
-     id="namedview11"
+     id="namedview9"
      showgrid="false"
      fit-margin-top="1"
      fit-margin-left="1"
      fit-margin-right="1"
      fit-margin-bottom="1"
-     inkscape:zoom="1"
-     inkscape:cx="74.728814"
-     inkscape:cy="61.20339"
+     inkscape:zoom="4.9166667"
+     inkscape:cx="25"
+     inkscape:cy="25"
      inkscape:window-x="-8"
      inkscape:window-y="-8"
      inkscape:window-maximized="1"
      inkscape:current-layer="g4" />
   <g
      id="g4"
-     transform="translate(1,-79)">
+     transform="translate(1,1)">
     <circle
-       cy="104"
+       cy="24"
        cx="24"
        id="ellipse6"
-       style="fill:#263238;fill-opacity:1;stroke:none;stroke-opacity:1"
-       r="24" />
-    <g
-       transform="matrix(0.37500001,0,0,0.37500001,17.257385,91.249998)"
-       id="g8">
-      <path
-         id="path1"
-         height="68"
-         width="68"
-         transform="scale(0.08018868,0.08018868)"
-         d="m 198.273,749.162 c -10.588,0 -19.189,10.313 -19.189,23.048 l 0,14.431 c 0,12.781 8.601,23.093 19.189,23.093 l 53.985,0 c 10.569,0 19.188,-10.312 19.188,-23.093 l 0,-14.431 c 0,-12.735 -8.619,-23.048 -19.188,-23.048 z M 37.3278,104.758 l 0,605.896 369.7472,0 0,-605.896 z M 144.643,34.4351 c -5.003,0 -9.051,4.2552 -9.051,9.5096 0,5.2696 4.048,9.5096 9.051,9.5096 l 167.054,0 c 4.983,0 9.013,-4.24 9.013,-9.5096 0,-5.2544 -4.03,-9.5096 -9.013,-9.5096 z M 49.6394,0 398.793,0 c 27.395,3e-6 49.657,23.3807 49.657,52.2583 l 0,743.4987 C 448.45,824.635 426.188,848 398.793,848 L 49.6394,848 C 22.2243,848 -3e-6,824.635 0,795.757 L 0,52.2583 C -3e-6,23.3807 22.2243,3e-6 49.6394,0 Z"
-         inkscape:connector-curvature="0"
-         style="fill:#f8f8f8" />
-    </g>
+       r="24"
+       style="fill:#263238;fill-opacity:1" />
+    <path
+       id="path1"
+       transform="matrix(0.8125,0,0,0.8125,11,11.121875)"
+       d="m 10.800003,13.400002 c -4.1999969,0 -7.5999984,3.399995 -7.5999984,7.60001 0,4.199985 3.4000015,7.600011 7.5999984,7.600011 4.199997,0 7.599999,-3.400026 7.599999,-7.600011 0,-4.200015 -3.400002,-7.60001 -7.599999,-7.60001 z M 28,0 32,0 32,3.8999957 32,12.000007 28.100006,10.9 l 0,-5.0000026 L 19.5,14.500009 c 1.300003,1.799988 2.100006,4.000003 2.100006,6.399997 0,5.899997 -4.800003,10.799995 -10.800003,10.799995 C 4.9000015,31.700001 0,26.900009 0,20.900006 0,15.000009 4.8000031,10.100012 10.800003,10.100012 c 2.5,0 4.800003,0.899995 6.699997,2.399995 l 8.5,-8.5000047 -5,0 -1.099998,-3.8999962 8.099998,0 z"
+       inkscape:connector-curvature="0"
+       style="fill:#f7f7f7" />
   </g>
 </svg>

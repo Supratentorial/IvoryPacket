@@ -1,7 +1,7 @@
 ﻿module interfaces.services {
 
     export interface sessionService {
-        getSessionTimeSlots(): interfaces.models.timeSlot[];
+        getSessionTimeSlots(): interfaces.timeSlot[];
 
     }
 

@@ -16,11 +16,9 @@ namespace IvoryPacket.Models
         public string Gender { get; set; }
         [Column(TypeName = "Date")]
         public DateTime DateOfBirth { get; set; }
-
         public int? MedicareCardNumber { get; set; }
         public DateTimeOffset? MedicareCardExpiry { get; set; }
         public int? MedicareCardPosition { get; set; }
-
         public bool IsActive { get; set; }
         public virtual ICollection<PhoneNumber> PhoneNumbers { get; set; }
         public virtual EmailAddress EmailAddress { get; set; }
