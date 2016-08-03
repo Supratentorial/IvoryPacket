@@ -1,5 +1,5 @@
 <div class="row">
-    <div class="col-lg-5">
+    <div class="col-lg-5 col-md-9 col-sm-9">
         <div class="panel panel-default">
             <div class="panel-heading">
                 <h4 class="panel-title">Basic Details</h4>
@@ -15,6 +15,8 @@
                         <div>
                             <img class="summary-icon" src="images/birthday-icon.svg" />
                             <span class="summary-text">{{vm.patientShellService.currentPatient.dateOfBirth | date:'dd/MM/yyyy' || "Not recorded."}} ({{vm.patientShellService.currentPatient.age}})</span>
+                            <img class="summary-icon" src="images/male-icon.svg" />
+                            <img class="summary-icon" src="images/female-icon.svg"/>
                             <span class="summary-text">{{vm.patientShellService.currentPatient.gender || "Not recorded."}}</span>
                         </div>
                         <div>
@@ -30,7 +32,7 @@
                             <span class="summary-text">{{vm.address.value || "Not recorded."}}</span>
                         </div>
                         <div>
-                            <img class="summary-icon" src="images/email-icon.svg"/>
+                            <img class="summary-icon" src="images/email-icon.svg" />
                             <span class="summary-text">{{vm.patientShellService.currentPatient.emailAddress.emailValue || "Not recorded."}}</span>
                         </div>
                     </div>

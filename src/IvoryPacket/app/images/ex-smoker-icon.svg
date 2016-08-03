@@ -13,7 +13,7 @@
    id="svg2"
    version="1.1"
    inkscape:version="0.91 r13725"
-   sodipodi:docname="non-smoker-icon.svg">
+   sodipodi:docname="ex-smoker-icon.svg">
   <metadata
      id="metadata13">
     <rdf:RDF>
@@ -22,7 +22,7 @@
         <dc:format>image/svg+xml</dc:format>
         <dc:type
            rdf:resource="http://purl.org/dc/dcmitype/StillImage" />
-        <dc:title></dc:title>
+        <dc:title />
       </cc:Work>
     </rdf:RDF>
   </metadata>
@@ -46,7 +46,7 @@
      fit-margin-left="1"
      fit-margin-bottom="1"
      inkscape:zoom="4.9166667"
-     inkscape:cx="25"
+     inkscape:cx="-44.355932"
      inkscape:cy="25"
      inkscape:window-x="-8"
      inkscape:window-y="-8"
@@ -60,7 +60,7 @@
        cx="24"
        id="ellipse6"
        r="24"
-       style="fill:#1b5e20;fill-opacity:1" />
+       style="fill:#f57f17;fill-opacity:1" />
     <path
        id="path1"
        transform="matrix(0.81247404,0,0,0.81247404,11.000415,11)"

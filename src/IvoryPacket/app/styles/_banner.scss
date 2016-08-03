@@ -8,25 +8,22 @@
     padding-left: 1em;
     display: flex;
 
+    h4 {
+        margin-bottom: 0px;
+        margin-top: 0px;
+        line-height: 30px;
+    }
+
     label {
         font-size: $font-size-medium;
         color: $md-grey-500;
         display: inline;
         font-weight: 100;
         margin-right: 0.2em;
-        line-height: 30px;
-    }
-
-    .content {
-        font-size: $font-size-medium;
-    }
-
-    .name {
-        font-size: 1.5em;
     }
 }
 
-.vertical-divider{
+.vertical-divider {
     margin-right: 0.75em;
     margin-left: 0.75em;
     border-right: solid 1px $md-blue-grey-100;

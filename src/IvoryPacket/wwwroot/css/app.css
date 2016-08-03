@@ -7942,17 +7942,16 @@ button.close {
   padding-bottom: 0.5em;
   padding-left: 1em;
   display: flex; }
+  #patientBanner h4 {
+    margin-bottom: 0px;
+    margin-top: 0px;
+    line-height: 30px; }
   #patientBanner label {
     font-size: 1.1em;
     color: #9E9E9E;
     display: inline;
     font-weight: 100;
-    margin-right: 0.2em;
-    line-height: 30px; }
-  #patientBanner .content {
-    font-size: 1.1em; }
-  #patientBanner .name {
-    font-size: 1.5em; }
+    margin-right: 0.2em; }
 
 .vertical-divider {
   margin-right: 0.75em;
@@ -8035,12 +8034,15 @@ body {
     border-left: solid 0.25em #D84315; }
 
 .patient-profile-picture {
-  width: 150px;
-  height: 150px; }
+  width: 120px;
+  height: 120px; }
 
 .summary-icon {
   width: 30px;
   margin-bottom: 5px; }
+
+.banner-icon {
+  width: 30px; }
 
 .summary-text {
   font-size: 15px; }
