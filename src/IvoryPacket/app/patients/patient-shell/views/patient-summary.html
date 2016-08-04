@@ -15,8 +15,8 @@
                         <div>
                             <img class="summary-icon" src="images/birthday-icon.svg" />
                             <span class="summary-text">{{vm.patientShellService.currentPatient.dateOfBirth | date:'dd/MM/yyyy' || "Not recorded."}} ({{vm.patientShellService.currentPatient.age}})</span>
-                            <img class="summary-icon" src="images/male-icon.svg" />
-                            <img class="summary-icon" src="images/female-icon.svg"/>
+                            <img ng-show="vm.patientShellService.currentPatient.gender == 'Male'" class="summary-icon" src="images/male-icon.svg" />
+                            <img ng-show="vm.patientShellService.currentPatient.gender == 'Female'" class="summary-icon" src="images/female-icon.svg"/>
                             <span class="summary-text">{{vm.patientShellService.currentPatient.gender || "Not recorded."}}</span>
                         </div>
                         <div>
@@ -36,6 +36,34 @@
                             <span class="summary-text">{{vm.patientShellService.currentPatient.emailAddress.emailValue || "Not recorded."}}</span>
                         </div>
                     </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<div class="row">
+    <div class="col-lg-5">
+        <div class="panel panel-default">
+            <div class="panel-heading">
+                <h4 class="panel-title">Active Problems</h4>
+                <button class="btn btn-default" ui-sref="patient.detail.medicalhistory-view"><i class="fa fa-pencil"></i> Edit</button>
+            </div>
+            <div class="panel-body">
+
+            </div>
+        </div>
+    </div>
+</div>
+<div class="row">
+    <div class="col-lg-5">
+        <div class="panel panel-default">
+            <div class="panel-heading">
+                <h4 class="panel-title">Current Medications</h4>
+                <button class="btn btn-default" ui-sref="patient.detail.scripts-view"><i class="fa fa-pencil"></i> Edit</button>
+            </div>
+            <div class="panel-body">
+                <div>
+                    <span>Aspirin</span><span style="color:lightgray">100mg daily orally</span>
                 </div>
             </div>
         </div>

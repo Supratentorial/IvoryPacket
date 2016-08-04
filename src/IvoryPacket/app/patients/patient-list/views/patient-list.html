@@ -1,8 +1,12 @@
 ﻿<div class="row">
     <div class="col-lg-12">
-        <div class="toolbar">
-            <button class="btn btn-default" ng-click="vm.createPatient()">New Patient</button>
-            <input class="form-control pull-right" ng-model="vm.searchString" uib-typeahead="patient.patientId as patient.givenName for patient in vm.searchPatients($viewValue)" placeholder="Search patients" typeahead-on-select="vm.patientSelected($item)" />
+        <div class="toolbar row">
+            <div class="col-lg-3">
+                <button class="btn btn-default" ng-click="vm.createPatient()">New Patient</button>
+            </div>
+            <div class="col-lg-3">
+                <input class="form-control pull-right" ng-model="vm.searchString" uib-typeahead="patient.patientId as patient.givenName for patient in vm.searchPatients($viewValue)" placeholder="Search patients" typeahead-on-select="vm.patientSelected($item)" />
+            </div>
         </div>
     </div>
 </div>
